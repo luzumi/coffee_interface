@@ -3,6 +3,8 @@
 @section('content')
     <h1>WEBHOOK Test</h1>
     <p id="demo"></p>
+    <div class="loader">0</div>
+
     <form method="POST" action="{{ route('turn_on') }}">
         @csrf
         <button type="submit">Relais einschalten</button>
@@ -10,25 +12,9 @@
 @endsection
 
 @section('scripts')
+    <link href="{{ asset('css/welcome.css') }}" rel="stylesheet"/>
+
     <script>
-        {{--const checkWebhook = async () => {--}}
-        {{--    //überprüfe den ersten eintrag in der db rasp_users auf die user_id--}}
-        {{--    const response = await fetch("{{ route('webhook_data') }}");--}}
-        {{--    //if response is null, the webhook was not received--}}
-        {{--    const data = await response.json();--}}
-
-        {{--    if (data.user_id < 1 || data.user_id == null)--}}
-        {{--    {--}}
-        {{--        console.log('Webhook nicht empfangen');--}}
-        {{--        return null;--}}
-        {{--    }--}}
-        {{--    {--}}
-        {{--        console.log('Webhook empfangen' + data.user_id);--}}
-        {{--        window.location.href = "{{ route('menu') }}";--}}
-        {{--    }--}}
-        {{--};--}}
-
-        {{--setInterval(checkWebhook, 2000);--}}
         let xhr = new XMLHttpRequest();
         xhr.open("GET", "{{ route('webhook_data') }}");
         xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");
@@ -41,7 +27,7 @@
                 }
 
                 let data = JSON.parse(responseText);
-                const userId = data.data.user_id
+                const userId = data.data
 
                 if (userId == null || userId < 1) {
                     console.log('kein Benutzer gefunden')
@@ -56,10 +42,13 @@
 
                     xhr.send();
                     window.location.href = '/menu';
+
                 }
             }
         };
         xhr.send();
 
     </script>
+
+
 @endsection
