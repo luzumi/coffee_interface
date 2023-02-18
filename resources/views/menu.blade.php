@@ -11,6 +11,11 @@
         @csrf
         <button type="submit">Back</button>
     </form>
+{{--    Button zum senden eines Webhooks--}}
+    <form method="POST" action="{{ route('turn_on') }}">
+        @csrf
+        <button type="submit">Webhook</button>
+    </form>
 
 @endsection
 

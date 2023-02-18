@@ -20,7 +20,7 @@ Route::get('/menu', 'App\Http\Controllers\MenuController@show')->name('menu');
 
 
 //Route::post('/webhook', 'App\Http\Controllers\WebhookController@handleWebhook')->name('webhook');
-Route::post('/turn_on', 'App\Http\Controllers\TurnRelaisOn@sendStripeWebhook')->name('turn_on');
+Route::post('/turn_on', 'App\Http\Controllers\WebhookController@sendWebhookTurnOn')->name('turn_on');
 
 
 Route::group(['middleware' => ['web']], function () {
