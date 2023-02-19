@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('lastname')->nullable();
             $table->string('tag_id')->unique();
             $table->string('credits')->default('0');
-            $table->string('active')->default('0');
-            $table->string('remarks')->default('0');
+            $table->boolean('active')->default(false);
+            $table->string('remarks')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
