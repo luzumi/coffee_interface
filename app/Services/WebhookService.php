@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Services;
 
 use App\Services\RaspUser;
 use GuzzleHttp\Client;
@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class WebhookController extends Controller
+class WebhookService
 {
     /**
      * @param Request $request
@@ -30,7 +30,7 @@ class WebhookController extends Controller
      */
     public function getWebhookData()
     {
-        $rasp_user_id = RaspUser::getRaspUser();
+        $rasp_user_id = RaspUser::getRaspUserId();
 
         return response()->json(['data' => $rasp_user_id]);
     }
