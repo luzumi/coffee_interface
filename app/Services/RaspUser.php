@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 class RaspUser
 {
-    public static function getRaspUser(): int
+    public static function getRaspUserId(): int
     {
         $data = DB::table('rasp_users')->first('user_id');
 
