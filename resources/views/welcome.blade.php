@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>WEBHOOK Test</h1>
-    <p id="demo"></p>
-    <div class="loader">0</div>
+    <h1>WaitingScreen</h1>
 
-    <form method="POST" action="{{ route('turn_on') }}">
-        @csrf
-        <button type="submit">Relais einschalten</button>
-    </form>
+    <div class="loader"></div>
+    <a href="{{ route('setId') }}">
+        <div class="loader"></div>
+    </a>
+
+
 @endsection
 
 @section('scripts')

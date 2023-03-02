@@ -2,50 +2,55 @@
 .row {
   display: flex; }
 
-/* line 3, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+/* line 4, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+.body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #C4A8A8FF; }
+
+/* line 10, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
 .box {
   padding: 1rem;
   margin-bottom: 1rem;
   border: 1px solid #ccc;
   border-radius: 0.25rem; }
-  /* line 9, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+  /* line 16, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
   .box-primary {
     background-color: #007bff;
     color: #fff; }
-    /* line 13, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+    /* line 20, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
     .box-primary:hover, .box-primary:focus {
       background-color: #0069d9;
       border-color: #0062cc; }
-  /* line 19, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+  /* line 24, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
   .box-success {
     background-color: #28a745;
     color: #fff; }
-    /* line 23, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+    /* line 28, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
     .box-success:hover, .box-success:focus {
       background-color: #218838;
       border-color: #1e7e34; }
-  /* line 29, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+  /* line 32, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
   .box-warning {
     background-color: #ffc107;
     color: #212529; }
-    /* line 33, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+    /* line 36, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
     .box-warning:hover, .box-warning:focus {
       background-color: #e0a800;
       border-color: #d39e00; }
-  /* line 39, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+  /* line 40, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
   .box-danger {
     background-color: #dc3545;
     color: #fff; }
-    /* line 43, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+    /* line 44, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
     .box-danger:hover, .box-danger:focus {
       background-color: #c82333;
       border-color: #bd2130; }
 
-/* line 48, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+/* line 49, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
 .progress-section {
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background-color: transparent;
@@ -54,9 +59,76 @@
   justify-content: center;
   z-index: 9999; }
 
-/* line 61, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+/* line 60, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
 .progress {
   color: white;
-  text-align: center; }
+  text-align: center;
+  width: 30%;
+  height: 60%; }
+
+/* line 66, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+.loader {
+  width: 30%;
+  height: 30%; }
+
+/* line 70, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+.loader, .progress {
+  background-color: #343030;
+  position: absolute;
+  border: 42px solid #705050;
+  border-top: 14px solid #c4a8a8;
+  border-radius: 50%;
+  top: 20vh;
+  left: 20vw;
+  animation: spin 2s ease-in-out infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; }
+
+/* line 84, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+.loader:before, .progress:before {
+  position: absolute;
+  left: 0;
+  color: #705050;
+  width: 50vh;
+  text-align: center;
+  transform: rotate(-90deg);
+  animation: spin 2s ease-in-out infinite reverse; }
+
+/* line 93, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+.loader:before {
+  content: "Bitte Karte auflegen";
+  font-size: 5rem; }
+
+/* line 97, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+.progress:before {
+  content: "Reset ID";
+  font-size: 5rem; }
+
+/* Button-Styling */
+/* line 102, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+.edelstahl-button {
+  background: linear-gradient(to bottom, #f4f4f4, #e4e4e4);
+  width: 10vh;
+  height: 10vh;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 2px 0 #7f8c8d, inset 0 0 0 2px #bdc3c7, inset 0 0 5px rgba(255, 255, 255, 0.6);
+  color: #555;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 20px;
+  text-shadow: 0 3px 0 rgba(255, 255, 255, 0.8); }
+  /* line 115, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+  .edelstahl-button:active {
+    box-shadow: 0 1px 0 #7f8c8d, inset 0 0 0 2px #bdc3c7, inset 0 0 3px rgba(255, 255, 255, 0.4);
+    top: 1px; }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(-360deg); } }
 
 /*# sourceMappingURL=app.css.map */

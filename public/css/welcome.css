@@ -1,14 +1,26 @@
-.loader {
-    background-color: #2062be;
-    border: 16px solid #b41717;
-    border-top: 16px solid #3498db;
+.card-reader {
+    background-color: #343030;
+    border: 33px solid #705050;
+    border-top: 14px solid #c4a8a8;
     border-radius: 50%;
     width: 120px;
     height: 120px;
-    animation: spin 2s linear infinite;
+    animation: spin 2s ease-in-out infinite;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-reader:after {
+    content: "Kaffee läuft..";
+    transform: rotate(360deg); /* Ändere den Rotationswinkel der Schrift auf -90 Grad, um sie im Uhrzeigersinn zu drehen */
+    animation: spin 2s ease-in-out infinite reverse;
+    color: #c2a7a8;
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    100% { transform: rotate(360deg); } /* Ändere den Rotationswinkel des Kreises auf 360 Grad, um ihn gegen den Uhrzeigersinn zu drehen */
 }
+

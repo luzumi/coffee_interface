@@ -7,7 +7,6 @@
     <p>Die letzte Bestellung war am: {{ $viewData['orders']->last()->updated_at}}</p>
     <p>Sie hatten 1 {{ $viewData['orders']->last()->coffee_type}}</p>
 
-
     <div class="row">
         @foreach($viewData['varieties'] as $variety)
             <div class="col-md-4">
@@ -20,28 +19,14 @@
                         <p class="card-text box-warning">Füllmenge: {{ $variety->coffee_count ?? 'keine Füllmenge angegeben' }}</p>
                         <form method="POST" action="{{ route('new_order', ['type' => $variety->coffee_name]) }}">
                             @csrf
-                            <button type="submit" class="btn btn-primary box-primary">Bestellen</button>
+                            <button type="submit" class="edelstahl-button">Bestellen</button>
                         </form>
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
-
-
-{{--    button zum zurückkehren zur welcome.blade.php--}}
-    <form method="POST" action="{{ route('back_to_welcome') }}">
-        @csrf
-        <button type="submit">Back</button>
-    </form>
-{{--    Button zum senden eines Webhooks--}}
-    <form method="POST" action="{{ route('turn_on') }}">
-        @csrf
-        <button type="submit">Webhook</button>
-    </form>
-
-
-
 @endsection
 
 @yield('progress')
+

@@ -2,15 +2,15 @@
 
 @section('progress')
     <div class="progress-section">
-        <h1>bitte warten</h1>
-        <p id="demo"></p>
-        <div class="loader">0</div>
+        <a href="{{ route('setId') }}">
+            <div class="progress"></div>
+        </a>
     </div>
 @endsection
 
 
 @section('scripts')
-    <link href="{{ asset('css/welcome.css') }}" rel="stylesheet"/>
+
 
     <script>
         let xhr = new XMLHttpRequest();
@@ -45,8 +45,5 @@
             }
         };
         xhr.send();
-
     </script>
-
-
 @endsection

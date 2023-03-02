@@ -44,7 +44,6 @@ class MenuController extends Controller
     {
         $id = RaspUser::getRaspUserId();
         $user = User::find($id);
-        $viewData['channel_url'] = 'No channel url';
         $viewData['user'] = $user;
         $viewData['orders'] = CoffeeOrder::where('username', $user->username)->get();
         $viewData['varieties'] = CoffeeVariety::all();

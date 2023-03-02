@@ -20,11 +20,11 @@ Route::get('/menu', 'App\Http\Controllers\MenuController@show')->name('menu');
 
 
 //Route::post('/webhook', 'App\Http\Controllers\WebhookService@handleWebhook')->name('webhook');
-Route::post('/turn_on', 'App\Http\Controllers\WebhookController@sendWebhookTurnOn')->name('turn_on');
+//Route::post('/turn_on', 'App\Services\WebhookService@sendWebhookGetCoffee')->name('get_coffee');
 
 
 Route::group(['middleware' => ['web']], function () {
-    Route::post('/webhook', 'App\Http\Controllers\WebhookController@handleWebhook')
+    Route::post('/webhook', 'App\Services\WebhookService@handleWebhook')
         ->withoutMiddleware(['csrf'])
         ->middleware('web');
 });
@@ -32,3 +32,5 @@ Route::get('/webhook_data', 'App\Services\WebhookService@getWebhookData')->name(
 Route::post('/welcome', 'App\Http\Controllers\MenuController@backToWelcome')->name('back_to_welcome');
 Route::post('/new_order}', 'App\Http\Controllers\CoffeeOrdersController@newOrder')->name('new_order');
 Route::get('/in_progress', 'App\Http\Controllers\MenuController@inProgress')->name('in_progress');
+
+Route::get('/set', 'App\Services\WebhookService@setId')->name('setId');

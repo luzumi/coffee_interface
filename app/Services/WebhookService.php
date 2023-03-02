@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Services\RaspUser;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
@@ -35,22 +34,11 @@ class WebhookService
         return response()->json(['data' => $rasp_user_id]);
     }
 
-    public function sendWebhookTurnOn()
+    public function sendWebhookGetCoffee($coffee_name)
     {
         try {
             $client = new Client(['base_uri' => 'http://192.168.2.179',
-//                'timeout' => 2.0,
-//                'verify' => false,
-//                'http_errors' => false,
-//                'allow_redirects' => false,
-//                'debug' => false,
-//                'cookies' => true,
-//                'headers' => [
-//                    'Accept' => 'application/json',
-//                    'Content-Type' => 'application/json',
-//                    'User-Agent' => 'Laravel/8.0.0 (GuzzleHttp/7.0.1)'
-//                ],
-                'action' => 'turn_on',
+                'action' => $coffee_name,
             ]);
 
         } catch (\Exception $e) {
@@ -62,12 +50,8 @@ class WebhookService
                 'json' => [
                     'url' => 'http://127.0.0.1:5000/webhook',
                     'events' => ['charge.succeeded'],
-                    'action' => 'turn_on'
+                    'action' => $coffee_name,
                 ],
-//                'headers' => [
-//                    'Content-Type' => 'application/json',
-//                    'Accept' => 'application/json'
-//                ]
             ]);
             Log::info('Webhook sent to Raspberry Pi: ' . $client->getConfig('action'));
 
@@ -76,5 +60,14 @@ class WebhookService
         }
 
         return back();
+    }
+
+    public static function setId()
+    {
+        $id = RaspUser::getRaspUserId()==21 ? 0 : 21;
+
+        RaspUser::setRaspUser($id);
+
+        return redirect('/');
     }
 }

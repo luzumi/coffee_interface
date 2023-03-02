@@ -9,7 +9,7 @@
 
     @yield('scripts')
 </head>
-<body>
+<body class="body">
 
     <div style="max-width: 100vw; max-height: 100vh">
         @yield('content')
