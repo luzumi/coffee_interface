@@ -1,134 +1,147 @@
-/* line 1, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+:root {
+    --ff-primary: 'Unbounded', cursive;
+    --ff-secondary: 'Roboto', sans-serif;
+
+    --bg-color-1: #281D16FF;
+    --bg-color-2: #59341AFF;
+
+    --text-color-1: #F4AF66FF;
+    --text-color-2: #120403FF;
+}
+
+
 .row {
-  display: flex; }
+    display: flex;
+}
 
-/* line 4, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
 .body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: #C4A8A8FF; }
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(to right, var(--bg-color-2), var(--bg-color-1))
+}
 
-/* line 10, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
 .box {
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem; }
-  /* line 16, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
-  .box-primary {
-    background-color: #007bff;
-    color: #fff; }
-    /* line 20, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
-    .box-primary:hover, .box-primary:focus {
-      background-color: #0069d9;
-      border-color: #0062cc; }
-  /* line 24, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
-  .box-success {
-    background-color: #28a745;
-    color: #fff; }
-    /* line 28, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
-    .box-success:hover, .box-success:focus {
-      background-color: #218838;
-      border-color: #1e7e34; }
-  /* line 32, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
-  .box-warning {
-    background-color: #ffc107;
-    color: #212529; }
-    /* line 36, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
-    .box-warning:hover, .box-warning:focus {
-      background-color: #e0a800;
-      border-color: #d39e00; }
-  /* line 40, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
-  .box-danger {
-    background-color: #dc3545;
-    color: #fff; }
-    /* line 44, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
-    .box-danger:hover, .box-danger:focus {
-      background-color: #c82333;
-      border-color: #bd2130; }
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    background: linear-gradient(to right, var(--bg-color-2), var(--bg-color-1));
+    color: var(--text-color-1);
+    font-family: var(--ff-secondary);
+}
 
-/* line 49, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
+.card-body {
+    background: linear-gradient(to right, var(--bg-color-2), var(--bg-color-1));
+    color: var(--text-color-1);
+    font-family: var(--ff-secondary);
+    padding: 1rem;
+    border: solid 1px var(--text-color-1);
+}
+
+
 .progress-section {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999; }
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
 
-/* line 60, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
 .progress {
-  color: white;
-  text-align: center;
-  width: 30%;
-  height: 60%; }
+    color: white;
+    text-align: center;
+    width: 30%;
+    height: 60%;
+}
 
-/* line 66, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
 .loader {
-  width: 30%;
-  height: 30%; }
+    width: 30%;
+    height: 30%;
+}
 
-/* line 70, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
 .loader, .progress {
-  background-color: #343030;
-  position: absolute;
-  border: 42px solid #705050;
-  border-top: 14px solid #c4a8a8;
-  border-radius: 50%;
-  top: 20vh;
-  left: 20vw;
-  animation: spin 2s ease-in-out infinite;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden; }
+    background-color: #343030;
+    position: absolute;
+    border: 42px solid #705050;
+    border-top: 14px solid #c4a8a8;
+    border-radius: 50%;
+    top: 20vh;
+    left: 20vw;
+    animation: spin 2s ease-in-out infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: var(--ff-primary);
+}
 
-/* line 84, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
 .loader:before, .progress:before {
-  position: absolute;
-  left: 0;
-  color: #705050;
-  width: 50vh;
-  text-align: center;
-  transform: rotate(-90deg);
-  animation: spin 2s ease-in-out infinite reverse; }
+    position: absolute;
+    left: 0;
+    color: #705050;
+    width: 50vh;
+    text-align: center;
+    transform: rotate(-90deg);
+    animation: spin 2s ease-in-out infinite reverse;
+}
 
-/* line 93, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
 .loader:before {
-  content: "Bitte Karte auflegen";
-  font-size: 5rem; }
+    content: "Bitte Karte auflegen";
+    font-size: 5rem;
+}
 
-/* line 97, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
 .progress:before {
-  content: "Reset ID";
-  font-size: 5rem; }
+    content: "Reset ID";
+    font-size: 5rem;
+}
 
 /* Button-Styling */
-/* line 102, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
 .edelstahl-button {
-  background: linear-gradient(to bottom, #f4f4f4, #e4e4e4);
-  width: 10vh;
-  height: 10vh;
-  border-radius: 50%;
-  border: none;
-  box-shadow: 0 2px 0 #7f8c8d, inset 0 0 0 2px #bdc3c7, inset 0 0 5px rgba(255, 255, 255, 0.6);
-  color: #555;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 10px 20px;
-  text-shadow: 0 3px 0 rgba(255, 255, 255, 0.8); }
-  /* line 115, ../../PHPStormWorkspace/coffee_interface/resources/sass/app.sass */
-  .edelstahl-button:active {
+    background: linear-gradient(to bottom, #f4f4f4, #e4e4e4);
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 2px 0 #7f8c8d, inset 0 0 0 2px #bdc3c7, inset 0 0 5px rgba(255, 255, 255, 0.6);
+    color: #555;
+    cursor: pointer;
+    font-family: var(--ff-secondary);
+    font-size: 16px;
+    font-weight: bolder;
+    padding: 10px 20px;
+    text-shadow: 0 3px 0 rgba(255, 255, 255, 0.8);
+}
+
+.edelstahl-button:active {
     box-shadow: 0 1px 0 #7f8c8d, inset 0 0 0 2px #bdc3c7, inset 0 0 3px rgba(255, 255, 255, 0.4);
-    top: 1px; }
+    top: 1px;
+}
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg); }
-  to {
-    transform: rotate(-360deg); } }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
+}
 
-/*# sourceMappingURL=app.css.map */
+h1 {
+    font-family: var(--ff-secondary);
+    font-size: 5rem;
+    color: var(--text-color-1);
+    text-align: center;
+}
+
+p {
+    font-family: var(--ff-secondary);
+    font-size: 1rem;
+    color: var(--text-color-1);
+    text-align: center;
+}
+
+

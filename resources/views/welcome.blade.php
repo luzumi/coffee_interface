@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>WaitingScreen</h1>
+    <h1>Get me Coffee</h1>
 
     <div class="loader"></div>
     <a href="{{ route('setId') }}">
