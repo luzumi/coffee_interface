@@ -31,15 +31,16 @@
         </div>
 
         <div class="menu-varieties">
+            <div class="menu-varieties-header">
                 <p class="menu-varieties-header-2">Getränk</p>
                 <p class="menu-varieties-header-3">Kosten</p>
-            <
+            </div>
             @foreach($viewData['varieties'] as $key => $variety)
                 <div class="menu-varieties-item menu-varieties-item-{{$key}}">
 
                     <form method="POST" action="{{ route('new_order', ['type' => $variety->coffee_name]) }}">
                             @csrf
-                            <button type="submit" class="menu-varieties-item-button menu-varieties-item-button-{{$key}}">Bestellen</button>
+                            <button type="submit" class="menu-varieties-item-button menu-varieties-item-button-{{$key}}"></button>
                         </form>
 
                     <div class="menu-varieties-item-name menu-varieties-item-name-{{$key}}">
