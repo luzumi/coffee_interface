@@ -43,10 +43,13 @@ class MenuController extends Controller
     public function inProgress()
     {
         $id = RaspUser::getRaspUserId();
+
         $user = User::find($id);
         $viewData['user'] = $user;
         $viewData['orders'] = CoffeeOrder::where('username', $user->username)->get();
         $viewData['varieties'] = CoffeeVariety::all();
+
+        RaspUser::resetRaspUser();
 
         return view('in_progress')->with(compact('viewData'));
     }

@@ -14,9 +14,11 @@
 </head>
 <body class="body">
 
-    <div style="max-width: 100vw; max-height: 100vh">
+<div class="border">
+    <div class="content">
         @yield('content')
     </div>
+</div>
 
 </body>
 

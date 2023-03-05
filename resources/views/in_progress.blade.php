@@ -10,8 +10,6 @@
 
 
 @section('scripts')
-
-
     <script>
         let xhr = new XMLHttpRequest();
         xhr.open("GET", "{{ route('webhook_data') }}");
@@ -40,7 +38,6 @@
 
                     xhr.send();
                     window.location.href = '/';
-
                 }
             }
         };

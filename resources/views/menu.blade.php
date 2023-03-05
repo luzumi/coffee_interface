@@ -1,30 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Willkommen, {{ $viewData['user']->username }}!</h1>
-    <p>Ihr Guthaben beträgt: {{ $viewData['user']->credits }} Credits</p>
-    <p>Ihr User_id lautet: {{ $viewData['user']->id }}</p>
-    <p>Die letzte Bestellung war am: {{ $viewData['orders']->last()->updated_at}}</p>
-    <p>Sie hatten 1 {{ $viewData['orders']->last()->coffee_type}}</p>
+    <div class="grid_menu">
+        <div class="title_app">
+            <h1>Get me Coffee</h1>
+        </div>
+        <div class="title_welcome">
+            <h2>Willkommen, {{ $viewData['user']->username }}!</h2>
+        </div>
+        <div class="bg_img1"></div>
+        <div class="bg_img2"></div>
 
-    <div class="row">
-        @foreach($viewData['varieties'] as $variety)
-            <div class="col-md-4">
-                <div class="card box">
-                    <img src="{{ $variety->coffee_image }}" class="card-img-top" alt="{{ $variety->coffee_name }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $variety->coffee_name }}</h5>
-                        <p class="card-text">{{ $variety->coffee_description }}</p>
-                        <p class="card-text box-success">Preis: {{ $variety->credit_cost }} Credits</p>
-                        <p class="card-text box-warning">Füllmenge: {{ $variety->coffee_count ?? 'keine Füllmenge angegeben' }}</p>
-                        <form method="POST" action="{{ route('new_order', ['type' => $variety->coffee_name]) }}">
+        <div class="menu-statistics">
+            <div class="menu-statistics-item">
+                <h3>Bestellungen</h3>
+                <p> {{ $viewData['orders']->count() }}</p>
+            </div>
+            <div class="menu-statistics-item">
+                <h3>Letzte Bestellung:&nbsp;</h3>
+                <p>{{ $viewData['orders']->last()->updated_at->format('d.m.Y - H:i') }}</p>
+            </div>
+            <div class="menu-statistics-item">
+                <h3>Letzter Auswahl</h3>
+                <p> {{ $viewData['orders']->last()->coffee_type}}</p>
+            </div>
+            <div class="menu-statistics-item">
+                <h3>Guthaben</h3>
+                <p> {{ $viewData['user']->credits }} Credits</p>
+            </div>
+        </div>
+
+        <div class="menu-varieties">
+                <p class="menu-varieties-header-2">Getränk</p>
+                <p class="menu-varieties-header-3">Kosten</p>
+            <
+            @foreach($viewData['varieties'] as $key => $variety)
+                <div class="menu-varieties-item menu-varieties-item-{{$key}}">
+
+                    <form method="POST" action="{{ route('new_order', ['type' => $variety->coffee_name]) }}">
                             @csrf
-                            <button type="submit" class="edelstahl-button">Bestellen</button>
+                            <button type="submit" class="menu-varieties-item-button menu-varieties-item-button-{{$key}}">Bestellen</button>
                         </form>
+
+                    <div class="menu-varieties-item-name menu-varieties-item-name-{{$key}}">
+                        <h3>{{ $variety->coffee_name }}</h3>
+                    </div>
+                    <div class="menu-varieties-item-price menu-varieties-item-price-{{$key}}">
+                        <p>{{ $variety->credit_cost }} Credits</p>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
 @endsection
 
