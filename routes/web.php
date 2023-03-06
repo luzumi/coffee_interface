@@ -32,5 +32,6 @@ Route::get('/webhook_data', 'App\Services\WebhookService@getWebhookData')->name(
 Route::post('/welcome', 'App\Http\Controllers\MenuController@backToWelcome')->name('back_to_welcome');
 Route::post('/new_order/{type}', 'App\Http\Controllers\CoffeeOrdersController@newOrder')->name('new_order');
 Route::get('/in_progress', 'App\Http\Controllers\MenuController@inProgress')->name('in_progress');
+Route::post('/logout', 'App\Http\Controllers\MenuController@logout')->name('logout');
 
 Route::get('/set', 'App\Services\WebhookService@setId')->name('setId');

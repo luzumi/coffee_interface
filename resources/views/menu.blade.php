@@ -14,15 +14,15 @@
         <div class="menu-statistics">
             <div class="menu-statistics-item">
                 <h3>Bestellungen</h3>
-                <p> {{ $viewData['orders']->count() }}</p>
+                <p>{{ $viewData['orders']->count() }}</p>
             </div>
             <div class="menu-statistics-item">
                 <h3>Letzte Bestellung:&nbsp;</h3>
-                <p>{{ $viewData['orders']->last()->updated_at->format('d.m.Y - H:i') }}</p>
+                <p>{{ $viewData['orders']->last()->updated_at->format('d.m.Y - H:i') ?? '' }}</p>
             </div>
             <div class="menu-statistics-item">
                 <h3>Letzter Auswahl</h3>
-                <p> {{ $viewData['orders']->last()->coffee_type}}</p>
+                <p> {{ $viewData['orders']->last()->coffee_type??''}}</p>
             </div>
             <div class="menu-statistics-item">
                 <h3>Guthaben</h3>
@@ -38,10 +38,11 @@
             @foreach($viewData['varieties'] as $key => $variety)
                 <div class="menu-varieties-item menu-varieties-item-{{$key}}">
 
-                    <form method="POST" action="{{ route('new_order', ['type' => $variety->coffee_name]) }}">
-                            @csrf
-                            <button type="submit" class="menu-varieties-item-button menu-varieties-item-button-{{$key}}"></button>
-                        </form>
+                    <form method="POST" action="{{ route('new_order', ['type' => $variety->coffee_name]) }}" class="order-form">
+                        @csrf
+                        <button type="submit"
+                                class="menu-varieties-item-button menu-varieties-item-button-{{$key}}"></button>
+                    </form>
 
                     <div class="menu-varieties-item-name menu-varieties-item-name-{{$key}}">
                         <h3>{{ $variety->coffee_name }}</h3>
@@ -52,8 +53,14 @@
                 </div>
             @endforeach
         </div>
+        <div class="menu-logout">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="menu-logout-button">Logout</button>
+            </form>
     </div>
 @endsection
 
 @yield('progress')
+
 

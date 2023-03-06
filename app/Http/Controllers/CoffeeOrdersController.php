@@ -11,15 +11,15 @@ use Illuminate\Http\Request;
 
 class CoffeeOrdersController extends Controller
 {
-    public function newOrder(Request $request)
+    public function newOrder(Request $request, $type)
     {
         $raspUserId = RaspUser::getRaspUserId();
         $user = User::find($raspUserId);
-        $rfid = RFID_Tag::where('id', $user->tag_id)->first();
-        $coffee_type = $request->get('type');
+
+        $coffee_type = $type;
 
         CoffeeOrder::create([
-            'tag_id' => $rfid->id,
+            'tag_id' => $user->tag_id,
             'username' => $user->username,
             'coffee_type' => $coffee_type,
         ]);

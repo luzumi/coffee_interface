@@ -40,20 +40,26 @@ class DatabaseSeeder extends Seeder
 
         // Seed coffee varieties
         $coffeeVarieties = [
-            ['coffee_name' => 'Light',
-                'credit_cost' => '2',
+
+            ['coffee_name' => 'Coffee',
+                'credit_cost' => '50',
+                'coffee_image' => 'strong.png',
+                'coffee_description' => 'A strong black coffee.'
+            ],
+            ['coffee_name' => 'Coffee Double',
+                'credit_cost' => '90',
+                'coffee_image' => 'strong.png',
+                'coffee_description' => 'A strong black coffee.'
+            ],
+            ['coffee_name' => 'Espresso',
+                'credit_cost' => '60',
                 'coffee_image' => 'light.png',
                 'coffee_description' => 'A short black coffee.'
             ],
-            ['coffee_name' => 'Normal',
-                'credit_cost' => '3',
+            ['coffee_name' => 'Espresso Double',
+                'credit_cost' => '100',
                 'coffee_image' => 'normal.png',
                 'coffee_description' => 'A normal black coffee.'
-            ],
-            ['coffee_name' => 'Strong',
-                'credit_cost' => '4',
-                'coffee_image' => 'strong.png',
-                'coffee_description' => 'A strong black coffee.'
             ],
             ['coffee_name' => 'Water',
                 'credit_cost' => '0',
@@ -65,12 +71,12 @@ class DatabaseSeeder extends Seeder
             CoffeeVariety::create($coffeeVariety);
         }
 
-        $coffeeOrders = [
-            ['tag_id' => '59', 'username' => 'kkuehn', 'coffee_type' => 'Espresso'],
-            ['tag_id' => '59', 'username' => 'kkuehn', 'coffee_type' => 'Cappuccino'],
-        ];
-        foreach ($coffeeOrders as $coffeeOrder) {
-            CoffeeOrder::create($coffeeOrder);
-        }
+//        $coffeeOrders = [
+//            ['tag_id' => '59', 'username' => 'kkuehn', 'coffee_type' => 'Espresso'],
+//            ['tag_id' => '59', 'username' => 'kkuehn', 'coffee_type' => 'Cappuccino'],
+//        ];
+//        foreach ($coffeeOrders as $coffeeOrder) {
+//            CoffeeOrder::create($coffeeOrder);
+//        }
     }
 }

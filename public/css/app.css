@@ -1,14 +1,17 @@
 :root {
     --ff-primary: 'Unbounded', cursive;
     --ff-secondary: 'Roboto', sans-serif;
+    --digital-clock: 'Sono', sans-serif;
 
     --bg-color-1: #281D16FF;
     --bg-color-2: #59341AFF;
     --bg-color-3: #A87047FF;
+    --bg-color-3-opactity-75: rgba(168, 112, 71, 0.75);
 
     --text-color-1: #F4AF66FF;
     --text-color-2: #300e06;
     --text-color-3: #cb8840;
+    --text-color-3-opactity-75: rgba(203, 136, 64, 0.75);
 
     --hours: 10;
     --minutes: 10;
@@ -19,17 +22,21 @@
 }
 
 html, body {
-    height: 100%;
+    height: 100vh;
     margin: 0;
+    overflow: hidden;
 }
 
+.touch {
+    max-height: 800px;
+}
 .body {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100%;
-    min-height: 100%;
+    max-height: 100%;
     background: linear-gradient(to top right, var(--bg-color-2), var(--bg-color-1));
 }
 
@@ -50,30 +57,26 @@ html, body {
     height: 75%;
     background-color: var(--bg-color-3);
     padding: 3rem;
-    margin: 0 auto;
+    margin: auto;
     border-radius: 3rem 3rem 3rem 3rem;
 }
 
 .content {
     position: relative;
-    /*top: 1rem;*/
-    /*left: 1rem;*/
     width: 85%;
-    height: 90%;
+    height: 82%;
     background: linear-gradient(to bottom right, var(--bg-color-1), var(--bg-color-2));
-
     padding: 3rem;
-    margin: 0 auto;
+    margin: auto;
     border-radius: 3rem 3rem 3rem 3rem;
 }
-
 
 /*WELCOME*/
 .grid_container {
     /*background-color: #1e7e34 !important;*/
     display: grid;
     grid-template-areas:
-            "logo logo title title title"
+            "logo logo logo title title"
             "hint hint hint hint hint"
             "content content content content content"
             "content content content content content"
@@ -162,26 +165,35 @@ html, body {
 
 .item {
     grid-row: 2 / span 10;
-    grid-column: 2 / span 9;
+    grid-column: 1 / span 9;
     width: 100%;
     height: 980%;
     background-image: url("../storage/media/corataca_based_welcome.png");
-    background-size: 670px;
-    background-position-x: 150rem;
+    background-size: 490px;
+    background-position-x: 1rem;
     background-position-y: 130rem;
-    background-position: center left;
+    background-position: center;
     background-repeat: no-repeat;
 }
 
+
 /*CLOCK*/
+.clock-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    grid-row: 2 / span 4;
+    grid-column: 4 / span 3;
+}
+
 .clock {
-    width: 80px;
-    height: 80px;
+    width: 160px; /* doubled width */
+    height: 160px; /* doubled height */
     border: 2px solid var(--text-color-1);
     border-radius: 50%;
     position: relative;
-    margin: 50px auto;
-    grid-area: last;
+    margin: 5px auto;
+
 }
 
 .clock .hour-hand,
@@ -192,26 +204,26 @@ html, body {
 }
 
 .clock .hour-hand {
-    width: 3px;
-    height: 25px;
-    left: calc(50% - 1.5px);
-    top: calc(50% - 25px);
+    width: 6px; /* doubled width */
+    height: 50px; /* doubled height */
+    left: calc(50% - 3px); /* adjusted position */
+    top: calc(50% - 50px); /* adjusted position */
     transform-origin: bottom center;
 }
 
 .clock .minute-hand {
-    width: 2px;
-    height: 35px;
-    left: calc(50% - 1px);
-    top: calc(50% - 35px);
+    width: 4px; /* doubled width */
+    height: 70px; /* doubled height */
+    left: calc(50% - 2px); /* adjusted position */
+    top: calc(50% - 70px); /* adjusted position */
     transform-origin: bottom center;
 }
 
 .clock .second-hand {
-    width: 1px;
-    height: 45px;
-    left: calc(50% - 0.5px);
-    top: calc(50% - 45px);
+    width: 2px; /* doubled width */
+    height: 90px; /* doubled height */
+    left: calc(50% - 1px); /* adjusted position */
+    top: calc(50% - 90px); /* adjusted position */
     transform-origin: bottom center;
 }
 
@@ -219,52 +231,56 @@ html, body {
 .clock .minute-mark {
     position: absolute;
     background-color: #333;
-    width: 1px;
-    height: 5px;
+    width: 2px; /* doubled width */
+    height: 10px; /* doubled height */
     transform-origin: bottom center;
 }
 
 .clock .hour-mark {
-    left: calc(50% - 0.5px);
-    top: calc(50% - 25px);
+    left: calc(50% - 1px); /* adjusted position */
+    top: calc(50% - 50px); /* adjusted position */
 }
 
 .clock .minute-mark {
-    left: calc(50% - 0.5px);
-    top: calc(50% - 35px);
+    left: calc(50% - 1px); /* adjusted position */
+    top: calc(50% - 70px); /* adjusted position */
 }
 
 .clock .hour-mark:nth-child(3n),
 .clock .minute-mark:nth-child(5n) {
-    height: 10px;
+    height: 20px; /* doubled height */
 }
 
 .clock .hour-mark:nth-child(6n) {
-    height: 15px;
+    height: 30px; /* doubled height */
 }
 
 .clock .hour-mark:nth-child(12n) {
-    height: 20px;
+    height: 40px; /* doubled height */
 }
 
 .clock .digital-clock {
     position: absolute;
-    top: calc(50% + 30px);
-    left: calc(50% - 20px);
-    font-size: 12px;
+    top: calc(50% + 60px); /* adjusted position */
+    left: calc(50% - 40px); /* adjusted position */
+    font-size: 24px; /* doubled font size */
     font-weight: bold;
     text-align: center;
 }
 
+.digital-clock {
+    color: var(--text-color-1);
+    font-family: var(--digital-clock);
+    font-size: 1.4rem;
+    margin: 1rem auto;
+}
 /*MENU*/
 .grid_menu {
     display: grid;
     grid-template:
         "logo logo title" 5rem
-        ". . user" 1fr
-        "main main menu" 1fr
-        "main main menu" 1fr
-        "main main leaf" 1fr;
+        "user . menu" 20rem
+        "main main leaf" 5rem;
     gap: 0 4rem;
 }
 
@@ -274,6 +290,9 @@ html, body {
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 1rem;
+    margin-top: 4rem;
+    max-height: 10rem;
+    top: -2rem;
 }
 
 
@@ -287,6 +306,7 @@ html, body {
     margin: 0.3rem;
     border-radius: 0.25rem;
     background: linear-gradient(to right, var(--bg-color-2), var(--bg-color-1));
+    opacity: 75%;
     color: var(--text-color-1);
     font-family: var(--ff-secondary);
     height: 1.2rem;
@@ -301,7 +321,8 @@ html, body {
         "varietie0 varietie0 varietie0" 1fr
         "varietie1 varietie1 varietie1" 1fr
         "varietie2 varietie2 varietie2" 1fr
-        "varietie3 varietie3 varietie3" 1fr;
+        "varietie3 varietie3 varietie3" 1fr
+        "varietie4 varietie4 varietie4" 1fr;
 }
 
 .menu-varieties-header {
@@ -311,7 +332,7 @@ html, body {
     position: relative;
     justify-content: space-between;
     align-items: center;
-    gap: 5rem;
+    gap: 2rem;
     padding: 0.1rem;
     border-radius: 0.25rem;
     left: -3rem;
@@ -324,23 +345,22 @@ html, body {
 
 .menu-varieties-header-2, .menu-varieties-header-3 {
     grid-area: head2;
-    background: linear-gradient(to top, var(--text-color-1), var(--bg-color-3));
+    background: linear-gradient(to top, var(--bg-color-3-opactity-75), var(--text-color-3-opactity-75));
 }
 
 .menu-varieties-header-3 {
     grid-area: head3;
 }
 
-
 .menu-varieties-item {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding: 0.1rem;
     margin: 0.2rem;
     border-radius: 0.25rem;
-    background: linear-gradient(to right, var(--bg-color-2), var(--bg-color-1));
+    background: linear-gradient(to right, var(--bg-color-1), var(--bg-color-2));
     color: var(--text-color-1);
     font-family: var(--ff-secondary);
     height: 1.5rem;
@@ -362,24 +382,34 @@ html, body {
     grid-area: varietie3;
 }
 
+.menu-varieties-item-4 {
+    grid-area: varietie4;
+}
+
 .menu-varieties-item-button {
-    grid-area: button;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    justify-self: center;
 }
 
 .menu-varieties-item-name {
-    grid-area: varietie;
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
     justify-self: center;
 }
 
 .menu-varieties-item-price {
-    grid-area: costs;
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
     justify-self: center;
 }
 
+
 /* Button-Styling */
 .menu-varieties-item-button {
+    justify-self: center;
     display: inline-block;
-    padding: 1.7rem 1.7rem;
+    padding: 1.6rem 1.6rem;
     border: none;
     border-radius: 50%;
     background-color: #e19a15;
@@ -399,6 +429,7 @@ html, body {
 }
 
 .menu-varieties-item-button-0 {
+    justify-self: left;
     background-image: url('../storage/media/bg_button1.svg');
     background-repeat: no-repeat;
     background-position: center center;
@@ -422,12 +453,37 @@ html, body {
     background-position: center center;
 }
 
+.menu-varieties-item-button-4 {
+    background-image: url('../storage/media/bg_button5.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+}
 
 .menu-varieties-item-button:active {
     box-shadow: 0 1px 0 #7f8c8d, inset 0 0 0 2px #bdc3c7, inset 0 0 3px rgba(255, 255, 255, 0.4);
     top: 1px;
 }
 
+.menu-logout {
+    grid-area: main;
+}
+
+.menu-logout-button {
+    display: inline-block;
+    padding: 1.7rem 1.7rem;
+    border: none;
+    border-radius: 50%;
+    background-color: #e19a15;
+    background-image: radial-gradient(circle at 25% 50%, #d4af37 70%, #e19a15 20%);
+    opacity: 0.75;
+    color: white;
+    font-size: 1.0rem;
+    text-align: center;
+    text-shadow: 1px 1px #333;
+    box-shadow: 2px 2px #666;
+    background-size: 25px;
+
+}
 
 /*Background-Images*/
 .bg_img1 {
@@ -436,25 +492,33 @@ html, body {
     background-image: url('../storage/media/coffeecup.png');
     background-repeat: no-repeat;
     background-position: top left;
-    background-size: 640px;
+    background-size: 440px;
     height: 100%;
     width: 100%;
-    background-position-x: -36px;
-    background-position-y: -15px;
+    background-position-x: 9rem;
+    background-position-y: -1.1rem;
 }
 
-.bg_img2 {
-    grid-row: 4 / span 3;
-    grid-column: 2 / span 2;
-    background-image: url('../storage/media/leaf.png');
-    background-repeat: no-repeat;
-    background-position: bottom right;
-    background-size: 352px;
-    height: 100%;
-    width: 100%;
-    background-position-x: 312px;
-    background-position-y: -130px;
+/*Progress*/
+.coffee-cup {
+    /* Styles für die Kaffeetasse */
 }
+
+.coffee-cup-animation {
+    animation-name: fill-coffee;
+    animation-duration: 5s;
+    animation-delay: 2s; /* Verzögerung von 2 Sekunden */
+    animation-fill-mode: forwards;
+}
+
+@keyframes fill-coffee {
+    from { height: 0; }
+    to { height: 70%; }
+}
+
+
+
+
 
 /*.progress-section {*/
 /*    position: fixed;*/
@@ -470,20 +534,11 @@ html, body {
 /*.progress {*/
 /*    color: white;*/
 /*    text-align: center;*/
-/*    width: 10%;*/
-/*    height: 20%;*/
-
-/*}*/
-
-/*.loader {*/
-/*    position: center;*/
-/*    top: 30%;*/
 /*    width: 30%;*/
-/*    height: 30%;*/
-/*    font-size: 2rem;*/
+/*    height: 60%;*/
 /*}*/
 
-/*.loader, .progress {*/
+/*.progress {*/
 /*    background-color: #343030;*/
 /*    position: absolute;*/
 /*    border: 42px solid #705050;*/
@@ -491,33 +546,26 @@ html, body {
 /*    border-radius: 50%;*/
 /*    top: 20vh;*/
 /*    left: 20vw;*/
-/*    animation: spin 5s ease-in-out infinite;*/
-/*    !*display: flex;*!*/
+/*    animation: spin 2s ease-in-out infinite;*/
+/*    display: flex;*/
 /*    justify-content: center;*/
 /*    align-items: center;*/
 /*    overflow: hidden;*/
-/*    font-family: var(--ff-primary);*/
+/*    font-family: var(--ff-primary)*/
 /*}*/
 
-/*.loader:before,*/
 /*.progress:before {*/
 /*    position: absolute;*/
+/*    left: 0;*/
 /*    color: #705050;*/
-/*    width: 100%;*/
+/*    width: 50vh;*/
 /*    text-align: center;*/
-/*    transform: translate(-50%, -50%) rotate(-90deg);*/
-/*}*/
-
-/*.loader:before {*/
-/*    content: "Bitte Karte auflegen";*/
-/*    font-size: 0.31rem;*/
-/*    top: 50%;*/
-/*    left: 50%;*/
+/*    transform: rotate(-90deg);*/
+/*    animation: spin 2s ease-in-out infinite reverse;*/
 /*}*/
 
 /*.progress:before {*/
-/*    content: "Reset ID";*/
-/*    font-size: 3rem;*/
-/*    top: 50%;*/
-/*    left: 50%;*/
+/*    content: "Kaffee läuft";*/
+/*    font-size: 5rem;*/
 /*}*/
+

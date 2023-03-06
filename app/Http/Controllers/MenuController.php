@@ -22,9 +22,20 @@ class MenuController extends Controller
     {
         $id = RaspUser::getRaspUserId();
         $user = User::find($id);
+        $orders = CoffeeOrder::where('username', $user->username)->get();
+        if(isset($orders)) {
+            CoffeeOrder::create([
+                'tag_id' => $user->tag_id,
+                'username' => $user->username,
+                'coffee_type' => 'noch keine',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+        }
+        $orders = CoffeeOrder::where('username', $user->username)->get();
         $viewData['channel_url'] = 'No channel url';
         $viewData['user'] = $user;
-        $viewData['orders'] = CoffeeOrder::where('username', $user->username)->get();
+        $viewData['orders'] = $orders;
         $viewData['varieties'] = CoffeeVariety::all();
 
         return view('menu')->with(compact('viewData'));
@@ -52,5 +63,11 @@ class MenuController extends Controller
         RaspUser::resetRaspUser();
 
         return view('in_progress')->with(compact('viewData'));
+    }
+
+    public function logout()
+    {
+        RaspUser::resetRaspUser();
+        return redirect()->route('home');
     }
 }

@@ -10,7 +10,7 @@
             </div>
 
             <div class="title_welcome">
-                <h2>Herzlich Willkommen</h2>
+                <h2>Herzlich willkommen</h2>
             </div>
 
             <div class="title_text">
@@ -19,16 +19,21 @@
                         Bitte halten Sie Ihren RFID Chip an den Leser.
                     </a>
                 </h2>
-                <div class="clock" id="clock">
-                    <div class="hour-hand"></div>
-                    <div class="minute-hand"></div>
-                    <div class="second-hand"></div>
+                <div class="clock-container">
+                    <div class="clock" id="clock">
+                        <div class="hour-hand"></div>
+                        <div class="minute-hand"></div>
+                        <div class="second-hand"></div>
+                    </div>
+                    <div class="digital-clock" id="digital-clock"></div>
                 </div>
             </div>
+
             <div class="item"></div>
+
         </div>
     </div>
-<div class="loader"></div>
+    <div class="loader"></div>
 @endsection
 
 @section('scripts')
@@ -38,7 +43,7 @@
             const date = new Date();
             const hours = date.getHours();
             const minutes = date.getMinutes();
-            const seconds = date.getSeconds();
+            let seconds = date.getSeconds();
 
             const hourDeg = (hours / 12) * 360 + (minutes / 60) * 30;
             const minuteDeg = (minutes / 60) * 360 + (seconds / 60) * 6;
@@ -52,6 +57,9 @@
             minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
             secondHand.style.transform = `rotate(${secondDeg}deg)`;
 
+            const digitalClock = document.querySelector(".digital-clock");
+            seconds < 10 ? seconds = "0" + seconds : seconds;
+            digitalClock.innerHTML = `${hours}:${minutes}:${seconds}`;
         }
 
         setInterval(setClock, 1000); // update the clock every second
