@@ -41,8 +41,8 @@
     <script>
         function setClock() {
             const date = new Date();
-            const hours = date.getHours();
-            const minutes = date.getMinutes();
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
             let seconds = date.getSeconds();
 
             const hourDeg = (hours / 12) * 360 + (minutes / 60) * 30;
@@ -59,6 +59,8 @@
 
             const digitalClock = document.querySelector(".digital-clock");
             seconds < 10 ? seconds = "0" + seconds : seconds;
+            minutes < 10 ? minutes = "0" + minutes : minutes;
+            hours < 10 ? hours = "0" + hours : hours;
             digitalClock.innerHTML = `${hours}:${minutes}:${seconds}`;
         }
 

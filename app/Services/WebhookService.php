@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\RFID_Tag;
+use App\Models\User;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
@@ -30,8 +32,9 @@ class WebhookService
     public function getWebhookData()
     {
         $rasp_user_id = RaspUser::getRaspUserId();
+        $user = User::find($rasp_user_id);
 
-        return response()->json(['data' => $rasp_user_id]);
+        return response()->json(['data' => $rasp_user_id, 'role' => RFID_Tag::find($user->tag_id)->role]);
     }
 
     public function sendWebhookGetCoffee($coffee_name)
@@ -64,7 +67,7 @@ class WebhookService
 
     public static function setId()
     {
-        $id = RaspUser::getRaspUserId()==21 ? 0 : 21;
+        $id = RaspUser::getRaspUserId()==29 ? 0 : 29;
 
         RaspUser::setRaspUser($id);
 

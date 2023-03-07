@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class RFID_Tag extends Model
 {
+    protected $table = 'rfid_tags';
+
     protected $fillable = [
         'uid',
         'role',

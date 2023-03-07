@@ -15,7 +15,6 @@ class CoffeeOrdersController extends Controller
     {
         $raspUserId = RaspUser::getRaspUserId();
         $user = User::find($raspUserId);
-
         $coffee_type = $type;
 
         CoffeeOrder::create([

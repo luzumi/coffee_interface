@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="in-progress">
+        @yield('progress')
+    </div>
+
+
     <div class="grid_menu">
         <div class="title_app">
             <h1>Get me Coffee</h1>
@@ -9,7 +14,6 @@
             <h2>Willkommen, {{ $viewData['user']->username }}!</h2>
         </div>
         <div class="bg_img1"></div>
-        <div class="bg_img2"></div>
 
         <div class="menu-statistics">
             <div class="menu-statistics-item">
@@ -38,29 +42,58 @@
             @foreach($viewData['varieties'] as $key => $variety)
                 <div class="menu-varieties-item menu-varieties-item-{{$key}}">
 
-                    <form method="POST" action="{{ route('new_order', ['type' => $variety->coffee_name]) }}" class="order-form">
+                @if( $viewData['role'] != 'maintenance' &&
+                            $viewData['role'] != 'vip' &&
+                            $viewData['user']->credits < $variety->credit_cost )
+                        <form  class="order-form">
+                            @csrf
+                            <button type="button" class="menu-varieties-item-button menu-varieties-item-button-{{ $key }}"></button>
+                        </form>
+                        <div class="menu-varieties-item menu-varieties-item-{{$key}} ">
+                            <h5>Bitte Guthaben aufladen.</h5>
+                        </div>
+
+                @else
+                    <form method="POST" action="{{ route('new_order', ['type' => $variety->coffee_name]) }}"
+                          class="order-form">
                         @csrf
                         <button type="submit"
                                 class="menu-varieties-item-button menu-varieties-item-button-{{$key}}"></button>
                     </form>
-
+                @endif
+                @if( $viewData['role'] != 'maintenance' &&
+                            $viewData['role'] != 'vip' &&
+                            $viewData['user']->credits >= $variety->credit_cost )
                     <div class="menu-varieties-item-name menu-varieties-item-name-{{$key}}">
                         <h3>{{ $variety->coffee_name }}</h3>
                     </div>
+                @endif
                     <div class="menu-varieties-item-price menu-varieties-item-price-{{$key}}">
-                        <p>{{ $variety->credit_cost }} Credits</p>
+                        @if($viewData['role'] == 'maintenance' || $viewData['role'] == 'vip')
+                            <p>0 Credits</p>
+                        @else
+                            <p>{{ $variety->credit_cost }} Credits</p>
+                        @endif
                     </div>
                 </div>
             @endforeach
         </div>
+
         <div class="menu-logout">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="menu-logout-button">Logout</button>
             </form>
+        </div>
+
+        @if ($viewData['role'] == 'maintenance')
+            <div class="maintenance-mode">Hinweis! Maintenance-Mode aktiv - zum beenden Logout drücken oder Rfid-Karte
+                erneut auflegen
+            </div>
+        @endif
     </div>
 @endsection
 
-@yield('progress')
+
 
 
