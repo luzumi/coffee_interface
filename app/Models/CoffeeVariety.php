@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CoffeeVariety extends Model
@@ -13,11 +14,10 @@ class CoffeeVariety extends Model
         'credit_cost',
         'coffee_image',
         'coffee_description',
-        'coffee_count',
     ];
 
-    public function coffeeOrders(): HasMany
+    public function coffeeOrders(): BelongsTo
     {
-        return $this->hasMany(CoffeeOrder::class, 'coffee_type');
+        return $this->belongsTo(CoffeeOrder::class, 'id');
     }
 }

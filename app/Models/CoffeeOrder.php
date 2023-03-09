@@ -5,13 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class CoffeeOrder extends Model
 {
     protected $fillable = [
         'tag_id',
-        'username',
-        'coffee_type',
+        'user_id',
+        'coffee_name',
     ];
 
     public function rfidTag(): BelongsTo
@@ -21,11 +24,14 @@ class CoffeeOrder extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'username');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function coffeeVariety(): BelongsTo
     {
-        return $this->belongsTo(CoffeeVariety::class, 'coffee_type');
+        return $this->belongsTo(CoffeeVariety::class, 'id');
     }
+
+
 }
+

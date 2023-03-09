@@ -417,10 +417,7 @@ html, body {
 
 
 /* Button-Styling */
-.menu-varieties-item-button {
-    justify-self: center;
-    display: inline-block;
-    padding: 1.6rem 1.6rem;
+.btn {
     border: none;
     border-radius: 50%;
     background-color: #e19a15;
@@ -434,44 +431,37 @@ html, body {
     background-size: 25px;
 }
 
-.menu-varieties-item-button:active {
-    box-shadow: 0 1px 0 #7f8c8d, inset 0 0 0 2px #bdc3c7, inset 0 0 3px rgba(255, 255, 255, 0.4);
-    top: 1px;
+.menu-varieties-item-button {
+    justify-self: center;
+    display: inline-block;
+    padding: 1.6rem 1.6rem;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .menu-varieties-item-button-0 {
     justify-self: left;
     background-image: url('../storage/media/bg_button1.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
 }
 
 .menu-varieties-item-button-1 {
     background-image: url('../storage/media/bg_button2.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
 }
 
 .menu-varieties-item-button-2 {
     background-image: url('../storage/media/bg_button3.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
 }
 
 .menu-varieties-item-button-3 {
     background-image: url('../storage/media/bg_button4.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
 }
 
 .menu-varieties-item-button-4 {
     background-image: url('../storage/media/bg_button5.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
 }
 
 .menu-varieties-item-button:active {
-    box-shadow: 0 1px 0 #7f8c8d, inset 0 0 0 2px #bdc3c7, inset 0 0 3px rgba(255, 255, 255, 0.4);
+    box-shadow: 1px -1px 0 #7f8c8d, inset 0 0 0 5px #bdc3c7, inset 0 0 3px rgba(255, 255, 255, 0.4);
     top: 1px;
 }
 
@@ -482,18 +472,6 @@ html, body {
 .menu-logout-button {
     display: inline-block;
     padding: 1.7rem 1.7rem;
-    border: none;
-    border-radius: 50%;
-    background-color: #e19a15;
-    background-image: radial-gradient(circle at 25% 50%, #d4af37 70%, #e19a15 20%);
-    opacity: 0.75;
-    color: white;
-    font-size: 1.0rem;
-    text-align: center;
-    text-shadow: 1px 1px #333;
-    box-shadow: 2px 2px #666;
-    background-size: 25px;
-
 }
 
 .maintenance-mode {
@@ -533,6 +511,7 @@ html, body {
     width: 100%;
     background-position-x: 9rem;
     background-position-y: -1.1rem;
+    opacity: 70%;
 }
 
 /*Progress*/
@@ -544,12 +523,12 @@ html, body {
     animation-name: fill-coffee;
     animation-duration: 5s;
     animation-delay: 2s; /* Verzögerung von 2 Sekunden */
-    animation-fill-mode: forwards;
+    animation-fill-mode: backwards;
 }
 
 @keyframes fill-coffee {
-    from { height: 70%; }
-    to { height: 0; }
+    from { height: 0; }
+    to { height: 50%; }
 }
 
 .progress-section {
@@ -572,9 +551,6 @@ html, body {
     text-align: center;
     width: 30%;
     height: 60%;
-}
-
-.progress {
     background-color: #343030;
     position: absolute;
     border: 42px solid #705050;
@@ -594,7 +570,6 @@ html, body {
     position: absolute;
     top: 50%;
     left: 50%;
-
     background-color: #343030;
     display: flex;
     justify-content: center;
@@ -608,7 +583,7 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 99999; /* Stellen Sie sicher, dass es eine höhere Zahlen als die anderen Elemente auf der Seite hat */
-    pointer-events: none; /* Verhindert das Klicken auf die Ebene */
+    z-index: 9999;
+    pointer-events: none;
 }
 

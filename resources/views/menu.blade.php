@@ -26,7 +26,7 @@
             </div>
             <div class="menu-statistics-item">
                 <h3>Letzter Auswahl</h3>
-                <p> {{ $viewData['orders']->last()->coffee_type??''}}</p>
+                <p> {{ $viewData['orders']->last()->coffee_name??''}}</p>
             </div>
             <div class="menu-statistics-item">
                 <h3>Guthaben</h3>
@@ -40,6 +40,8 @@
                 <p class="menu-varieties-header-3">Kosten</p>
             </div>
             @foreach($viewData['varieties'] as $key => $variety)
+                @if($variety->coffee_name == 'noch keine Auswahl getroffen') @continue @endif
+
                 <div class="menu-varieties-item menu-varieties-item-{{$key}}">
 
                 @if( $viewData['role'] != 'maintenance' &&
@@ -47,7 +49,7 @@
                             $viewData['user']->credits < $variety->credit_cost )
                         <form  class="order-form">
                             @csrf
-                            <button type="button" class="menu-varieties-item-button menu-varieties-item-button-{{ $key }}"></button>
+                            <button type="button" class="btn menu-varieties-item-button menu-varieties-item-button-{{ $key }}"></button>
                         </form>
                         <div class="menu-varieties-item menu-varieties-item-{{$key}} ">
                             <h5>Bitte Guthaben aufladen.</h5>
@@ -58,9 +60,10 @@
                           class="order-form">
                         @csrf
                         <button type="submit"
-                                class="menu-varieties-item-button menu-varieties-item-button-{{$key}}"></button>
+                                class="btn menu-varieties-item-button menu-varieties-item-button-{{$key}}"></button>
                     </form>
                 @endif
+
                 @if( $viewData['role'] != 'maintenance' &&
                             $viewData['role'] != 'vip' &&
                             $viewData['user']->credits >= $variety->credit_cost )
@@ -82,12 +85,12 @@
         <div class="menu-logout">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="menu-logout-button">Logout</button>
+                <button type="submit" class="btn menu-logout-button">Logout</button>
             </form>
         </div>
 
         @if ($viewData['role'] == 'maintenance')
-            <div class="maintenance-mode">Hinweis! Maintenance-Mode aktiv - zum beenden Logout drücken oder Rfid-Karte
+            <div class="maintenance-mode">Hinweis! Maintenance-Mode aktiv - zum Beenden Logout drücken oder Rfid-Karte
                 erneut auflegen
             </div>
         @endif

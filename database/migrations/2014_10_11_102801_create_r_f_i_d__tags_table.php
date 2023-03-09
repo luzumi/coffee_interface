@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('r_f_i_d__tags', function (Blueprint $table) {
+        Schema::create('rfid_tags', function (Blueprint $table) {
             $table->id();
-            $table->string('uid')->unique();
+            $table->string('tag_uid');
             $table->string('role')->default('user');
             $table->boolean('tag_active')->default(false);
             $table->timestamps();
         });
+
     }
 
     /**
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('r_f_i_d__tags');
+        Schema::dropIfExists('rfid_tags');
     }
 };

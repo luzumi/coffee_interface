@@ -13,16 +13,18 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
+            $table->string('username')->unique();
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
-            $table->string('tag_id')->unique();
+            $table->unsignedBigInteger('tag_id');
+            $table->foreign('tag_id')->references('id')->on('rfid_tags');
             $table->string('credits')->default('0');
             $table->boolean('active')->default(false);
-            $table->string('remarks')->nullable();
+            $table->string('remarks')->default('');
             $table->rememberToken();
             $table->timestamps();
         });
+
     }
 
     /**

@@ -24,46 +24,48 @@ class MenuController extends Controller
         $id = RaspUser::getRaspUserId();
         $user = User::find($id);
         $orders = CoffeeOrder::where('username', $user->username)->get();
-        if (isset($orders)) {
+
+        if (!isset( $orders )) {
             CoffeeOrder::create([
                 'tag_id' => $user->tag_id,
                 'username' => $user->username,
-                'coffee_type' => 'noch keine',
+                'coffee_name' => 'noch keine Auswahl getroffen',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
         }
-        $orders = CoffeeOrder::where('username', $user->username)->get();
+//        $orders = CoffeeOrder::where('username', $user->username)->get();
+
         $viewData['user'] = $user;
-        $viewData['orders'] = $orders;
+        $viewData['orders'] = CoffeeOrder::where('username', $user->username)->get();
         $viewData['varieties'] = CoffeeVariety::all();
         $viewData['role'] = RFID_Tag::find($user->tag_id)->role;
 
         return view('menu')->with(compact('viewData'));
     }
 
-    public function limit($key)
-    {
-        $id = RaspUser::getRaspUserId();
-        $user = User::find($id);
-        $orders = CoffeeOrder::where('username', $user->username)->get();
-        if (isset($orders)) {
-            CoffeeOrder::create([
-                'tag_id' => $user->tag_id,
-                'username' => $user->username,
-                'coffee_type' => 'noch keine',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ]);
-        }
-        $orders = CoffeeOrder::where('username', $user->username)->get();
-        $viewData['user'] = $user;
-        $viewData['orders'] = $orders;
-        $viewData['varieties'] = CoffeeVariety::all();
-        $viewData['role'] = RFID_Tag::find($user->tag_id)->role;
-        $viewData['key'] = $key;
-        return view('limit')->with(compact('viewData'));
-    }
+//    public function limit($key)
+//    {
+//        $id = RaspUser::getRaspUserId();
+//        $user = User::find($id);
+//        $orders = CoffeeOrder::where('username', $user->username)->get();
+//        if (isset($orders)) {
+//            CoffeeOrder::create([
+//                'tag_id' => $user->tag_id,
+//                'username' => $user->username,
+//                'coffee_name => 'noch keine',
+//                'created_at' => date('Y-m-d H:i:s'),
+//                'updated_at' => date('Y-m-d H:i:s')
+//            ]);
+//        }
+//        $orders = CoffeeOrder::where('username', $user->username)->get();
+//        $viewData['user'] = $user;
+//        $viewData['orders'] = $orders;
+//        $viewData['varieties'] = CoffeeVariety::all();
+//        $viewData['role'] = RFID_Tag::find($user->tag_id)->role;
+//        $viewData['key'] = $key;
+//        return view('limit')->with(compact('viewData'));
+//    }
     /**
      * @param Request $request
      * @return RedirectResponse

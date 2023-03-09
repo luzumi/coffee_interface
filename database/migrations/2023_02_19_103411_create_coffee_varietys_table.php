@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('credit_cost')->default(0);
             $table->string('coffee_image')->default('default_coffee_image.png');
             $table->string('coffee_description')->nullable();
-            $table->string('coffee_count')->nullable();
+            $table->string('coffee_code')->nullable();
             $table->timestamps();
         });
     }

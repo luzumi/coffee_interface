@@ -13,18 +13,18 @@ class RFID_Tag extends Model
     protected $table = 'rfid_tags';
 
     protected $fillable = [
-        'uid',
+        'tag_uid',
         'role',
         'tag_active',
     ];
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'tag_id');
+        return $this->belongsTo(User::class, 'id');
     }
 
     public function coffeeOrders(): HasMany
     {
-        return $this->hasMany(CoffeeOrder::class, 'tag_uid');
+        return $this->hasMany(CoffeeOrder::class, 'id');
     }
 }

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rasp_user', function (Blueprint $table) {
+        Schema::create('rasp_users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->default(0);
             $table->timestamps();
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rasp_user');
+        Schema::dropIfExists('rasp_users');
     }
 };

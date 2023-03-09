@@ -8,7 +8,7 @@ class RaspUser
 {
     public static function getRaspUserId(): int
     {
-        $data = DB::table('rasp_users')->first('user_id');
+        $data = DB::table('rasp_users')->where('id', 1)->first();
 
         return $data->user_id;
     }

@@ -13,11 +13,16 @@ return new class extends Migration
     {
         Schema::create('coffee_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('tag_id');
-            $table->string('username');
-            $table->string('coffee_type');
+            $table->unsignedBigInteger('tag_id');
+            $table->foreign('tag_id')->references('id')->on('rfid_tags');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('coffee_name');
+            $table->foreign('coffee_name')->references('coffee_name')->on('coffee_varieties');
             $table->timestamps();
         });
+
+
     }
 
     /**

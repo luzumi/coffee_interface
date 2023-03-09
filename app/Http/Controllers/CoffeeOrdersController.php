@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\CoffeeOrder;
-use App\Models\RFID_Tag;
 use App\Models\User;
 use App\Services\Calculate;
 use App\Services\RaspUser;
@@ -15,15 +14,15 @@ class CoffeeOrdersController extends Controller
     {
         $raspUserId = RaspUser::getRaspUserId();
         $user = User::find($raspUserId);
-        $coffee_type = $type;
+        $coffee_name = $type;
 
         CoffeeOrder::create([
             'tag_id' => $user->tag_id,
             'username' => $user->username,
-            'coffee_type' => $coffee_type,
+            'coffee_name' => $coffee_name,
         ]);
 
-        Calculate::coffeeOrder($coffee_type, $raspUserId);
+        Calculate::coffeeOrder($coffee_name, $raspUserId);
 
         return redirect()->route('in_progress');
     }
