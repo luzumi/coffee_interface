@@ -45,7 +45,7 @@ class WebhookService
             ]);
 
         } catch (\Exception $e) {
-            Log::info('Could not make Clienti: ' . $e->getMessage());
+            Log::info('Could not make Client: ' . $e->getMessage());
         }
         try {
             $response = $client->post('http://127.0.0.1:5000/webhook', [
@@ -67,7 +67,7 @@ class WebhookService
 
     public static function setId()
     {
-        $id = RaspUser::getRaspUserId()==3 ? 0 : 3;
+        $id = RaspUser::getRaspUserId()==6 ? 0 : 6;
 
         RaspUser::setRaspUser($id);
 

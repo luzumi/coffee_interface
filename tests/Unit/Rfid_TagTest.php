@@ -77,12 +77,19 @@ class Rfid_TagTest extends TestCase
     {
         $rfidTag = RFID_Tag::find(1);
 
-        // Lösche zuerst alle CoffeeOrders, die mit dem RFID-Tag verknüpft sind
+        // Delete any related User instances that reference this RFID_Tag
+        if ($rfidTag->users !== null) {
+            foreach ($rfidTag->users as $user) {
+                $user->update(['tag_id' => null]);
+            }
+        }
+
+        // Delete any related CoffeeOrder instances that reference this RFID_Tag
         foreach ($rfidTag->coffeeOrders as $coffeeOrder) {
             $coffeeOrder->delete();
         }
 
-        // Lösche dann den RFID-Tag
+        // Delete the RFID_Tag instance
         $rfidTag->delete();
 
         $this->assertDatabaseMissing('rfid_tags', ['id' => 1]);

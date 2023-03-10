@@ -10,7 +10,7 @@ use App\Services\RaspUser;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class DatabaseSeeder extends Seeder
+class TestDatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
                 'lastname' => 'PRO',
                 'tag_id' => '1',
                 'credits' => '0',
+                'role' => 'vip',
                 'active' => true,
                 'remarks' => '',
             ],
@@ -45,6 +46,7 @@ class DatabaseSeeder extends Seeder
                 'lastname' => 'MAINTENANCE_PRO',
                 'tag_id' => '2',
                 'credits' => '0',
+                'role' => 'maintenance',
                 'active' => true,
                 'remarks' => '',
             ],

@@ -14,8 +14,8 @@ class Calculate
     {
         $credit_cost = CoffeeVariety::where('coffee_name', $coffee_name)->first()->credit_cost;
         $user = User::find($id);
-
         $role = RFID_Tag::find($user->tag_id)->role;
+
         if ($role == 'vip' || $role == 'maintenance') {
             $credit_cost = 0;
         }

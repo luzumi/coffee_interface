@@ -18,7 +18,7 @@ class CoffeeOrdersController extends Controller
 
         CoffeeOrder::create([
             'tag_id' => $user->tag_id,
-            'username' => $user->username,
+            'user_id' => $user->id,
             'coffee_name' => $coffee_name,
         ]);
 

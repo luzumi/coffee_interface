@@ -83,7 +83,7 @@
         </div>
 
         <div class="menu-logout">
-            <form method="POST" action="{{ route('logout') }}">
+            <form method="GET" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="btn menu-logout-button">Logout</button>
             </form>

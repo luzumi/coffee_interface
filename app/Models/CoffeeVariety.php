@@ -16,8 +16,8 @@ class CoffeeVariety extends Model
         'coffee_description',
     ];
 
-    public function coffeeOrders(): BelongsTo
+    public function coffeeOrders(): HasMany
     {
-        return $this->belongsTo(CoffeeOrder::class, 'id');
+        return $this->hasMany(CoffeeOrder::class, 'id');
     }
 }
