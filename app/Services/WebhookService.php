@@ -46,8 +46,8 @@ class WebhookService
     public function sendWebhookGetCoffee($coffee_code)
     {
         // Abrufen der Webhook-URL aus der Umgebungsvariablen GUZZLE_HTTP_CLIENT
-        $client_url = config('guzzle_http_client');
-        $webhook_url = config('webhook_url');
+        $client_url = config('webhook-client.configs.default.guzzle_http_client');
+        $webhook_url = config('webhook-client.configs.default.webhook_url');
 
         try {
             // Erstellen eines Guzzle-HTTP-Clients mit der Basis-URI und der Aktion

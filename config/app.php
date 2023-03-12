@@ -55,8 +55,6 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
-    'webhook_ip' => env('WEBHOOK_IP', 'http://127.0.0.1:5000/webhook'),
-    'guzzle_http_client' => env('GUZZLE_HTTP_CLIENT', 'http://192.168.2.179'),
     'asset_url' => env('ASSET_URL', '/'),
 
     /*
@@ -83,7 +81,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'de',
 
     /*
     |--------------------------------------------------------------------------
@@ -109,7 +107,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'de_DE',
 
     /*
     |--------------------------------------------------------------------------
