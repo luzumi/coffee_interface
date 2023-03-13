@@ -15,7 +15,7 @@ return [
              */
             'signing_secret' => env('WEBHOOK_CLIENT_SECRET'),
             'webhook_ip' => env('WEBHOOK_URL', 'http://127.0.0.1:5000/webhook'),
-            'guzzle_http_client' => env('GUZZLE_HTTP_CLIENT', 'http://192.168.2.179'),
+            'guzzle_http_client' => env('GUZZLE_HTTP_CLIENT', 'http://10.110.34.166'),
 
             /*
              * The name of the header containing the signature.

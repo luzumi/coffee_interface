@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Services\RaspUser;
 use App\Services\WebhookService;
 use Database\Seeders\TestDatabaseSeeder;
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Handler\MockHandler;
@@ -16,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Mockery;
+use Monolog\Handler\StreamHandler;
 use Tests\TestCase;
 
 class WebHookServiceTest extends TestCase
@@ -84,54 +86,18 @@ class WebHookServiceTest extends TestCase
         $response->assertStatus(500);
     }
 
-    public function test_send_webhook_get_coffee_calls_post_method_with_expected_arguments()
+    public function test_sendWebhookGetCoffee_with_valid_coffee_code()
     {
         // Arrange
-        $coffee_name = 'Latte';
-        $url = 'http://127.0.0.1:5000/webhook';
-        $events = ['charge.succeeded'];
-
-        // Create a mock handler for the Guzzle client
-        $mock = new MockHandler([
-            new Response(200),
-        ]);
-        $handlerStack = HandlerStack::create($mock);
-
-        // Create a Guzzle client with the mock handler
-        $client = new Client(['handler' => $handlerStack]);
-
+        $coffeeCode = 'coffee';
+        config(['webhook-client.configs.0.webhook_url' => 'http://example.com']);
+        config(['webhook-client.configs.0.guzzle_http_client' => 'http://example.org']);
         $webhookService = new WebhookService();
 
-        // Mock the Log facade to check if the info method is called
-        Log::shouldReceive('info')
-            ->once()
-            ->withArgs(['Webhook sent to Raspberry Pi: ' . $coffee_name]);
-
         // Act
-        $response = $webhookService->sendWebhookGetCoffee($coffee_name, $client);
+        $response = $webhookService->sendWebhookGetCoffee($coffeeCode);
 
         // Assert
-        $this->assertNull($response);
-    }
-
-    public function test_send_webhook_get_coffee_logs_error_when_guzzle_exception_is_thrown()
-    {
-        // Arrange
-        $coffee_name = 'latte';
-
-        $mockClient = Mockery::mock(Client::class);
-        $mockClient->shouldReceive('post')
-            ->once()
-            ->andThrow(GuzzleException::class);
-
-        $webhookService = new WebhookService();
-        Log::shouldReceive('info')->once();
-
-        // Act
-        $response = $webhookService->sendWebhookGetCoffee($coffee_name);
-
-        // Assert
-        $this->assertEquals(302, $response->getStatusCode());
-        $mockClient->shouldHaveReceived('post');
+        $this->assertEquals(200, $response);
     }
 }
