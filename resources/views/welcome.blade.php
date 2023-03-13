@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="container">
         <div class="grid_container">
 
@@ -9,7 +8,7 @@
                 <h1>Get me Coffee</h1>
             </div>
 
-            <div class="title_welcome">
+            <div class="title_welcome" id="csrf">
                 <h2>Herzlich willkommen</h2>
             </div>
 
@@ -67,6 +66,8 @@
         setInterval(setClock, 1000); // update the clock every second
     </script>
     <script>
+        {{--let csrfToken = "{{ csrf_token() }}";--}}
+
         let xhr = new XMLHttpRequest();
         xhr.open("GET", "{{ route('webhook_data') }}");
         xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");
@@ -89,17 +90,24 @@
                     xhr.send();
                 } else {
                     console.log('Benutzer gefunden' + userId)
-                    xhr.open("GET", "{{ route('menu') }}");
-                    xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");
-
-                    xhr.send();
-                    window.location.href = '/menu';
-
+                    const menuXhr = new XMLHttpRequest();
+                    menuXhr.open("GET", "{{ route('menu') }}");
+                    menuXhr.setRequestHeader("x-requested-with", "XMLHttpRequest");
+                    menuXhr.onreadystatechange = function() {
+                        if (menuXhr.readyState === XMLHttpRequest.DONE) {
+                            // const responseText = menuXhr.responseText;
+                            // const parser = new DOMParser();
+                            // parser.parseFromString(responseText, 'text/html');
+                            window.location.href = '/menu';
+                        }
+                    };
+                    menuXhr.send();
                 }
             }
         };
         xhr.send();
 
     </script>
+
 
 @endsection

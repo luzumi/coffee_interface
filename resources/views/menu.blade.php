@@ -56,7 +56,7 @@
                         </div>
 
                 @else
-                    <form method="POST" action="{{ route('new_order', ['type' => $variety->coffee_name]) }}"
+                    <form method="POST" action="{{ route('new_order', ['type' => $variety->coffee_code]) }}"
                           class="order-form">
                         @csrf
                         <button type="submit"

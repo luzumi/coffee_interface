@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Gruppo&family=Unbounded:wght@200;400;600;800&display=swap"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Sono&display=swap" rel="stylesheet">
+{{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
     @yield('scripts')
 </head>
 <body class="body">

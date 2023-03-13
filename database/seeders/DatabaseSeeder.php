@@ -90,32 +90,38 @@ class DatabaseSeeder extends Seeder
             ['coffee_name' => 'Coffee',
                 'credit_cost' => '50',
                 'coffee_image' => 'strong.png',
-                'coffee_description' => 'A strong black coffee.'
+                'coffee_description' => 'A strong black coffee.',
+                'coffee_code' => '1'
             ],
             ['coffee_name' => 'Coffee Double',
                 'credit_cost' => '90',
                 'coffee_image' => 'strong.png',
-                'coffee_description' => 'A strong black coffee.'
+                'coffee_description' => 'A strong black coffee.',
+                'coffee_code' => '2'
             ],
             ['coffee_name' => 'Espresso',
                 'credit_cost' => '60',
                 'coffee_image' => 'light.png',
-                'coffee_description' => 'A short black coffee.'
+                'coffee_description' => 'A short black coffee.',
+                'coffee_code' => '3'
             ],
             ['coffee_name' => 'Espresso Double',
                 'credit_cost' => '100',
                 'coffee_image' => 'normal.png',
-                'coffee_description' => 'A normal black coffee.'
+                'coffee_description' => 'A normal black coffee.',
+                'coffee_code' => '4'
             ],
             ['coffee_name' => 'Water',
                 'credit_cost' => '0',
                 'coffee_image' => 'water.png',
-                'coffee_description' => 'Gratis Water.'
+                'coffee_description' => 'Gratis Water.',
+                'coffee_code' => '5'
             ],
             ['coffee_name' => 'noch keine Auswahl getroffen',
                 'credit_cost' => '0',
                 'coffee_image' => 'water.png',
-                'coffee_description' => 'erster Eintrag eines Users'
+                'coffee_description' => 'erster Eintrag eines Users',
+                'coffee_code' => '6'
             ],
         ];
         foreach ($coffeeVarieties as $coffeeVariety) {

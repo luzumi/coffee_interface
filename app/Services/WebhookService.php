@@ -6,8 +6,11 @@ use App\Models\RFID_Tag;
 use App\Models\User;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Log;
 
 class WebhookService
@@ -20,7 +23,7 @@ class WebhookService
     {
         // Extrahieren der JSON-Daten aus der Anfrage
         $data = $request->json()->all();
-
+        Log::error('Webhook data: ' . json_encode($data));
         // Festlegen des aktuellen Benutzers anhand der empfangenen Benutzer-ID
         RaspUser::setRaspUser($data['user_id']);
 
@@ -49,22 +52,23 @@ class WebhookService
         $config = config('webhook-client.configs.0');
         if (!$config) {
             Log::error('Webhook configuration not found.');
+
             return 500; // HTTP-Statuscode für interne Serverfehler
         }
 
         // Webhook-URL und Guzzle-Client-URL aus der Konfiguration laden
-        $webhookUrl = config('webhook-client.configs.0.webhook_url');
         $clientUrl = config('webhook-client.configs.0.guzzle_http_client');
+        $webhookUrl = config('webhook-client.configs.0.webhook_url');
 
         // Guzzle-Client mit Basis-URI und Aktion erstellen
         try {
-            $client = new Client([
-                'base_uri' => $clientUrl,
+            $client = new Client(['base_uri' => $webhookUrl,
                 'action' => $coffeeCode,
             ]);
         } catch (\Exception $e) {
             // Protokollieren einer Fehlermeldung, falls der Client nicht erstellt werden konnte
             Log::error('Could not create Guzzle client: ' . $e->getMessage());
+
             return 500; // HTTP-Statuscode für interne Serverfehler
         }
 
@@ -89,13 +93,58 @@ class WebhookService
         }
     }
 
+    public function ALTsendWebhookGetCoffee()
+    {
+        try {
+            $client = new Client(['base_uri' => config('webhook-client.configs.0.webhook_url'),
+//                'timeout' => 2.0,
+//                'verify' => false,
+//                'http_errors' => false,
+//                'allow_redirects' => false,
+//                'debug' => false,
+//                'cookies' => true,
+//                'headers' => [
+//                    'Accept' => 'application/json',
+//                    'Content-Type' => 'application/json',
+//                    'User-Agent' => 'Laravel/8.0.0 (GuzzleHttp/7.0.1)'
+//                ],
+                'action' => 'turn_on',
+            ]);
+
+        } catch (\Exception $e) {
+            Log::info('Could not make Clienti: ' . $e->getMessage());
+        }
+        try {
+            $response = $client->post(config('webhook-client.configs.0.webhook_url'), [
+                'auth' => ['stripe_secret_key', '1'],
+                'json' => [
+                    'url' => config('webhook-client.configs.0.webhook_url'),
+                    'events' => ['charge.succeeded'],
+                    'action' => 'turn_on'
+                ],
+//                'headers' => [
+//                    'Content-Type' => 'application/json',
+//                    'Accept' => 'application/json'
+//                ]
+            ]);
+            Log::info('Webhook sent to Raspberry Pi: ' . $client->getConfig('action'));
+
+        } catch (GuzzleException $e) {
+            Log::info('Could not send webhook to Raspberry Pi: ' . $e->getMessage());
+        }
+
+        return back();
+    }
 
 
-    public static function setId()
+
+    public static function setId(): Redirector|Application|RedirectResponse
     {
         // Setzen der aktuellen Benutzer-ID auf 0 oder 6, abhängig von der aktuellen Benutzer-ID
         // (benötigt für den klickbaren Buttons auf der Startseite)
-        $id = RaspUser::getRaspUserId()==6 ? 0 : 6;
+        $id = RaspUser::getRaspUserId()==1 ? 0 : 1;
         RaspUser::setRaspUser($id);
+
+        return redirect('/');
     }
 }
