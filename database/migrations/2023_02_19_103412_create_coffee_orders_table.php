@@ -14,11 +14,20 @@ return new class extends Migration
         Schema::create('coffee_orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tag_id');
-            $table->foreign('tag_id')->references('id')->on('rfid_tags');
+            $table->foreign('tag_id')
+                ->references('id')
+                ->on('rfid_tags')
+                ->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
             $table->string('coffee_name');
-            $table->foreign('coffee_name')->references('coffee_name')->on('coffee_varieties');
+            $table->foreign('coffee_name')
+                ->references('coffee_name')
+                ->on('coffee_varieties')
+                ->onDelete('cascade');
             $table->timestamps();
         });
 

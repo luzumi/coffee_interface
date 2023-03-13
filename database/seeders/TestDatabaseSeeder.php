@@ -24,6 +24,7 @@ class TestDatabaseSeeder extends Seeder
             ['tag_uid' => '124-89-54-121-106', 'role' => 'user', 'tag_active' => true],
             ['tag_uid' => '106-124-89-54-121', 'role' => 'user', 'tag_active' => true],
             ['tag_uid' => '121-106-124-89-54', 'role' => 'user', 'tag_active' => true],
+            ['tag_uid' => '54-121-106-124-89', 'role' => 'user', 'tag_active' => true]
         ];
         foreach ($rfidTags as $rfidTag) {
             RFID_Tag::create($rfidTag);
@@ -71,6 +72,14 @@ class TestDatabaseSeeder extends Seeder
                 'active' => true,
                 'remarks' => '',
             ],
+            ['username' => 'user-no-order',
+                'firstname' => 'user',
+                'lastname' => '0',
+                'tag_id' => '6',
+                'credits' => '0',
+                'active' => true,
+                'remarks' => '',
+            ]
         ];
         foreach ($users as $user) {
             User::create($user);

@@ -12,6 +12,8 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        '/webhook'
+        '/webhook',
+        'test/Feature/CoffeeOrdersControllerTest.php',
+        '/new_order/*'
     ];
 }

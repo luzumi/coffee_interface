@@ -22,50 +22,28 @@ class MenuController extends Controller
     public function show(Request $request)
     {
         $id = RaspUser::getRaspUserId();
-        $user = User::find($id);
-        $orders = CoffeeOrder::where('username', $user->username)->get();
-
-        if (!isset( $orders )) {
+        $orders = CoffeeOrder::where('user_id', $id)->get();
+        $user = User::with('coffeeOrders')->find($id);
+        if (isset( $orders )) {
             CoffeeOrder::create([
+                'user_id' => $user->id,
                 'tag_id' => $user->tag_id,
-                'username' => $user->username,
                 'coffee_name' => 'noch keine Auswahl getroffen',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
         }
-//        $orders = CoffeeOrder::where('username', $user->username)->get();
 
         $viewData['user'] = $user;
-        $viewData['orders'] = CoffeeOrder::where('username', $user->username)->get();
+        $viewData['orders'] = CoffeeOrder::where('user_id', $user->id)->get();
         $viewData['varieties'] = CoffeeVariety::all();
         $viewData['role'] = RFID_Tag::find($user->tag_id)->role;
+
 
         return view('menu')->with(compact('viewData'));
     }
 
-//    public function limit($key)
-//    {
-//        $id = RaspUser::getRaspUserId();
-//        $user = User::find($id);
-//        $orders = CoffeeOrder::where('username', $user->username)->get();
-//        if (isset($orders)) {
-//            CoffeeOrder::create([
-//                'tag_id' => $user->tag_id,
-//                'username' => $user->username,
-//                'coffee_name => 'noch keine',
-//                'created_at' => date('Y-m-d H:i:s'),
-//                'updated_at' => date('Y-m-d H:i:s')
-//            ]);
-//        }
-//        $orders = CoffeeOrder::where('username', $user->username)->get();
-//        $viewData['user'] = $user;
-//        $viewData['orders'] = $orders;
-//        $viewData['varieties'] = CoffeeVariety::all();
-//        $viewData['role'] = RFID_Tag::find($user->tag_id)->role;
-//        $viewData['key'] = $key;
-//        return view('limit')->with(compact('viewData'));
-//    }
+
     /**
      * @param Request $request
      * @return RedirectResponse
@@ -82,7 +60,7 @@ class MenuController extends Controller
 
         $user = User::find($id);
         $viewData['user'] = $user;
-        $viewData['orders'] = CoffeeOrder::where('username', $user->username)->get();
+        $viewData['orders'] = CoffeeOrder::where('user_id', $user->id)->get(); // use user_id instead of username
         $viewData['varieties'] = CoffeeVariety::all();
         $viewData['role'] = RFID_Tag::find($user->tag_id)->role;
 
@@ -92,6 +70,7 @@ class MenuController extends Controller
 
         return view('in_progress')->with(compact('viewData'));
     }
+
 
     public function logout()
     {
