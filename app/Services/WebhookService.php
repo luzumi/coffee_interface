@@ -21,15 +21,20 @@ class WebhookService
      */
     public function handleWebhook(Request $request)
     {
-        // Extrahieren der JSON-Daten aus der Anfrage
         $data = $request->json()->all();
-        Log::error('Webhook data: ' . json_encode($data));
+
         // Festlegen des aktuellen Benutzers anhand der empfangenen Benutzer-ID
-        RaspUser::setRaspUser($data['user_id']);
+        $rfid_tag = RFID_Tag::where('tag_uid', $data['user_id'])->with('user')->first();
+        $user_id = $rfid_tag->user->id;
+
+        Log::info('Webhook data incoming: ' . json_encode($data));
+
+        RaspUser::setRaspUser($user_id);
 
         // Rückgabe einer JSON-Antwort mit einem Status "success" und den empfangenen Daten
         return response()->json(['status' => 'success', 'data' => $data]);
     }
+
 
 
     /**
@@ -39,6 +44,7 @@ class WebhookService
     {
         // Abrufen der aktuellen Benutzer-ID
         $rasp_user_id = RaspUser::getRaspUserId();
+
 
         // Abrufen des Benutzers anhand der Benutzer-ID und
         // Rückgabe einer JSON-Antwort mit der Benutzer-ID und der Rolle des RFID-Tags
@@ -51,7 +57,7 @@ class WebhookService
         // Konfiguration laden und prüfen, ob der erste Eintrag vorhanden ist
         $config = config('webhook-client.configs.0');
         if (!$config) {
-            Log::error('Webhook configuration not found.');
+//            Log::error('Webhook configuration not found.');
 
             return 500; // HTTP-Statuscode für interne Serverfehler
         }
@@ -67,7 +73,7 @@ class WebhookService
             ]);
         } catch (\Exception $e) {
             // Protokollieren einer Fehlermeldung, falls der Client nicht erstellt werden konnte
-            Log::error('Could not create Guzzle client: ' . $e->getMessage());
+//            Log::error('Could not create Guzzle client: ' . $e->getMessage());
 
             return 500; // HTTP-Statuscode für interne Serverfehler
         }
@@ -83,12 +89,12 @@ class WebhookService
                 ],
             ]);
             // Erfolgsmeldung protokollieren
-            Log::info('Webhook sent to Raspberry Pi: ' . $client->getConfig('action'));
+//            Log::info('Webhook sent to Raspberry Pi: ' . $client->getConfig('action'));
             // HTTP-Statuscode der Antwort zurückgeben
             return $response->getStatusCode();
         } catch (GuzzleException $e) {
             // Protokollieren einer Fehlermeldung, falls die Webhook-Anforderung nicht gesendet werden konnte
-            Log::error('Could not send webhook to Raspberry Pi: ' . $e->getMessage());
+//            Log::error('Could not send webhook to Raspberry Pi: ' . $e->getMessage());
             return 500; // HTTP-Statuscode für interne Serverfehler
         }
     }

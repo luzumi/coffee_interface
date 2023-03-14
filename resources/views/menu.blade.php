@@ -64,13 +64,13 @@
                     </form>
                 @endif
 
-                @if( $viewData['role'] != 'maintenance' &&
-                            $viewData['role'] != 'vip' &&
-                            $viewData['user']->credits >= $variety->credit_cost )
+{{--                @if( $viewData['role'] != 'maintenance' &&--}}
+{{--                            $viewData['role'] != 'vip' &&--}}
+{{--                            $viewData['user']->credits >= $variety->credit_cost )--}}
                     <div class="menu-varieties-item-name menu-varieties-item-name-{{$key}}">
                         <h3>{{ $variety->coffee_name }}</h3>
                     </div>
-                @endif
+{{--                @endif--}}
                     <div class="menu-varieties-item-price menu-varieties-item-price-{{$key}}">
                         @if($viewData['role'] == 'maintenance' || $viewData['role'] == 'vip')
                             <p>0 Credits</p>

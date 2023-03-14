@@ -47,9 +47,9 @@ class User extends Authenticatable
     ];
 
 
-    public function rfidTag(): HasOne
+    public function rfidTag(): HasMany
     {
-        return $this->hasOne(RFID_Tag::class, 'id');
+        return $this->hasMany(RFID_Tag::class, 'id');
     }
 
     public function coffeeOrders(): HasMany
