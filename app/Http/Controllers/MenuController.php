@@ -60,7 +60,7 @@ class MenuController extends Controller
 
         $user = User::find($id);
         $viewData['user'] = $user;
-        $viewData['orders'] = CoffeeOrder::where('user_id', $user->id)->get(); // use user_id instead of username
+        $viewData['orders'] = CoffeeOrder::where('user_id', $user->id)->get();
         $viewData['varieties'] = CoffeeVariety::all();
         $viewData['role'] = RFID_Tag::find($user->tag_id)->role;
 

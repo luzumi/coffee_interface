@@ -54,6 +54,7 @@ class WebhookService
 
     public function sendWebhookGetCoffee(string $coffeeCode): int
     {
+        $bin_code = decbin($coffeeCode);
         // Konfiguration laden und prüfen, ob der erste Eintrag vorhanden ist
         $config = config('webhook-client.configs.0');
         if (!$config) {
@@ -69,7 +70,7 @@ class WebhookService
         // Guzzle-Client mit Basis-URI und Aktion erstellen
         try {
             $client = new Client(['base_uri' => $webhookUrl,
-                'action' => $coffeeCode,
+                'action' => $bin_code,
             ]);
         } catch (\Exception $e) {
             // Protokollieren einer Fehlermeldung, falls der Client nicht erstellt werden konnte

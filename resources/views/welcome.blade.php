@@ -67,46 +67,48 @@
     </script>
     <script>
         {{--let csrfToken = "{{ csrf_token() }}";--}}
+        function load(){
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "{{ route('webhook_data') }}");
+            xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    let responseText = xhr.responseText;
+                    if (responseText.startsWith("data")) {
+                        responseText = responseText.substring(5);
+                        console.log("if " + responseText)
+                    }
 
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", "{{ route('webhook_data') }}");
-        xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                let responseText = xhr.responseText;
-                if (responseText.startsWith("data")) {
-                    responseText = responseText.substring(5);
-                    console.log("if " + responseText)
+                    let data = JSON.parse(responseText);
+                    const userId = data.data
+                    console.log(userId)
+                    if (userId == null || userId < 1) {
+                        console.log('kein Benutzer gefunden')
+                        // Wiederhole den Request, wenn kein Benutzer gefunden wurde
+                        {{--xhr.open("GET", "{{ route('webhook_data') }}");--}}
+                        {{--xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");--}}
+                        {{--xhr.send();--}}
+                    } else {
+                        console.log('Benutzer gefunden' + userId)
+                        window.location.href = '/menu';
+                        {{--const menuXhr = new XMLHttpRequest();--}}
+                        {{--menuXhr.open("GET", "{{ route('menu') }}");--}}
+                        {{--menuXhr.setRequestHeader("x-requested-with", "XMLHttpRequest");--}}
+                        {{--menuXhr.onreadystatechange = function() {--}}
+                        {{--    if (menuXhr.readyState === XMLHttpRequest.DONE) {--}}
+                        {{--        // const responseText = menuXhr.responseText;--}}
+                        {{--        // const parser = new DOMParser();--}}
+                        {{--        // parser.parseFromString(responseText, 'text/html');--}}
+                        {{--        window.location.href = '/menu';--}}
+                        {{--    }--}}
+                        {{--};--}}
+                        {{--menuXhr.send();--}}
+                    }
                 }
-
-                let data = JSON.parse(responseText);
-                const userId = data.data
-                console.log(userId)
-                if (userId == null || userId < 1) {
-                    console.log('kein Benutzer gefunden')
-                    // Wiederhole den Request, wenn kein Benutzer gefunden wurde
-                    xhr.open("GET", "{{ route('webhook_data') }}");
-                    xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");
-                    xhr.send();
-                } else {
-                    console.log('Benutzer gefunden' + userId)
-                    const menuXhr = new XMLHttpRequest();
-                    menuXhr.open("GET", "{{ route('menu') }}");
-                    menuXhr.setRequestHeader("x-requested-with", "XMLHttpRequest");
-                    menuXhr.onreadystatechange = function() {
-                        if (menuXhr.readyState === XMLHttpRequest.DONE) {
-                            // const responseText = menuXhr.responseText;
-                            // const parser = new DOMParser();
-                            // parser.parseFromString(responseText, 'text/html');
-                            window.location.href = '/menu';
-                        }
-                    };
-                    menuXhr.send();
-                }
-            }
-        };
-        xhr.send();
-
+            };
+            xhr.send();
+        }
+        setInterval(load, 1000);
     </script>
 
 

@@ -29,6 +29,10 @@
                 <p> {{ $viewData['orders']->last()->coffee_name??''}}</p>
             </div>
             <div class="menu-statistics-item">
+                <h3>Role</h3>
+                <p> {{ $viewData['role'] }}</p>
+            </div>
+            <div class="menu-statistics-item">
                 <h3>Guthaben</h3>
                 <p> {{ $viewData['user']->credits }} Credits</p>
             </div>

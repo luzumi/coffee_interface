@@ -25,7 +25,7 @@
 
 @section('scripts')
     <script>
-        setTimeout(function () {
+        function load(){
             let xhr = new XMLHttpRequest();
             xhr.open("GET", "{{ route('webhook_data') }}");
             xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");
@@ -46,22 +46,23 @@
                     {{--    xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");--}}
                     {{--    xhr.send();--}}
                     {{--} else {--}}
-                        if (data.role === 'maintenance') {
-                        xhr.open("GET", "{{ route('menu') }}");
-                        xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");
-                        xhr.send();
-                        window.location.href = '/menu';
+                    if (data.role === 'maintenance') {
+                        {{--xhr.open("GET", "{{ route('menu') }}");--}}
+                        {{--xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");--}}
+                        {{--xhr.send();--}}
+                        window.location.href = '/';
                     } else {
                             console.log('Benutzer reset')
-                            xhr.open("GET", "{{ route('setId') }}");
-                            xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");
-                            xhr.send();
+                            {{--xhr.open("GET", "{{ route('setId') }}");--}}
+                            {{--xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");--}}
+                            {{--xhr.send();--}}
                             window.location.href = '/set';
                         }
                     }
                 }
 
             xhr.send();
-        }, 10000);
+        }
+        setInterval(load, 1000);
     </script>
 @endsection
