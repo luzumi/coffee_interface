@@ -18,29 +18,9 @@ Route::get('/', function () {
 })->name('home');
 Route::get('/menu', 'App\Http\Controllers\MenuController@show')->name('menu');
 
-
 Route::post('/turn_on', 'App\Services\WebhookService@sendWebhookGetCoffee')->name('get_coffee');
 
-
-//Route::get('/get-csrf-token', function () {
-//    return response()->json(['X-CSRF-TOKEN' => csrf_token()]);
-//})->withoutMiddleware(['csrf']);
-
 Route::post('/webhook', 'App\Services\WebhookService@handleWebhook')->name('webhook');
-//Route::group(['middleware' => ['web']], function () {
-//    Route::post('/webhook', 'App\Services\WebhookService@handleWebhook')
-//        ->withoutMiddleware(['csrf'])
-//        ->middleware('web')
-//        ->name('webhook');
-//});
-
-//Route::post('/webhook', 'App\Http\Controllers\WebhookController@handleWebhook')->middleware('verifyWebhook');
-//Route::post('/webhook', 'App\Services\WebhookService@handleWebhook')
-//    ->middleware('verify.webhook')
-//    ->name('verify_webhook');
-
-
-
 Route::get('/webhook_data', 'App\Services\WebhookService@getWebhookData')->name('webhook_data');
 Route::post('/welcome', 'App\Http\Controllers\MenuController@backToWelcome')->name('back_to_welcome');
 //Route::get('/limit/{key}', 'App\Http\Controllers\MenuController@limit')->name('limit');

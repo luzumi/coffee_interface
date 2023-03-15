@@ -24,20 +24,20 @@ class MenuController extends Controller
         $id = RaspUser::getRaspUserId();
         $orders = CoffeeOrder::where('user_id', $id)->get();
         $user = User::with('coffeeOrders')->find($id);
-        if (isset( $orders )) {
-            CoffeeOrder::create([
-                'user_id' => $user->id,
-                'tag_id' => $user->tag_id,
-                'coffee_name' => 'noch keine Auswahl getroffen',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ]);
-        }
+//        if (isset( $orders )) {
+//            CoffeeOrder::create([
+//                'user_id' => $user->id,
+//                'tag_id' => RFID_Tag::where('user_id', $user->id)->first()->id,
+//                'coffee_name' => 'noch keine Auswahl getroffen',
+//                'created_at' => date('Y-m-d H:i:s'),
+//                'updated_at' => date('Y-m-d H:i:s')
+//            ]);
+//        }
 
         $viewData['user'] = $user;
         $viewData['orders'] = CoffeeOrder::where('user_id', $user->id)->get();
         $viewData['varieties'] = CoffeeVariety::all();
-        $viewData['role'] = RFID_Tag::find($user->tag_id)->role;
+        $viewData['role'] = RFID_Tag::where('user_id', $user->id)->first()->role;
 
 
         return view('menu')->with(compact('viewData'));
@@ -62,9 +62,9 @@ class MenuController extends Controller
         $viewData['user'] = $user;
         $viewData['orders'] = CoffeeOrder::where('user_id', $user->id)->get();
         $viewData['varieties'] = CoffeeVariety::all();
-        $viewData['role'] = RFID_Tag::find($user->tag_id)->role;
+        $viewData['role'] = RFID_Tag::where('user_id', $user->id)->first()->role;
 
-        if (!RFID_Tag::find($user->tag_id)->role == 'maintenance') {
+        if (!$viewData['role'] == 'maintenance') {
             RaspUser::resetRaspUser();
         }
 

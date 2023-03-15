@@ -2,6 +2,8 @@
 
 @section('progress')
     <div class="overlay"></div>
+    <input type="hidden" id="user_role" value="{{ $viewData['role'] }}">
+
     <div class="progress-section">
         <svg viewBox="0 0 200 200">
             <!-- Kaffeetasse -->
@@ -25,44 +27,16 @@
 
 @section('scripts')
     <script>
-        function load(){
-            let xhr = new XMLHttpRequest();
-            xhr.open("GET", "{{ route('webhook_data') }}");
-            xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    let responseText = xhr.responseText;
-                    if (responseText.startsWith("data")) {
-                        responseText = responseText.substring(5);
-                        console.log("if " + responseText)
-                    }
-                    let data = JSON.parse(responseText);
-                    const userId = data.data
-                    console.log(userId)
-                    console.log('waiting..', userId, data.role)
-                    {{--if (userId > 0) {--}}
-                    {{--    // Wiederhole den Request, wenn kein Benutzer gefunden wurde--}}
-                    {{--    xhr.open("GET", "{{ route('webhook_data') }}");--}}
-                    {{--    xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");--}}
-                    {{--    xhr.send();--}}
-                    {{--} else {--}}
-                    if (data.role === 'maintenance') {
-                        {{--xhr.open("GET", "{{ route('menu') }}");--}}
-                        {{--xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");--}}
-                        {{--xhr.send();--}}
-                        window.location.href = '/';
-                    } else {
-                            console.log('Benutzer reset')
-                            {{--xhr.open("GET", "{{ route('setId') }}");--}}
-                            {{--xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");--}}
-                            {{--xhr.send();--}}
-                            window.location.href = '/set';
-                        }
-                    }
-                }
+        setTimeout(() => {
+            const userRole = document.getElementById('user_role').value;
 
-            xhr.send();
-        }
-        setInterval(load, 1000);
+            if (userRole === 'maintenance') {
+                window.location.href = '/';
+            } else {
+                console.log('Benutzer reset');
+                window.location.href = '/set';
+            }
+
+        }, 8000);
     </script>
 @endsection

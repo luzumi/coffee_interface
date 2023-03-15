@@ -19,23 +19,19 @@ class DatabaseSeeder extends Seeder
     {
         // Seed RFID tags
         $rfidTags = [
-            ['tag_uid' => '54-121-106-124-89', 'role' => 'vip', 'tag_active' => true],
-            ['tag_uid' => '89-54-121-106-124', 'role' => 'maintenance', 'tag_active' => true],
-            ['tag_uid' => '124-89-54-121-106', 'role' => 'user', 'tag_active' => true],
-            ['tag_uid' => '106-124-89-54-121', 'role' => 'user', 'tag_active' => true],
-            ['tag_uid' => '121-106-124-89-54', 'role' => 'user', 'tag_active' => true],
-            ['tag_uid' => '54-121-106-124-89', 'role' => 'user', 'tag_active' => true]
+            ['tag_uid' => '182-232-225-89-230', 'role' => 'vip', 'tag_active' => true],
+            ['tag_uid' => '214-33-156-27-112', 'role' => 'maintenance', 'tag_active' => true],
+            ['tag_uid' => '19-89-65-33-42', 'role' => 'user', 'tag_active' => true],
+            ['tag_uid' => '30-92-208-131-17', 'role' => 'user', 'tag_active' => true],
+            ['tag_uid' => '16-215-115-162-22', 'role' => 'user', 'tag_active' => true],
+            ['tag_uid' => '136-4-117-47-214', 'role' => 'user', 'tag_active' => true]
         ];
-        foreach ($rfidTags as $rfidTag) {
-            RFID_Tag::create($rfidTag);
-        }
 
         // Seed users
         $users = [
             ['username' => 'vip_user',
                 'firstname' => 'VIP',
                 'lastname' => 'PRO',
-                'tag_id' => '1',
                 'credits' => '0',
                 'active' => true,
                 'remarks' => '',
@@ -43,7 +39,6 @@ class DatabaseSeeder extends Seeder
             ['username' => 'MAINTENANCE_user',
                 'firstname' => 'MAINTENANCE',
                 'lastname' => 'MAINTENANCE_PRO',
-                'tag_id' => '2',
                 'credits' => '0',
                 'active' => true,
                 'remarks' => '',
@@ -51,7 +46,6 @@ class DatabaseSeeder extends Seeder
             ['username' => 'user-1000',
                 'firstname' => 'user',
                 'lastname' => '1000',
-                'tag_id' => '3',
                 'credits' => '1000',
                 'active' => true,
                 'remarks' => '',
@@ -59,7 +53,6 @@ class DatabaseSeeder extends Seeder
             ['username' => 'user-55',
                 'firstname' => 'user',
                 'lastname' => '55',
-                'tag_id' => '4',
                 'credits' => '55',
                 'active' => true,
                 'remarks' => '',
@@ -67,7 +60,6 @@ class DatabaseSeeder extends Seeder
             ['username' => 'user-0',
                 'firstname' => 'user',
                 'lastname' => '0',
-                'tag_id' => '5',
                 'credits' => '0',
                 'active' => true,
                 'remarks' => '',
@@ -75,14 +67,18 @@ class DatabaseSeeder extends Seeder
             ['username' => 'user-no-order',
                 'firstname' => 'user',
                 'lastname' => '0',
-                'tag_id' => '6',
                 'credits' => '0',
                 'active' => true,
                 'remarks' => '',
             ]
         ];
-        foreach ($users as $user) {
-            User::create($user);
+
+        // Create users and associate RFID tags with users
+        foreach ($users as $index => $user) {
+            $createdUser = User::create($user);
+            $rfidTag = $rfidTags[$index];
+            $rfidTag['user_id'] = $createdUser->id;
+            RFID_Tag::create($rfidTag);
         }
 
         // Seed coffee varieties

@@ -36,7 +36,6 @@ class WebhookService
     }
 
 
-
     /**
      * @return JsonResponse
      */
@@ -49,11 +48,19 @@ class WebhookService
         // Abrufen des Benutzers anhand der Benutzer-ID und
         // Rückgabe einer JSON-Antwort mit der Benutzer-ID und der Rolle des RFID-Tags
         $user = User::find($rasp_user_id);
-        return response()->json(['data' => $rasp_user_id, 'role' => RFID_Tag::find($user->tag_id)->role]);
+        Log::info('Webhook data outgoing: ' . json_encode([
+                'data' => $rasp_user_id,
+                'role' => RFID_Tag::where('user_id', $user->id)->first()->role
+            ] ?? null));
+        return response()->json([
+            'data' => $rasp_user_id,
+            'role' => RFID_Tag::where('user_id', $user->id)->first()->role
+        ] ?? null);
     }
 
     public function sendWebhookGetCoffee(string $coffeeCode): int
     {
+        Log::info('webhookHandler called' . $coffeeCode);
         $bin_code = decbin($coffeeCode);
         // Konfiguration laden und prüfen, ob der erste Eintrag vorhanden ist
         $config = config('webhook-client.configs.0');
@@ -144,12 +151,11 @@ class WebhookService
     }
 
 
-
     public static function setId(): Redirector|Application|RedirectResponse
     {
         // Setzen der aktuellen Benutzer-ID auf 0 oder 6, abhängig von der aktuellen Benutzer-ID
         // (benötigt für den klickbaren Buttons auf der Startseite)
-        $id = RaspUser::getRaspUserId()==1 ? 0 : 1;
+        $id = RaspUser::getRaspUserId() == 1 ? 0 : 1;
         RaspUser::setRaspUser($id);
 
         return redirect('/');

@@ -16,19 +16,12 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
-            $table->unsignedBigInteger('tag_id');
-            $table->foreign('tag_id')
-                ->references('id')
-                ->on('rfid_tags')
-                ->onDelete('cascade');
             $table->string('credits')->default('0');
-            $table->string('role')->default('user');
-            $table->boolean('active')->default(false);
+            $table->boolean('active')->default(true);
             $table->string('remarks')->default('');
             $table->rememberToken();
             $table->timestamps();
         });
-
     }
 
     /**

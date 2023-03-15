@@ -15,7 +15,7 @@
             <div class="title_text">
                 <h2>
                     <a href="{{ route('setId') }}">
-                        Bitte halten Sie Ihren RFID Chip an den Leser.
+                        Bitte halten Sie Ihren RFID-Chip an den Leser.
                     </a>
                 </h2>
                 <div class="clock-container">
@@ -37,6 +37,7 @@
 
 @section('scripts')
     <link href="{{ asset('css/welcome.css') }}" rel="stylesheet"/>
+{{--    CLOCK   --}}
     <script>
         function setClock() {
             const date = new Date();
@@ -65,8 +66,8 @@
 
         setInterval(setClock, 1000); // update the clock every second
     </script>
+{{--    Load    --}}
     <script>
-        {{--let csrfToken = "{{ csrf_token() }}";--}}
         function load(){
             let xhr = new XMLHttpRequest();
             xhr.open("GET", "{{ route('webhook_data') }}");
@@ -84,25 +85,9 @@
                     console.log(userId)
                     if (userId == null || userId < 1) {
                         console.log('kein Benutzer gefunden')
-                        // Wiederhole den Request, wenn kein Benutzer gefunden wurde
-                        {{--xhr.open("GET", "{{ route('webhook_data') }}");--}}
-                        {{--xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");--}}
-                        {{--xhr.send();--}}
                     } else {
                         console.log('Benutzer gefunden' + userId)
                         window.location.href = '/menu';
-                        {{--const menuXhr = new XMLHttpRequest();--}}
-                        {{--menuXhr.open("GET", "{{ route('menu') }}");--}}
-                        {{--menuXhr.setRequestHeader("x-requested-with", "XMLHttpRequest");--}}
-                        {{--menuXhr.onreadystatechange = function() {--}}
-                        {{--    if (menuXhr.readyState === XMLHttpRequest.DONE) {--}}
-                        {{--        // const responseText = menuXhr.responseText;--}}
-                        {{--        // const parser = new DOMParser();--}}
-                        {{--        // parser.parseFromString(responseText, 'text/html');--}}
-                        {{--        window.location.href = '/menu';--}}
-                        {{--    }--}}
-                        {{--};--}}
-                        {{--menuXhr.send();--}}
                     }
                 }
             };

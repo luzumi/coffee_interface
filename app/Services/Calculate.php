@@ -59,7 +59,7 @@ class Calculate
      */
     private static function isFreeCoffeeEligible(User $user): bool
     {
-        $tag = RFID_Tag::findOrFail($user->tag_id);
+        $tag = RFID_Tag::where('user_id', $user->id)->firstOrFail();
 
         return in_array($tag->role, ['vip', 'maintenance']);
     }

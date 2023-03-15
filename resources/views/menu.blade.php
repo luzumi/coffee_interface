@@ -22,12 +22,13 @@
             </div>
             <div class="menu-statistics-item">
                 <h3>Letzte Bestellung:&nbsp;</h3>
-                <p>{{ $viewData['orders']->last()->updated_at->format('d.m.Y - H:i') ?? '' }}</p>
+                <p>{{ $viewData['orders']->last() ? $viewData['orders']->last()->updated_at->format('d.m.Y - H:i') : '' }}</p>
             </div>
             <div class="menu-statistics-item">
                 <h3>Letzter Auswahl</h3>
-                <p> {{ $viewData['orders']->last()->coffee_name??''}}</p>
+                <p>{{ $viewData['orders']->last() ? $viewData['orders']->last()->coffee_name : 'noch keine Auswahl getroffen' }}</p>
             </div>
+
             <div class="menu-statistics-item">
                 <h3>Role</h3>
                 <p> {{ $viewData['role'] }}</p>
@@ -43,6 +44,7 @@
                 <p class="menu-varieties-header-2">Getränk</p>
                 <p class="menu-varieties-header-3">Kosten</p>
             </div>
+
             @foreach($viewData['varieties'] as $key => $variety)
                 @if($variety->coffee_name == 'noch keine Auswahl getroffen') @continue @endif
 
@@ -55,6 +57,7 @@
                             @csrf
                             <button type="button" class="btn menu-varieties-item-button menu-varieties-item-button-{{ $key }}"></button>
                         </form>
+
                         <div class="menu-varieties-item menu-varieties-item-{{$key}} ">
                             <h5>Bitte Guthaben aufladen.</h5>
                         </div>
@@ -68,13 +71,10 @@
                     </form>
                 @endif
 
-{{--                @if( $viewData['role'] != 'maintenance' &&--}}
-{{--                            $viewData['role'] != 'vip' &&--}}
-{{--                            $viewData['user']->credits >= $variety->credit_cost )--}}
                     <div class="menu-varieties-item-name menu-varieties-item-name-{{$key}}">
                         <h3>{{ $variety->coffee_name }}</h3>
                     </div>
-{{--                @endif--}}
+
                     <div class="menu-varieties-item-price menu-varieties-item-price-{{$key}}">
                         @if($viewData['role'] == 'maintenance' || $viewData['role'] == 'vip')
                             <p>0 Credits</p>
