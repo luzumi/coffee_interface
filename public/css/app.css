@@ -5,7 +5,10 @@
 
     --bg-color-1: #281D16FF;
     --bg-color-2: #59341AFF;
-    --bg-color-3: #A87047FF;
+    --bg-color-3: #98603a;
+    --bg-color-4: rgba(231,204,184,75);
+    --bg-color-5: rgba(94,79,70,75);
+    --bg-color-6: rgba(169,84,32,75);
     --bg-color-3-opactity-75: rgba(168, 112, 71, 0.75);
 
     --text-color-1: #F4AF66FF;
@@ -15,6 +18,8 @@
 
     --hours: 10;
     --minutes: 10;
+    --shadow-offset: 2rem; /* Abstand des Schattens vom Content */
+    --shadow-blur: 3rem; /* Unschärfe des Schattens */
 }
 
 .row {
@@ -23,21 +28,23 @@
 
 html, body {
     height: 100vh;
-    margin: 0;
+    /*margin: 0;*/
     overflow: hidden;
 }
 
 .touch {
     max-height: 800px;
 }
+
 .body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    max-height: 100%;
-    background: linear-gradient(to top right, var(--bg-color-2), var(--bg-color-1));
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*flex-direction: column;*/
+    /*width: 100%;*/
+    /*max-height: 100%;*/
+    background: var(--bg-color-1);
+    place-content: center;
 }
 
 .container {
@@ -46,19 +53,30 @@ html, body {
     align-items: center;
     height: 100%;
     width: 100%;
+    position: relative;
 }
 
 .border {
-    gap: 2rem;
     position: relative;
-    /*top: 1rem;*/
-    /*left: 1rem;*/
+    top: 3rem;
     width: 85%;
     height: 75%;
     background-color: var(--bg-color-3);
     padding: 3rem;
     margin: auto;
-    border-radius: 3rem 3rem 3rem 3rem;
+    border-radius: 3rem;
+}
+
+.border {
+    position: relative;
+    top: 3rem;
+    width: 85%;
+    height: 75%;
+    background-color: var(--bg-color-3);
+    padding: 3rem;
+    margin: auto;
+    border-radius: 3rem;
+    overflow: hidden;
 }
 
 .content {
@@ -68,7 +86,83 @@ html, body {
     background: linear-gradient(to bottom right, var(--bg-color-1), var(--bg-color-2));
     padding: 2rem;
     margin: auto;
-    border-radius: 3rem 3rem 3rem 3rem;
+    border-radius: 3rem;
+    overflow: hidden;
+}
+
+.content {
+    position: relative;
+    width: 85%;
+    height: 82%;
+    margin: auto;
+    background-color: white;
+    border-radius: 3rem;
+    box-shadow: var(--bg-color-1) 0 .5rem var(--shadow-blur),
+    var(--bg-color-3) .7rem -.7rem var(--shadow-blur),
+    var(--bg-color-4) -.7rem -.7rem var(--shadow-blur),
+    var(--bg-color-5) 0 0 var(--shadow-blur),
+    var(--bg-color-6) -.7rem .7rem var(--shadow-blur),
+    var(--bg-color-1) .7rem .7rem var(--shadow-blur);
+    animation: shadow-move 10s infinite;
+}
+
+@keyframes shadow-move {
+    0% {
+        box-shadow: var(--bg-color-1) 0 .5rem var(--shadow-blur),
+        var(--bg-color-2) .7rem -.7rem var(--shadow-blur),
+        var(--bg-color-3) -.7rem -.7rem var(--shadow-blur),
+        var(--bg-color-4) 0 0 var(--shadow-blur),
+        var(--bg-color-5) -.7rem .7rem var(--shadow-blur),
+        var(--bg-color-6) .7rem .7rem var(--shadow-blur);
+    }
+    16.67% {
+        box-shadow: var(--bg-color-2) 0 .5rem var(--shadow-blur),
+        var(--bg-color-3) .7rem -.7rem var(--shadow-blur),
+        var(--bg-color-4) -.7rem -.7rem var(--shadow-blur),
+        var(--bg-color-5) 0 0 var(--shadow-blur),
+        var(--bg-color-6) -.7rem .7rem var(--shadow-blur),
+        var(--bg-color-1) .7rem .7rem var(--shadow-blur);
+    }
+    33.33% {
+        box-shadow: var(--bg-color-3) 0 .5rem var(--shadow-blur),
+        var(--bg-color-4) .7rem -.7rem var(--shadow-blur),
+        var(--bg-color-5) -.7rem -.7rem var(--shadow-blur),
+        var(--bg-color-6) 0 0 var(--shadow-blur),
+        var(--bg-color-1) -.7rem .7rem var(--shadow-blur),
+        var(--bg-color-2) .7rem .7rem var(--shadow-blur);
+    }
+    50% {
+        box-shadow: var(--bg-color-4) 0 .5rem var(--shadow-blur),
+        var(--bg-color-5) .7rem -.7rem var(--shadow-blur),
+        var(--bg-color-6) -.7rem -.7rem var(--shadow-blur),
+        var(--bg-color-1) 0 0 var(--shadow-blur),
+        var(--bg-color-2) -.7rem .7rem var(--shadow-blur),
+        var(--bg-color-3) .7rem .7rem var(--shadow-blur);
+    }
+    66.67% {
+        box-shadow: var(--bg-color-5) 0 .5rem var(--shadow-blur),
+        var(--bg-color-6) .7rem -.7rem var(--shadow-blur),
+        var(--bg-color-1) -.7rem -.7rem var(--shadow-blur),
+        var(--bg-color-2) 0 0 var(--shadow-blur),
+        var(--bg-color-3) -.7rem .7rem var(--shadow-blur),
+        var(--bg-color-4) .7rem .7rem var(--shadow-blur);
+    }
+    83.33% {
+        box-shadow: var(--bg-color-6) 0 .5rem var(--shadow-blur),
+        var(--bg-color-1) .7rem -.7rem var(--shadow-blur),
+        var(--bg-color-2) -.7rem -.7rem var(--shadow-blur),
+        var(--bg-color-3) 0 0 var(--shadow-blur),
+        var(--bg-color-4) -.7rem .7rem var(--shadow-blur),
+        var(--bg-color-5) .7rem .7rem var(--shadow-blur);
+    }
+    100% {
+        box-shadow: var(--bg-color-1) 0 .5rem var(--shadow-blur),
+        var(--bg-color-2) .7rem -.7rem var(--shadow-blur),
+        var(--bg-color-3) -.7rem -.7rem var(--shadow-blur),
+        var(--bg-color-4) 0 0 var(--shadow-blur),
+        var(--bg-color-5) -.7rem .7rem var(--shadow-blur),
+        var(--bg-color-6) .7rem .7rem var(--shadow-blur);
+    }
 }
 
 /*WELCOME*/
@@ -273,6 +367,7 @@ html, body {
     font-size: 1.4rem;
     margin: 1rem auto;
 }
+
 /*MENU*/
 .grid_menu {
     display: grid;
@@ -344,7 +439,7 @@ html, body {
     left: -3rem;
     top: 2rem;
     color: var(--bg-color-2);
-    font-family: var(--ff-secondary) ;
+    font-family: var(--ff-secondary);
     width: 8rem;
     height: 1.0rem;
     justify-self: right;
@@ -527,8 +622,12 @@ html, body {
 }
 
 @keyframes fill-coffee {
-    from { height: 0; }
-    to { height: 50%; }
+    from {
+        height: 0;
+    }
+    to {
+        height: 50%;
+    }
 }
 
 .progress-section {
