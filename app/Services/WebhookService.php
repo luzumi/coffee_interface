@@ -93,7 +93,7 @@ class WebhookService
                 'json' => [
                     'url' => $webhookUrl,
                     'events' => ['charge.succeeded'],
-                    'action' => $coffeeCode,
+                    'action' => decbin($coffeeCode),
                 ],
             ]);
             // Erfolgsmeldung protokollieren

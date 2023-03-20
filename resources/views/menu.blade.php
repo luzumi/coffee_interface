@@ -63,7 +63,7 @@
                         </div>
 
                 @else
-                    <form method="POST" action="{{ route('new_order', ['type' => $variety->coffee_code]) }}"
+                    <form method="POST" action="{{ route('new_order', ['type' => $variety->id]) }}"
                           class="order-form">
                         @csrf
                         <button type="submit"

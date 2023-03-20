@@ -19,8 +19,9 @@ class CoffeeOrdersController extends Controller
     {
         $raspUserId = RaspUser::getRaspUserId();
         $rfidTag = RFID_Tag::where('user_id', $raspUserId)->with('user')->first();
-        $coffee = CoffeeVariety::where('id', $order_number)->first();
+        $coffee = CoffeeVariety::findOrFail($order_number);
         $webhook = new WebhookService();
+
 
         CoffeeOrder::create([
             'tag_id' => $rfidTag->id,
@@ -28,7 +29,7 @@ class CoffeeOrdersController extends Controller
             'coffee_name' => $coffee->coffee_name,
         ]);
 
-        Calculate::coffeeOrder($coffee->coffee_name, $raspUserId);
+        Calculate::coffeeOrder($coffee->id, $raspUserId);
         $webhook->sendWebhookGetCoffee($coffee->coffee_code);
 
         return redirect()->route('in_progress')->with(compact('rfidTag'));

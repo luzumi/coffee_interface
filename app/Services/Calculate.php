@@ -36,9 +36,9 @@ class Calculate
      * @param int $userId Die ID des Benutzers, der den Kauf tätigt.
      * @return void
      */
-    public static function coffeeOrder(string $coffeeName, int $userId): void
+    public static function coffeeOrder(int $coffee_id, int $userId): void
     {
-        $coffeeVariety = CoffeeVariety::where('coffee_name', $coffeeName)->firstOrFail();
+        $coffeeVariety = CoffeeVariety::findOrFail($coffee_id);
         $user = User::findOrFail($userId);
 
         if (self::isFreeCoffeeEligible($user)) {
