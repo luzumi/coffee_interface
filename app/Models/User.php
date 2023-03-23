@@ -47,11 +47,21 @@ class User extends Authenticatable
     ];
 
 
+    /**
+     * Definiert die Beziehung zu jeder RFID-Tag-Instanz.
+     *
+     * @return hasMany
+     */
     public function rfidTag(): HasMany
     {
         return $this->hasMany(RFID_Tag::class, 'id');
     }
 
+    /**
+     * Definiert die Beziehung zu jeder Coffee-Order-Instanz.
+     *
+     * @return hasMany
+     */
     public function coffeeOrders(): HasMany
     {
         return $this->hasMany(CoffeeOrder::class, 'id');

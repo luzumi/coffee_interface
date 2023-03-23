@@ -145,7 +145,13 @@ class DatabaseSeeder extends Seeder
             CoffeeOrder::create($coffeeOrder);
         }
 
-        DB::insert('insert into rasp_users (id) values (?)', [0]);
-        RaspUser::setRaspUser(0);
+        DB::table('rasp_users')->insert([
+            'user_id' => 0,
+            'need_service' => false,
+            'user_not_found' => false,
+            'disruption' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

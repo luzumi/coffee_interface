@@ -18,11 +18,20 @@ class RFID_Tag extends Model
         'tag_active',
     ];
 
+    /**
+     * Definiert die Beziehung zu der User-Instanz.
+     *
+     * @return BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'id');
     }
-
+    /**
+     * Definiert die Beziehung zu jeder Coffee_Order-Instanz.
+     *
+     * @return hasMany
+     */
     public function coffeeOrders(): HasMany
     {
         return $this->hasMany(CoffeeOrder::class, 'id');

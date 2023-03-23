@@ -65,7 +65,7 @@ class MenuControllerTest extends TestCase
         ]);
         $controller = new MenuController;
 
-        $response = $controller->backToWelcome($request);
+        $response = $controller->backToWelcome();
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals(route('home'), $response->getTargetUrl());

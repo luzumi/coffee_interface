@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('rasp_users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->default(0);
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->boolean('need_service')->default(false);
+            $table->boolean('user_not_found')->default(false);
+            $table->boolean('disruption')->default(false);
             $table->timestamps();
         });
     }

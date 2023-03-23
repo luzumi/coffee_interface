@@ -16,55 +16,61 @@ use Illuminate\Http\Request;
 class MenuController extends Controller
 {
     /**
+     * Zeigt die Menüansicht mit den zugehörigen Daten für den aktuellen Benutzer an.
+     *
      * @param Request $request
      * @return Application|Factory|View
      */
     public function show(Request $request)
     {
-        $id = RaspUser::getRaspUserId();
-        $orders = CoffeeOrder::where('user_id', $id)->get();
-        $user = User::with('coffeeOrders')->find($id);
-//        if (isset( $orders )) {
-//            CoffeeOrder::create([
-//                'user_id' => $user->id,
-//                'tag_id' => RFID_Tag::where('user_id', $user->id)->first()->id,
-//                'coffee_name' => 'noch keine Auswahl getroffen',
-//                'created_at' => date('Y-m-d H:i:s'),
-//                'updated_at' => date('Y-m-d H:i:s')
-//            ]);
-//        }
+        $raspUserId = RaspUser::getRaspUserId();
+        $user = User::with('coffeeOrders')->find($raspUserId->user_id);
+        $rfidTag = RFID_Tag::where('user_id', $user->id)->first();
 
-        $viewData['user'] = $user;
-        $viewData['orders'] = CoffeeOrder::where('user_id', $user->id)->get();
-        $viewData['varieties'] = CoffeeVariety::all();
-        $viewData['role'] = RFID_Tag::where('user_id', $user->id)->first()->role;
-
+        $viewData = [
+            'user' => $user,
+            'orders' => $user->coffeeOrders,
+            'varieties' => CoffeeVariety::all(),
+            'role' => $rfidTag->role,
+            'rasp_user_entry' => $raspUserId,
+        ];
 
         return view('menu')->with(compact('viewData'));
     }
 
 
+
     /**
-     * @param Request $request
+     * Setzt den RaspUser mit der angegebenen Benutzer-ID zurück und leitet den Benutzer zur "home"-Route weiter.
+     *
      * @return RedirectResponse
      */
-    public function backToWelcome(Request $request)
+    public function backToWelcome()
     {
-        RaspUser::resetRaspUser($request->get('user_id'));
+        RaspUser::resetRaspUser();
         return redirect()->route('home');
     }
 
+
+    /**
+     * Zeigt die "in_progress"-Ansicht für den aktuellen Benutzer und setzt den RaspUser zurück, wenn die Rolle nicht "maintenance" ist.
+     *
+     * @return View
+     */
     public function inProgress()
     {
-        $id = RaspUser::getRaspUserId();
+        $raspUserId = RaspUser::getRaspUserId();
+        $user = User::find($raspUserId->user_id);
+        $rfidTag = RFID_Tag::where('user_id', $user->id)->first();
 
-        $user = User::find($id);
-        $viewData['user'] = $user;
-        $viewData['orders'] = CoffeeOrder::where('user_id', $user->id)->get();
-        $viewData['varieties'] = CoffeeVariety::all();
-        $viewData['role'] = RFID_Tag::where('user_id', $user->id)->first()->role;
+        $viewData = [
+            'user' => $user,
+            'orders' => $user->coffeeOrders,
+            'varieties' => CoffeeVariety::all(),
+            'role' => $rfidTag->role,
+        ];
 
-        if (!$viewData['role'] == 'maintenance') {
+        if ($viewData['role'] !== 'maintenance') {
             RaspUser::resetRaspUser();
         }
 
@@ -72,9 +78,16 @@ class MenuController extends Controller
     }
 
 
+
+    /**
+     * Setzt den RaspUser zurück und leitet den Benutzer zur "home"-Route weiter.
+     *
+     * @return RedirectResponse
+     */
     public function logout()
     {
         RaspUser::resetRaspUser();
         return redirect()->route('home');
     }
+
 }

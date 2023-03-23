@@ -16,6 +16,11 @@ class CoffeeVariety extends Model
         'coffee_description',
     ];
 
+    /**
+     * Definiert die Beziehung zu der Coffee-Order-Instanz.
+     *
+     * @return hasMany
+     */
     public function coffeeOrders(): HasMany
     {
         return $this->hasMany(CoffeeOrder::class, 'id');

@@ -12,24 +12,34 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Log;
+use Psr\Http\Message\ResponseInterface;
 
 class WebhookService
 {
     /**
+     * Verarbeitet den empfangenen Webhook und speichert den Benutzer entsprechend.
+     *
      * @param Request $request
      * @return JsonResponse
      */
-    public function handleWebhook(Request $request)
+    public function handleWebhook(Request $request): JsonResponse
     {
         $data = $request->json()->all();
 
         // Festlegen des aktuellen Benutzers anhand der empfangenen Benutzer-ID
-        $rfid_tag = RFID_Tag::where('tag_uid', $data['user_id'])->with('user')->first();
-        $user_id = $rfid_tag->user->id;
+        $rfidTag = RFID_Tag::where('tag_uid', $data['tag_uid'])->with('user')->first();
+        $userId = $rfidTag->user->id;
 
-        Log::info('Webhook data incoming: ' . json_encode($data));
+        // Protokollieren der eingehenden Webhook-Daten
+        Log::info('Webhook data incoming: ', $data);
 
-        RaspUser::setRaspUser($user_id);
+        // Extrahieren der optionalen Parameter aus den empfangenen Daten
+        $disruption = $data['disruption'] ?? false;
+        $userNotFound = $data['user_not_found'] ?? false;
+        $service = $data['service'] ?? false;
+
+        // Aktualisieren des RaspUser-Eintrags in der Datenbank
+        RaspUser::setRaspUser($userId, $disruption, $userNotFound, $service);
 
         // Rückgabe einer JSON-Antwort mit einem Status "success" und den empfangenen Daten
         return response()->json(['status' => 'success', 'data' => $data]);
@@ -37,118 +47,121 @@ class WebhookService
 
 
     /**
+     * Gibt die Webhook-Daten für den aktuellen Benutzer zurück.
+     *
      * @return JsonResponse
      */
-    public function getWebhookData()
+    public function getWebhookData(): JsonResponse
     {
         // Abrufen der aktuellen Benutzer-ID
-        $rasp_user_id = RaspUser::getRaspUserId();
+        $raspUser = RaspUser::getRaspUserId();
 
+        // Abrufen des Benutzers anhand der Benutzer-ID
+        $user = User::find($raspUser->user_id);
 
-        // Abrufen des Benutzers anhand der Benutzer-ID und
-        // Rückgabe einer JSON-Antwort mit der Benutzer-ID und der Rolle des RFID-Tags
-        $user = User::find($rasp_user_id);
-        Log::info('Webhook data outgoing: ' . json_encode([
-                'data' => $rasp_user_id,
-                'role' => RFID_Tag::where('user_id', $user->id)->first()->role
-            ] ?? null));
+        // Abrufen der Rolle des RFID-Tags für den Benutzer
+        $rfidTagRole = RFID_Tag::where('user_id', $user->id)->first()->role;
+
+        // Protokollieren der ausgehenden Webhook-Daten
+        Log::info('Webhook data outgoing: ', [
+            'data' => $raspUser->user_id,
+            'disruption' => $raspUser->disruption,
+            'user_not_found' => $raspUser->user_not_found,
+            'service' => $raspUser->service,
+            'role' => $rfidTagRole,
+        ]);
+
+        // Rückgabe einer JSON-Antwort mit den Webhook-Daten
         return response()->json([
-            'data' => $rasp_user_id,
-            'role' => RFID_Tag::where('user_id', $user->id)->first()->role
-        ] ?? null);
+            'data' => $raspUser->user_id,
+            'disruption' => $raspUser->disruption,
+            'user_not_found' => $raspUser->user_not_found,
+            'service' => $raspUser->service,
+            'role' => $rfidTagRole,
+        ]);
     }
 
+
+    /**
+     * Sendet einen Webhook, um Kaffee basierend auf dem übergebenen Kaffee-Code zu bekommen.
+     *
+     * @param string $coffeeCode
+     * @return int
+     */
     public function sendWebhookGetCoffee(string $coffeeCode): int
     {
         Log::info('webhookHandler called' . $coffeeCode);
-        $bin_code = decbin($coffeeCode);
-        // Konfiguration laden und prüfen, ob der erste Eintrag vorhanden ist
-        $config = config('webhook-client.configs.0');
+
+        $config = $this->getWebhookConfiguration();
         if (!$config) {
-//            Log::error('Webhook configuration not found.');
-
-            return 500; // HTTP-Statuscode für interne Serverfehler
+            Log::error('Webhook configuration not found.');
+            return 500;
         }
 
-        // Webhook-URL und Guzzle-Client-URL aus der Konfiguration laden
-        $clientUrl = config('webhook-client.configs.0.guzzle_http_client');
-        $webhookUrl = config('webhook-client.configs.0.webhook_url');
-
-        // Guzzle-Client mit Basis-URI und Aktion erstellen
         try {
-            $client = new Client(['base_uri' => $webhookUrl,
-                'action' => $bin_code,
-            ]);
+            $client = $this->createGuzzleClient($config['webhook_url'], $coffeeCode);
         } catch (\Exception $e) {
-            // Protokollieren einer Fehlermeldung, falls der Client nicht erstellt werden konnte
-//            Log::error('Could not create Guzzle client: ' . $e->getMessage());
-
-            return 500; // HTTP-Statuscode für interne Serverfehler
+            Log::error('Could not create Guzzle client: ' . $e->getMessage());
+            return 500;
         }
 
-        // Webhook-Anforderung senden
         try {
-            $response = $client->post($webhookUrl, [
-                'auth' => ['stripe_secret_key', '1'],
-                'json' => [
-                    'url' => $webhookUrl,
-                    'events' => ['charge.succeeded'],
-                    'action' => decbin($coffeeCode),
-                ],
-            ]);
-            // Erfolgsmeldung protokollieren
-//            Log::info('Webhook sent to Raspberry Pi: ' . $client->getConfig('action'));
-            // HTTP-Statuscode der Antwort zurückgeben
+            $response = $this->sendWebhookRequest($client, $config['webhook_url'], $coffeeCode);
+            Log::info('Webhook sent to Raspberry Pi: ' . $client->getConfig('action'));
             return $response->getStatusCode();
         } catch (GuzzleException $e) {
-            // Protokollieren einer Fehlermeldung, falls die Webhook-Anforderung nicht gesendet werden konnte
-//            Log::error('Could not send webhook to Raspberry Pi: ' . $e->getMessage());
-            return 500; // HTTP-Statuscode für interne Serverfehler
+            Log::error('Could not send webhook to Raspberry Pi: ' . $e->getMessage());
+            return 500;
         }
     }
 
-    public function ALTsendWebhookGetCoffee()
+    /**
+     * Returns the webhook configuration.
+     *
+     * @return array|null
+     */
+    protected function getWebhookConfiguration(): ?array
     {
-        try {
-            $client = new Client(['base_uri' => config('webhook-client.configs.0.webhook_url'),
-//                'timeout' => 2.0,
-//                'verify' => false,
-//                'http_errors' => false,
-//                'allow_redirects' => false,
-//                'debug' => false,
-//                'cookies' => true,
-//                'headers' => [
-//                    'Accept' => 'application/json',
-//                    'Content-Type' => 'application/json',
-//                    'User-Agent' => 'Laravel/8.0.0 (GuzzleHttp/7.0.1)'
-//                ],
-                'action' => 'turn_on',
-            ]);
-
-        } catch (\Exception $e) {
-            Log::info('Could not make Clienti: ' . $e->getMessage());
-        }
-        try {
-            $response = $client->post(config('webhook-client.configs.0.webhook_url'), [
-                'auth' => ['stripe_secret_key', '1'],
-                'json' => [
-                    'url' => config('webhook-client.configs.0.webhook_url'),
-                    'events' => ['charge.succeeded'],
-                    'action' => 'turn_on'
-                ],
-//                'headers' => [
-//                    'Content-Type' => 'application/json',
-//                    'Accept' => 'application/json'
-//                ]
-            ]);
-            Log::info('Webhook sent to Raspberry Pi: ' . $client->getConfig('action'));
-
-        } catch (GuzzleException $e) {
-            Log::info('Could not send webhook to Raspberry Pi: ' . $e->getMessage());
-        }
-
-        return back();
+        return config('webhook-client.configs.0');
     }
+
+    /**
+     * Creates a new Guzzle client with the given webhook URL and coffee code.
+     *
+     * @param string $webhookUrl
+     * @param string $coffeeCode
+     * @return Client
+     * @throws \Exception
+     */
+    protected function createGuzzleClient(string $webhookUrl, string $coffeeCode): Client
+    {
+        return new Client([
+            'base_uri' => $webhookUrl,
+            'action' => $coffeeCode,
+        ]);
+    }
+
+    /**
+     * Sends the webhook request with the given client, webhook URL, and coffee code.
+     *
+     * @param Client $client
+     * @param string $webhookUrl
+     * @param string $coffeeCode
+     * @return ResponseInterface
+     * @throws GuzzleException
+     */
+    protected function sendWebhookRequest(Client $client, string $webhookUrl, string $coffeeCode): ResponseInterface
+    {
+        return $client->post($webhookUrl, [
+            'auth' => ['stripe_secret_key', '1'],
+            'json' => [
+                'url' => $webhookUrl,
+                'events' => ['charge.succeeded'],
+                'action' => $coffeeCode,
+            ],
+        ]);
+    }
+
 
 
     public static function setId(): Redirector|Application|RedirectResponse

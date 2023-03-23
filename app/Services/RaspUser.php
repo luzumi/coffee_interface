@@ -2,23 +2,34 @@
 
 namespace App\Services;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 
 class RaspUser
 {
     /**
-     * Get the current Raspberry Pi user ID.
+     * Gibt den aktuellen RaspUser-Eintrag zurück.
      *
-     * @return int
+     * @return Model|Builder|null
      */
-    public static function getRaspUserId(): int
+    public function getRaspUser(): Model|Builder|null
     {
-        $data = DB::table('rasp_users')->where('id', 1)->first();
-        return $data->user_id;
+        return DB::table('rasp_users')->where('id', 1)->first();
     }
 
     /**
-     * Reset the Raspberry Pi user ID to 0.
+     * Gibt die ID des aktuellen Raspberry Pi-Benutzers zurück.
+     *
+     * @return Model|Builder
+     */
+    public static function getRaspUserId(): Model|Builder
+    {
+        return DB::table('rasp_users')->where('id', 1)->first()->user_id;
+    }
+
+    /**
+     * Setzt die Benutzer-ID des aktuellen Raspberry Pi-Benutzers auf 0 zurück.
      *
      * @return void
      */
@@ -28,15 +39,27 @@ class RaspUser
     }
 
     /**
-     * Set the Raspberry Pi user ID to the given value and log the event.
+     * Setzt die Benutzer-ID des aktuellen Raspberry Pi-Benutzers und aktualisiert optionale Flags.
      *
-     * @param int $user_id The new Raspberry Pi user ID.
+     * @param int $user_id
+     * @param bool $disruption Optionaler Parameter für eine Störung an der Kaffeemaschine, standardmäßig auf 'false' gesetzt
+     * @param bool $user_not_found Optionaler Parameter für einen unbekannten Benutzer, standardmäßig auf 'false' gesetzt
+     * @param bool $service Optionaler Parameter für Serviceeingriff nötig an an der Kaffeemaschine, standardmäßig auf 'false' gesetzt
      * @return void
      */
-    public static function setRaspUser($user_id): void
+    public static function setRaspUser(int  $user_id,
+                                       bool $disruption = false,
+                                       bool $user_not_found = false,
+                                       bool $service = false): void
     {
         \Log::info('New Login from Raspberry Pi with ID: ' . $user_id);
 
-        DB::table('rasp_users')->where('id', 1)->update(['user_id' => $user_id]);
+        DB::table('rasp_users')->where('id', 1)
+            ->update([
+                'user_id' => $user_id,
+                'disruption' => $disruption,
+                'user_not_found' => $user_not_found,
+                'service' => $service
+            ]);
     }
 }

@@ -13,21 +13,34 @@ class CoffeeOrder extends Model
         'coffee_name',
     ];
 
+    /**
+     * Definiert die Beziehung zu der RFID_Tag-Instanz.
+     *
+     * @return BelongsTo
+     */
     public function rfidTag(): BelongsTo
     {
         return $this->belongsTo(RFID_Tag::class, 'tag_id');
     }
 
+    /**
+     * Definiert die Beziehung zu der User-Instanz.
+     *
+     * @return BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * Definiert die Beziehung zu der CoffeeVariety-Instanz.
+     *
+     * @return BelongsTo
+     */
     public function coffeeVariety(): BelongsTo
     {
         return $this->belongsTo(CoffeeVariety::class, 'id');
     }
-
-
 }
 
