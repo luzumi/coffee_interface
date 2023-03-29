@@ -1,0 +1,52 @@
+\hypertarget{class_app_1_1_console_1_1_kernel}{}\doxysection{Kernel Class Reference}
+\label{class_app_1_1_console_1_1_kernel}\index{Kernel@{Kernel}}
+
+
+Inheritance diagram for Kernel\+:
+% FIG 0
+
+
+Collaboration diagram for Kernel\+:
+% FIG 1
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_console_1_1_kernel_ac8f0af578c80277b7a25381c6a9e268c}{schedule}} (Schedule \$schedule)
+\item 
+\mbox{\hyperlink{class_app_1_1_console_1_1_kernel_af0afefa0d79d09344a638cf6c532aa39}{commands}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_console_2_kernel_8php_source_l00008}{8}} of file \mbox{\hyperlink{_console_2_kernel_8php_source}{Kernel.\+php}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_app_1_1_console_1_1_kernel_af0afefa0d79d09344a638cf6c532aa39}\label{class_app_1_1_console_1_1_kernel_af0afefa0d79d09344a638cf6c532aa39}} 
+\index{Kernel@{Kernel}!commands@{commands}}
+\index{commands@{commands}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{commands()}{commands()}}
+{\footnotesize\ttfamily commands (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Register the commands for the application. 
+
+Definition at line \mbox{\hyperlink{_console_2_kernel_8php_source_l00021}{21}} of file \mbox{\hyperlink{_console_2_kernel_8php_source}{Kernel.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_console_1_1_kernel_ac8f0af578c80277b7a25381c6a9e268c}\label{class_app_1_1_console_1_1_kernel_ac8f0af578c80277b7a25381c6a9e268c}} 
+\index{Kernel@{Kernel}!schedule@{schedule}}
+\index{schedule@{schedule}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{schedule()}{schedule()}}
+{\footnotesize\ttfamily schedule (\begin{DoxyParamCaption}\item[{Schedule}]{\$schedule }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Define the application\textquotesingle{}s command schedule. 
+
+Definition at line \mbox{\hyperlink{_console_2_kernel_8php_source_l00013}{13}} of file \mbox{\hyperlink{_console_2_kernel_8php_source}{Kernel.\+php}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/\+Console/Kernel.\+php\end{DoxyCompactItemize}

@@ -1,0 +1,123 @@
+\hypertarget{class_app_1_1_http_1_1_middleware_1_1_verify_webhook}{}\doxysection{Verify\+Webhook Class Reference}
+\label{class_app_1_1_http_1_1_middleware_1_1_verify_webhook}\index{VerifyWebhook@{VerifyWebhook}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_a1b367620fddf04cfa695dd66b9b54f48}{\+\_\+\+\_\+construct}} (Store \$session)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_acef7660b2651389395d139e8af42d670}{handle}} (\$request, Closure \$next)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_ad4b47d92edc231cc741aa653ca151417}{start\+Session\+If\+Necessary}} (Request \$request)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_a231d4fd8d99742848c95dce07ded3dc2}{generate\+Token}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_abefb3c26429d514777313e9a63d7cbac}{\$session}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_verify_webhook_8php_source_l00011}{11}} of file \mbox{\hyperlink{_verify_webhook_8php_source}{Verify\+Webhook.\+php}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_a1b367620fddf04cfa695dd66b9b54f48}\label{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_a1b367620fddf04cfa695dd66b9b54f48}} 
+\index{VerifyWebhook@{VerifyWebhook}!\_\_construct@{\_\_construct}}
+\index{\_\_construct@{\_\_construct}!VerifyWebhook@{VerifyWebhook}}
+\doxysubsubsection{\texorpdfstring{\_\_construct()}{\_\_construct()}}
+{\footnotesize\ttfamily \+\_\+\+\_\+construct (\begin{DoxyParamCaption}\item[{Store}]{\$session }\end{DoxyParamCaption})}
+
+Create a new middleware instance.
+
+
+\begin{DoxyParams}[1]{Parameters}
+Store & {\em \$session} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_verify_webhook_8php_source_l00025}{25}} of file \mbox{\hyperlink{_verify_webhook_8php_source}{Verify\+Webhook.\+php}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_a231d4fd8d99742848c95dce07ded3dc2}\label{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_a231d4fd8d99742848c95dce07ded3dc2}} 
+\index{VerifyWebhook@{VerifyWebhook}!generateToken@{generateToken}}
+\index{generateToken@{generateToken}!VerifyWebhook@{VerifyWebhook}}
+\doxysubsubsection{\texorpdfstring{generateToken()}{generateToken()}}
+{\footnotesize\ttfamily generate\+Token (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Generate a new CSRF token.
+
+\begin{DoxyReturn}{Returns}
+string 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_verify_webhook_8php_source_l00077}{77}} of file \mbox{\hyperlink{_verify_webhook_8php_source}{Verify\+Webhook.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_acef7660b2651389395d139e8af42d670}\label{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_acef7660b2651389395d139e8af42d670}} 
+\index{VerifyWebhook@{VerifyWebhook}!handle@{handle}}
+\index{handle@{handle}!VerifyWebhook@{VerifyWebhook}}
+\doxysubsubsection{\texorpdfstring{handle()}{handle()}}
+{\footnotesize\ttfamily handle (\begin{DoxyParamCaption}\item[{}]{\$request,  }\item[{Closure}]{\$next }\end{DoxyParamCaption})}
+
+Handle an incoming request.
+
+
+\begin{DoxyParams}[1]{Parameters}
+Request & {\em \$request} & \\
+\hline
+Closure & {\em \$next} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_verify_webhook_8php_source_l00037}{37}} of file \mbox{\hyperlink{_verify_webhook_8php_source}{Verify\+Webhook.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_ad4b47d92edc231cc741aa653ca151417}\label{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_ad4b47d92edc231cc741aa653ca151417}} 
+\index{VerifyWebhook@{VerifyWebhook}!startSessionIfNecessary@{startSessionIfNecessary}}
+\index{startSessionIfNecessary@{startSessionIfNecessary}!VerifyWebhook@{VerifyWebhook}}
+\doxysubsubsection{\texorpdfstring{startSessionIfNecessary()}{startSessionIfNecessary()}}
+{\footnotesize\ttfamily start\+Session\+If\+Necessary (\begin{DoxyParamCaption}\item[{Request}]{\$request }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Start the session if necessary for the request.
+
+
+\begin{DoxyParams}[1]{Parameters}
+Request & {\em \$request} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_verify_webhook_8php_source_l00057}{57}} of file \mbox{\hyperlink{_verify_webhook_8php_source}{Verify\+Webhook.\+php}}.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_abefb3c26429d514777313e9a63d7cbac}\label{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_abefb3c26429d514777313e9a63d7cbac}} 
+\index{VerifyWebhook@{VerifyWebhook}!\$session@{\$session}}
+\index{\$session@{\$session}!VerifyWebhook@{VerifyWebhook}}
+\doxysubsubsection{\texorpdfstring{\$session}{$session}}
+{\footnotesize\ttfamily \$session\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{_verify_webhook_8php_source_l00018}{18}} of file \mbox{\hyperlink{_verify_webhook_8php_source}{Verify\+Webhook.\+php}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/\+Http/\+Middleware/Verify\+Webhook.\+php\end{DoxyCompactItemize}

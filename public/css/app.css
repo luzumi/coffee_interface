@@ -254,6 +254,17 @@ html, body {
     background-repeat: no-repeat;
 }
 
+.user_not_found {
+    color: var(--text-color-1);
+    font-family: var(--ff-secondary);
+    text-decoration: none;
+}
+
+.user_not_found b {
+    background: var(--text-color-1);
+    color: var(--bg-color-1);
+    font-family: var(--ff-primary);
+}
 
 /*CLOCK*/
 .clock-container {
@@ -358,7 +369,7 @@ html, body {
     display: grid;
     grid-template:
         "logo logo title" 5rem
-        "user . menu" 20rem
+        "user user menu" 20rem
         "main main leaf" 5rem;
     gap: 0 4rem;
 }
@@ -444,8 +455,8 @@ html, body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0.1rem;
-    margin: 0.2rem;
+    padding: 0.7rem;
+    margin: 0.5rem 0.2rem;
     border-radius: 0.25rem;
     background: linear-gradient(to right, var(--bg-color-1), var(--bg-color-2));
     color: var(--text-color-1);
@@ -498,8 +509,9 @@ html, body {
 
 /* Button-Styling */
 .btn {
+    width: 5rem;
     border: none;
-    border-radius: 50%;
+    border-radius: 40%;
     background-color: #e19a15;
     background-image: radial-gradient(circle at 25% 50%, #d4af37 70%, #e19a15 20%);
     opacity: 0.75;
@@ -550,8 +562,9 @@ html, body {
 }
 
 .menu-logout-button {
-    display: inline-block;
-    padding: 1.7rem 1.7rem;
+    display: inline-flex;
+    padding: 1.7rem 1.0rem;
+    align-item: center;
 }
 
 .maintenance-mode {

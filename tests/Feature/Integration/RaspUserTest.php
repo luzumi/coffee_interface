@@ -27,7 +27,7 @@ class RaspUserTest extends TestCase
 
         // Act
         RaspUser::setRaspUser($user_id);
-        $result = RaspUser::getRaspUserId();
+        $result = RaspUser::getActualRaspUser();
 
         // Assert
         $this->assertEquals($user_id, $result);
@@ -41,7 +41,7 @@ class RaspUserTest extends TestCase
 
         // Act
         RaspUser::resetRaspUser();
-        $result = RaspUser::getRaspUserId();
+        $result = RaspUser::getActualRaspUser();
 
         // Assert
         $this->assertEquals(0, $result);
@@ -50,7 +50,7 @@ class RaspUserTest extends TestCase
     public function test_it_returns_zero_for_rasp_user_id_if_not_set()
     {
         // Act
-        $result = RaspUser::getRaspUserId();
+        $result = RaspUser::getActualRaspUser();
 
         // Assert
         $this->assertEquals(0, $result);

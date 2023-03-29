@@ -1,0 +1,102 @@
+\hypertarget{class_app_1_1_services_1_1_rasp_user}{}\doxysection{Rasp\+User Class Reference}
+\label{class_app_1_1_services_1_1_rasp_user}\index{RaspUser@{RaspUser}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_services_1_1_rasp_user_ac4520edcd17701bf423c3c19331df724}{get\+Rasp\+User}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_app_1_1_services_1_1_rasp_user_a1f255639995ed31dd7091cac18e55dee}{get\+Rasp\+User\+Id}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_services_1_1_rasp_user_abac1b4e5d0ce6f05239eda713e0b8616}{reset\+Rasp\+User}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_services_1_1_rasp_user_a7b78f85bce70bcd34ecc0d90cea661b6}{set\+Rasp\+User}} (int \$user\+\_\+id, bool \$disruption=false, bool \$user\+\_\+not\+\_\+found=false, bool \$service=false)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_rasp_user_8php_source_l00009}{9}} of file \mbox{\hyperlink{_rasp_user_8php_source}{Rasp\+User.\+php}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_app_1_1_services_1_1_rasp_user_ac4520edcd17701bf423c3c19331df724}\label{class_app_1_1_services_1_1_rasp_user_ac4520edcd17701bf423c3c19331df724}} 
+\index{RaspUser@{RaspUser}!getRaspUser@{getRaspUser}}
+\index{getRaspUser@{getRaspUser}!RaspUser@{RaspUser}}
+\doxysubsubsection{\texorpdfstring{getRaspUser()}{getRaspUser()}}
+{\footnotesize\ttfamily get\+Rasp\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gibt den aktuellen Rasp\+User-\/\+Eintrag zurück.
+
+\begin{DoxyReturn}{Returns}
+Model$\vert$\+Builder$\vert$null 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_rasp_user_8php_source_l00016}{16}} of file \mbox{\hyperlink{_rasp_user_8php_source}{Rasp\+User.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_services_1_1_rasp_user_a1f255639995ed31dd7091cac18e55dee}\label{class_app_1_1_services_1_1_rasp_user_a1f255639995ed31dd7091cac18e55dee}} 
+\index{RaspUser@{RaspUser}!getRaspUserId@{getRaspUserId}}
+\index{getRaspUserId@{getRaspUserId}!RaspUser@{RaspUser}}
+\doxysubsubsection{\texorpdfstring{getRaspUserId()}{getRaspUserId()}}
+{\footnotesize\ttfamily static get\+Rasp\+User\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gibt die ID des aktuellen Raspberry Pi-\/\+Benutzers zurück.
+
+\begin{DoxyReturn}{Returns}
+Model$\vert$\+Builder 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_rasp_user_8php_source_l00026}{26}} of file \mbox{\hyperlink{_rasp_user_8php_source}{Rasp\+User.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_services_1_1_rasp_user_abac1b4e5d0ce6f05239eda713e0b8616}\label{class_app_1_1_services_1_1_rasp_user_abac1b4e5d0ce6f05239eda713e0b8616}} 
+\index{RaspUser@{RaspUser}!resetRaspUser@{resetRaspUser}}
+\index{resetRaspUser@{resetRaspUser}!RaspUser@{RaspUser}}
+\doxysubsubsection{\texorpdfstring{resetRaspUser()}{resetRaspUser()}}
+{\footnotesize\ttfamily static reset\+Rasp\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Setzt die Benutzer-\/\+ID des aktuellen Raspberry Pi-\/\+Benutzers auf 0 zurück.
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_rasp_user_8php_source_l00036}{36}} of file \mbox{\hyperlink{_rasp_user_8php_source}{Rasp\+User.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_services_1_1_rasp_user_a7b78f85bce70bcd34ecc0d90cea661b6}\label{class_app_1_1_services_1_1_rasp_user_a7b78f85bce70bcd34ecc0d90cea661b6}} 
+\index{RaspUser@{RaspUser}!setRaspUser@{setRaspUser}}
+\index{setRaspUser@{setRaspUser}!RaspUser@{RaspUser}}
+\doxysubsubsection{\texorpdfstring{setRaspUser()}{setRaspUser()}}
+{\footnotesize\ttfamily static set\+Rasp\+User (\begin{DoxyParamCaption}\item[{int}]{\$user\+\_\+id,  }\item[{bool}]{\$disruption = {\ttfamily false},  }\item[{bool}]{\$user\+\_\+not\+\_\+found = {\ttfamily false},  }\item[{bool}]{\$service = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Setzt die Benutzer-\/\+ID des aktuellen Raspberry Pi-\/\+Benutzers und aktualisiert optionale Flags.
+
+
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$user\+\_\+id} & \\
+\hline
+bool & {\em \$disruption} & Optionaler Parameter für eine Störung an der Kaffeemaschine, standardmäßig auf \textquotesingle{}false\textquotesingle{} gesetzt \\
+\hline
+bool & {\em \$user\+\_\+not\+\_\+found} & Optionaler Parameter für einen unbekannten Benutzer, standardmäßig auf \textquotesingle{}false\textquotesingle{} gesetzt \\
+\hline
+bool & {\em \$service} & Optionaler Parameter für Serviceeingriff nötig an an der Kaffeemaschine, standardmäßig auf \textquotesingle{}false\textquotesingle{} gesetzt \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_rasp_user_8php_source_l00050}{50}} of file \mbox{\hyperlink{_rasp_user_8php_source}{Rasp\+User.\+php}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/\+Services/Rasp\+User.\+php\end{DoxyCompactItemize}

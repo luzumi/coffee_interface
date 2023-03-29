@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Seed RFID tags
+        // Seed RFIDService tags
         $rfidTags = [
             ['tag_uid' => '182-232-225-89-230', 'role' => 'vip', 'tag_active' => true],
             ['tag_uid' => '214-33-156-27-112', 'role' => 'maintenance', 'tag_active' => true],
@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
             ]
         ];
 
-        // Create users and associate RFID tags with users
+        // Create users and associate RFIDService tags with users
         foreach ($users as $index => $user) {
             $createdUser = User::create($user);
             $rfidTag = $rfidTags[$index];
@@ -87,31 +87,31 @@ class DatabaseSeeder extends Seeder
                 'credit_cost' => '50',
                 'coffee_image' => 'strong.png',
                 'coffee_description' => 'A strong black coffee.',
-                'coffee_code' => '1'
+                'coffee_code' => 'FA:09'
             ],
             ['coffee_name' => 'Coffee Double',
                 'credit_cost' => '90',
                 'coffee_image' => 'strong.png',
                 'coffee_description' => 'A strong black coffee.',
-                'coffee_code' => '2'
+                'coffee_code' => 'FA:0A'
             ],
             ['coffee_name' => 'Espresso',
                 'credit_cost' => '60',
                 'coffee_image' => 'light.png',
                 'coffee_description' => 'A short black coffee.',
-                'coffee_code' => '3'
+                'coffee_code' => 'FA:07'
             ],
             ['coffee_name' => 'Espresso Double',
                 'credit_cost' => '100',
                 'coffee_image' => 'normal.png',
                 'coffee_description' => 'A normal black coffee.',
-                'coffee_code' => '4'
+                'coffee_code' => 'FA:08'
             ],
             ['coffee_name' => 'Water',
                 'credit_cost' => '0',
                 'coffee_image' => 'water.png',
                 'coffee_description' => 'Gratis Water.',
-                'coffee_code' => '5'
+                'coffee_code' => 'FA:06'
             ],
             ['coffee_name' => 'noch keine Auswahl getroffen',
                 'credit_cost' => '0',

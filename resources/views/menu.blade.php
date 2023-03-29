@@ -11,7 +11,7 @@
             <h1>Get me Coffee</h1>
         </div>
         <div class="title_welcome">
-            <h2>Willkommen, {{ $viewData['user']->username }}!</h2>
+            <h2>Willkommen, <br>{{ $viewData['user']->username }}!</h2>
         </div>
         <div class="bg_img1"></div>
 
@@ -88,7 +88,7 @@
 
         <div class="menu-logout">
             <form method="GET" action="{{ route('logout') }}">
-                @csrf
+
                 <button type="submit" class="btn menu-logout-button">Logout</button>
             </form>
         </div>
@@ -99,6 +99,19 @@
             </div>
         @endif
     </div>
+    <div id="role" hidden role={{ $viewData['role'] }}></div>
+
+@endsection
+@section('scripts')
+    <script>
+        setTimeout(function () {
+            role = document.getElementById('role').getAttribute('role');
+            if (role !== 'maintenance') {
+                window.location.href = "{{ route('logout') }}";
+            }
+        }, 60000);
+    </script>
+
 @endsection
 
 

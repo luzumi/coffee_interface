@@ -70,15 +70,7 @@
 @section('scripts')
     <script>
         setTimeout(() => {
-            const userRole = document.getElementById('user_role').value;
-
-            if (userRole === 'maintenance') {
                 window.location.href = '/';
-            } else {
-                console.log('Benutzer reset');
-                window.location.href = '/set';
-            }
-
         }, 8000);
     </script>
 @endsection

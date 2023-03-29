@@ -23,8 +23,14 @@ class MenuController extends Controller
      */
     public function show(Request $request)
     {
-        $raspUserId = RaspUser::getRaspUserId();
-        $user = User::with('coffeeOrders')->find($raspUserId->user_id);
+        $raspUser = RaspUser::getActualRaspUser();
+        $user = User::find($raspUser->user_id);
+
+        if ($raspUser->user_not_found) {
+            return view('user_not_found')->with(compact('user'));
+        }
+
+        $user = User::find($raspUser->user_id);
         $rfidTag = RFID_Tag::where('user_id', $user->id)->first();
 
         $viewData = [
@@ -32,7 +38,7 @@ class MenuController extends Controller
             'orders' => $user->coffeeOrders,
             'varieties' => CoffeeVariety::all(),
             'role' => $rfidTag->role,
-            'rasp_user_entry' => $raspUserId,
+            'rasp_user_entry' => $raspUser,
         ];
 
         return view('menu')->with(compact('viewData'));
@@ -43,12 +49,13 @@ class MenuController extends Controller
     /**
      * Setzt den RaspUser mit der angegebenen Benutzer-ID zurück und leitet den Benutzer zur "home"-Route weiter.
      *
-     * @return RedirectResponse
+     * @return Application|Factory|View
      */
     public function backToWelcome()
     {
         RaspUser::resetRaspUser();
-        return redirect()->route('home');
+
+        return redirect('/');
     }
 
 
@@ -59,9 +66,13 @@ class MenuController extends Controller
      */
     public function inProgress()
     {
-        $raspUserId = RaspUser::getRaspUserId();
+        $raspUserId = RaspUser::getActualRaspUser();
         $user = User::find($raspUserId->user_id);
         $rfidTag = RFID_Tag::where('user_id', $user->id)->first();
+
+        if ($rfidTag->role !== 'maintenance') {
+            RaspUser::resetRaspUser();
+        }
 
         $viewData = [
             'user' => $user,
@@ -69,10 +80,6 @@ class MenuController extends Controller
             'varieties' => CoffeeVariety::all(),
             'role' => $rfidTag->role,
         ];
-
-        if ($viewData['role'] !== 'maintenance') {
-            RaspUser::resetRaspUser();
-        }
 
         return view('in_progress')->with(compact('viewData'));
     }
@@ -86,8 +93,12 @@ class MenuController extends Controller
      */
     public function logout()
     {
-        RaspUser::resetRaspUser();
-        return redirect()->route('home');
+        return $this->backToWelcome();
+    }
+
+    public function userNotFound()
+    {
+        return view('user_not_found');
     }
 
 }

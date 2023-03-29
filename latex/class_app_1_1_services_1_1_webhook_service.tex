@@ -1,0 +1,176 @@
+\hypertarget{class_app_1_1_services_1_1_webhook_service}{}\doxysection{Webhook\+Service Class Reference}
+\label{class_app_1_1_services_1_1_webhook_service}\index{WebhookService@{WebhookService}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a2517c3b5fc8fd81b684b287054f08120}{handle\+Webhook}} (Request \$request)
+\item 
+\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a828825007808598a6b0136c1ed10816e}{get\+Webhook\+Data}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a79a8df22d3d533faec42df8f9098ec60}{send\+Webhook\+Get\+Coffee}} (string \$coffee\+Code)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a6949f67d695921ff8e42ae161b529817}{set\+Id}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a370bd5b2db59dacce94e5985b86ba526}{get\+Webhook\+Configuration}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_ada118063e54a5ab451ecea6c0b46d852}{create\+Guzzle\+Client}} (string \$webhook\+Url, string \$coffee\+Code)
+\item 
+\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a78c9001466a66bfb4833979cc34e464e}{send\+Webhook\+Request}} (Client \$client, string \$webhook\+Url, string \$coffee\+Code)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_webhook_service_8php_source_l00017}{17}} of file \mbox{\hyperlink{_webhook_service_8php_source}{Webhook\+Service.\+php}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_app_1_1_services_1_1_webhook_service_ada118063e54a5ab451ecea6c0b46d852}\label{class_app_1_1_services_1_1_webhook_service_ada118063e54a5ab451ecea6c0b46d852}} 
+\index{WebhookService@{WebhookService}!createGuzzleClient@{createGuzzleClient}}
+\index{createGuzzleClient@{createGuzzleClient}!WebhookService@{WebhookService}}
+\doxysubsubsection{\texorpdfstring{createGuzzleClient()}{createGuzzleClient()}}
+{\footnotesize\ttfamily create\+Guzzle\+Client (\begin{DoxyParamCaption}\item[{string}]{\$webhook\+Url,  }\item[{string}]{\$coffee\+Code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Creates a new Guzzle client with the given webhook URL and coffee code.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$webhook\+Url} & \\
+\hline
+string & {\em \$coffee\+Code} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Client 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em } & \\
+\hline
+\end{DoxyExceptions}
+Exception 
+
+Definition at line \mbox{\hyperlink{_webhook_service_8php_source_l00136}{136}} of file \mbox{\hyperlink{_webhook_service_8php_source}{Webhook\+Service.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_services_1_1_webhook_service_a370bd5b2db59dacce94e5985b86ba526}\label{class_app_1_1_services_1_1_webhook_service_a370bd5b2db59dacce94e5985b86ba526}} 
+\index{WebhookService@{WebhookService}!getWebhookConfiguration@{getWebhookConfiguration}}
+\index{getWebhookConfiguration@{getWebhookConfiguration}!WebhookService@{WebhookService}}
+\doxysubsubsection{\texorpdfstring{getWebhookConfiguration()}{getWebhookConfiguration()}}
+{\footnotesize\ttfamily get\+Webhook\+Configuration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Returns the webhook configuration.
+
+\begin{DoxyReturn}{Returns}
+array$\vert$null 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_webhook_service_8php_source_l00123}{123}} of file \mbox{\hyperlink{_webhook_service_8php_source}{Webhook\+Service.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_services_1_1_webhook_service_a828825007808598a6b0136c1ed10816e}\label{class_app_1_1_services_1_1_webhook_service_a828825007808598a6b0136c1ed10816e}} 
+\index{WebhookService@{WebhookService}!getWebhookData@{getWebhookData}}
+\index{getWebhookData@{getWebhookData}!WebhookService@{WebhookService}}
+\doxysubsubsection{\texorpdfstring{getWebhookData()}{getWebhookData()}}
+{\footnotesize\ttfamily get\+Webhook\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gibt die Webhook-\/\+Daten für den aktuellen Benutzer zurück.
+
+\begin{DoxyReturn}{Returns}
+Json\+Response 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_webhook_service_8php_source_l00054}{54}} of file \mbox{\hyperlink{_webhook_service_8php_source}{Webhook\+Service.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_services_1_1_webhook_service_a2517c3b5fc8fd81b684b287054f08120}\label{class_app_1_1_services_1_1_webhook_service_a2517c3b5fc8fd81b684b287054f08120}} 
+\index{WebhookService@{WebhookService}!handleWebhook@{handleWebhook}}
+\index{handleWebhook@{handleWebhook}!WebhookService@{WebhookService}}
+\doxysubsubsection{\texorpdfstring{handleWebhook()}{handleWebhook()}}
+{\footnotesize\ttfamily handle\+Webhook (\begin{DoxyParamCaption}\item[{Request}]{\$request }\end{DoxyParamCaption})}
+
+Verarbeitet den empfangenen Webhook und speichert den Benutzer entsprechend.
+
+
+\begin{DoxyParams}[1]{Parameters}
+Request & {\em \$request} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Json\+Response 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_webhook_service_8php_source_l00025}{25}} of file \mbox{\hyperlink{_webhook_service_8php_source}{Webhook\+Service.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_services_1_1_webhook_service_a79a8df22d3d533faec42df8f9098ec60}\label{class_app_1_1_services_1_1_webhook_service_a79a8df22d3d533faec42df8f9098ec60}} 
+\index{WebhookService@{WebhookService}!sendWebhookGetCoffee@{sendWebhookGetCoffee}}
+\index{sendWebhookGetCoffee@{sendWebhookGetCoffee}!WebhookService@{WebhookService}}
+\doxysubsubsection{\texorpdfstring{sendWebhookGetCoffee()}{sendWebhookGetCoffee()}}
+{\footnotesize\ttfamily send\+Webhook\+Get\+Coffee (\begin{DoxyParamCaption}\item[{string}]{\$coffee\+Code }\end{DoxyParamCaption})}
+
+Sendet einen Webhook, um Kaffee basierend auf dem übergebenen Kaffee-\/\+Code zu bekommen.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$coffee\+Code} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_webhook_service_8php_source_l00091}{91}} of file \mbox{\hyperlink{_webhook_service_8php_source}{Webhook\+Service.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_services_1_1_webhook_service_a78c9001466a66bfb4833979cc34e464e}\label{class_app_1_1_services_1_1_webhook_service_a78c9001466a66bfb4833979cc34e464e}} 
+\index{WebhookService@{WebhookService}!sendWebhookRequest@{sendWebhookRequest}}
+\index{sendWebhookRequest@{sendWebhookRequest}!WebhookService@{WebhookService}}
+\doxysubsubsection{\texorpdfstring{sendWebhookRequest()}{sendWebhookRequest()}}
+{\footnotesize\ttfamily send\+Webhook\+Request (\begin{DoxyParamCaption}\item[{Client}]{\$client,  }\item[{string}]{\$webhook\+Url,  }\item[{string}]{\$coffee\+Code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Sends the webhook request with the given client, webhook URL, and coffee code.
+
+
+\begin{DoxyParams}[1]{Parameters}
+Client & {\em \$client} & \\
+\hline
+string & {\em \$webhook\+Url} & \\
+\hline
+string & {\em \$coffee\+Code} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Response\+Interface 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Guzzle\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{_webhook_service_8php_source_l00153}{153}} of file \mbox{\hyperlink{_webhook_service_8php_source}{Webhook\+Service.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_services_1_1_webhook_service_a6949f67d695921ff8e42ae161b529817}\label{class_app_1_1_services_1_1_webhook_service_a6949f67d695921ff8e42ae161b529817}} 
+\index{WebhookService@{WebhookService}!setId@{setId}}
+\index{setId@{setId}!WebhookService@{WebhookService}}
+\doxysubsubsection{\texorpdfstring{setId()}{setId()}}
+{\footnotesize\ttfamily static set\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{_webhook_service_8php_source_l00167}{167}} of file \mbox{\hyperlink{_webhook_service_8php_source}{Webhook\+Service.\+php}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/\+Services/Webhook\+Service.\+php\end{DoxyCompactItemize}

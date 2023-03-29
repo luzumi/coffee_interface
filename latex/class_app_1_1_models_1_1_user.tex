@@ -1,0 +1,129 @@
+\hypertarget{class_app_1_1_models_1_1_user}{}\doxysection{User Class Reference}
+\label{class_app_1_1_models_1_1_user}\index{User@{User}}
+
+
+Inheritance diagram for User\+:
+% FIG 0
+
+
+Collaboration diagram for User\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_models_1_1_user_ae905244dc68cf56a44e4de2cdbf84a79}{rfid\+Tag}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_models_1_1_user_a7a45000d29109c5c8236300080e20d46}{coffee\+Orders}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_models_1_1_user_a6a90e74ccdf5efd70d51d10c906f8e32}{\$fillable}}
+\item 
+\mbox{\hyperlink{class_app_1_1_models_1_1_user_a4a374564d2858d8ae869a8fb890aad56}{\$hidden}}
+\item 
+\mbox{\hyperlink{class_app_1_1_models_1_1_user_a1649e00448c72a723c2c79fe5f915b97}{\$casts}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_user_8php_source_l00014}{14}} of file \mbox{\hyperlink{_user_8php_source}{User.\+php}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_app_1_1_models_1_1_user_a7a45000d29109c5c8236300080e20d46}\label{class_app_1_1_models_1_1_user_a7a45000d29109c5c8236300080e20d46}} 
+\index{User@{User}!coffeeOrders@{coffeeOrders}}
+\index{coffeeOrders@{coffeeOrders}!User@{User}}
+\doxysubsubsection{\texorpdfstring{coffeeOrders()}{coffeeOrders()}}
+{\footnotesize\ttfamily coffee\+Orders (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Definiert die Beziehung zu jeder Coffee-\/\+Order-\/\+Instanz.
+
+\begin{DoxyReturn}{Returns}
+has\+Many 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_user_8php_source_l00065}{65}} of file \mbox{\hyperlink{_user_8php_source}{User.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_models_1_1_user_ae905244dc68cf56a44e4de2cdbf84a79}\label{class_app_1_1_models_1_1_user_ae905244dc68cf56a44e4de2cdbf84a79}} 
+\index{User@{User}!rfidTag@{rfidTag}}
+\index{rfidTag@{rfidTag}!User@{User}}
+\doxysubsubsection{\texorpdfstring{rfidTag()}{rfidTag()}}
+{\footnotesize\ttfamily rfid\+Tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Definiert die Beziehung zu jeder RFID-\/\+Tag-\/\+Instanz.
+
+\begin{DoxyReturn}{Returns}
+has\+Many 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_user_8php_source_l00055}{55}} of file \mbox{\hyperlink{_user_8php_source}{User.\+php}}.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{class_app_1_1_models_1_1_user_a1649e00448c72a723c2c79fe5f915b97}\label{class_app_1_1_models_1_1_user_a1649e00448c72a723c2c79fe5f915b97}} 
+\index{User@{User}!\$casts@{\$casts}}
+\index{\$casts@{\$casts}!User@{User}}
+\doxysubsubsection{\texorpdfstring{\$casts}{$casts}}
+{\footnotesize\ttfamily \$casts\hspace{0.3cm}{\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ [}
+\DoxyCodeLine{\ \ \ \ ]}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_user_8php_source_l00046}{46}} of file \mbox{\hyperlink{_user_8php_source}{User.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_models_1_1_user_a6a90e74ccdf5efd70d51d10c906f8e32}\label{class_app_1_1_models_1_1_user_a6a90e74ccdf5efd70d51d10c906f8e32}} 
+\index{User@{User}!\$fillable@{\$fillable}}
+\index{\$fillable@{\$fillable}!User@{User}}
+\doxysubsubsection{\texorpdfstring{\$fillable}{$fillable}}
+{\footnotesize\ttfamily \$fillable\hspace{0.3cm}{\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ [}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{'username'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{'firstname'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{'lastname'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{'tag\_id'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{'credits'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{'active'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{'remarks'},}
+\DoxyCodeLine{\ \ \ \ ]}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_user_8php_source_l00023}{23}} of file \mbox{\hyperlink{_user_8php_source}{User.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_models_1_1_user_a4a374564d2858d8ae869a8fb890aad56}\label{class_app_1_1_models_1_1_user_a4a374564d2858d8ae869a8fb890aad56}} 
+\index{User@{User}!\$hidden@{\$hidden}}
+\index{\$hidden@{\$hidden}!User@{User}}
+\doxysubsubsection{\texorpdfstring{\$hidden}{$hidden}}
+{\footnotesize\ttfamily \$hidden\hspace{0.3cm}{\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ [}
+\DoxyCodeLine{\ \ \ \ ]}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_user_8php_source_l00038}{38}} of file \mbox{\hyperlink{_user_8php_source}{User.\+php}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/\+Models/User.\+php\end{DoxyCompactItemize}

@@ -1,0 +1,31 @@
+\hypertarget{_redirect_if_authenticated_8php_source}{}\doxysection{Redirect\+If\+Authenticated.\+php}
+\label{_redirect_if_authenticated_8php_source}\index{app/Http/Middleware/RedirectIfAuthenticated.php@{app/Http/Middleware/RedirectIfAuthenticated.php}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00001}00001\ <?php}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00003}00003\ \textcolor{keyword}{namespace\ }App\(\backslash\)Http\(\backslash\)Middleware;}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00005}00005\ use\ \mbox{\hyperlink{class_app_1_1_providers_1_1_route_service_provider}{App\(\backslash\)Providers\(\backslash\)RouteServiceProvider}};}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00006}00006\ use\ Closure;}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00007}00007\ use\ Illuminate\(\backslash\)Http\(\backslash\)Request;}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00008}00008\ use\ Illuminate\(\backslash\)Support\(\backslash\)Facades\(\backslash\)Auth;}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00009}00009\ use\ Symfony\(\backslash\)Component\(\backslash\)HttpFoundation\(\backslash\)Response;}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00011}\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_redirect_if_authenticated}{00011}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_redirect_if_authenticated}{RedirectIfAuthenticated}}}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00018}\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_redirect_if_authenticated_adf796ec0946ecdedc3e4e750cd4657c8}{00018}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_redirect_if_authenticated_adf796ec0946ecdedc3e4e750cd4657c8}{handle}}(Request\ \$request,\ Closure\ \$next,\ \textcolor{keywordtype}{string}\ ...\$guards):\ Response}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00019}00019\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00020}00020\ \ \ \ \ \ \ \ \ \$guards\ =\ empty(\$guards)\ ?\ [\textcolor{keyword}{null}]\ :\ \$guards;}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (\$guards\ as\ \$guard)\ \{}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Auth::guard(\$guard)-\/>check())\ \{}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ redirect(RouteServiceProvider::HOME);}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00026}00026\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \$next(\$request);}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00029}00029\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_redirect_if_authenticated_8php_source_l00030}00030\ \}}
+
+\end{DoxyCode}

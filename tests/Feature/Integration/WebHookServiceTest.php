@@ -61,7 +61,7 @@ class WebHookServiceTest extends TestCase
 
         $webhookService->handleWebhook($request);
 
-        $this->assertEquals($rasp_user_id, RaspUser::getRaspUserId());
+        $this->assertEquals($rasp_user_id, RaspUser::getActualRaspUser());
     }
 
     public function test_get_webhook_data_returns_json_response_with_data_and_role()

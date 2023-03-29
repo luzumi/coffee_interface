@@ -9,6 +9,7 @@ use LaravelIdea\Helper\App\Models\_IH_RFID_Tag_C;
 
 class RFIDTagController extends Controller
 {
+
     /**
      * Gibt das RFID_tag des aktuellen Raspberry Pi-Benutzers zurück.
      *
@@ -16,7 +17,7 @@ class RFIDTagController extends Controller
      */
     public function getTag()
     {
-        $id = RaspUser::getRaspUserId();
+        $id = RaspUser::getActualRaspUser();
 
         return RFID_Tag::find($id);
     }

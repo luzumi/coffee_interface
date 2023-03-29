@@ -1,0 +1,101 @@
+\hypertarget{class_app_1_1_http_1_1_controllers_1_1_menu_controller}{}\doxysection{Menu\+Controller Class Reference}
+\label{class_app_1_1_http_1_1_controllers_1_1_menu_controller}\index{MenuController@{MenuController}}
+
+
+Inheritance diagram for Menu\+Controller\+:
+% FIG 0
+
+
+Collaboration diagram for Menu\+Controller\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_menu_controller_a5ab3bd1c209b4353ac32bd7ee51985d2}{show}} (Request \$request)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_menu_controller_ad21c3b55aca9eb50f4fc9e95b8149d12}{back\+To\+Welcome}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_menu_controller_a7f6e09bbd1b57e548f0b112c91d649cd}{in\+Progress}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_menu_controller_a082405d89acd6835c3a7c7a08a7adbab}{logout}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_menu_controller_8php_source_l00016}{16}} of file \mbox{\hyperlink{_menu_controller_8php_source}{Menu\+Controller.\+php}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_menu_controller_ad21c3b55aca9eb50f4fc9e95b8149d12}\label{class_app_1_1_http_1_1_controllers_1_1_menu_controller_ad21c3b55aca9eb50f4fc9e95b8149d12}} 
+\index{MenuController@{MenuController}!backToWelcome@{backToWelcome}}
+\index{backToWelcome@{backToWelcome}!MenuController@{MenuController}}
+\doxysubsubsection{\texorpdfstring{backToWelcome()}{backToWelcome()}}
+{\footnotesize\ttfamily back\+To\+Welcome (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Setzt den Rasp\+User mit der angegebenen Benutzer-\/\+ID zurück und leitet den Benutzer zur \char`\"{}home\char`\"{}-\/Route weiter.
+
+\begin{DoxyReturn}{Returns}
+Redirect\+Response 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_controller_8php_source_l00048}{48}} of file \mbox{\hyperlink{_menu_controller_8php_source}{Menu\+Controller.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_menu_controller_a7f6e09bbd1b57e548f0b112c91d649cd}\label{class_app_1_1_http_1_1_controllers_1_1_menu_controller_a7f6e09bbd1b57e548f0b112c91d649cd}} 
+\index{MenuController@{MenuController}!inProgress@{inProgress}}
+\index{inProgress@{inProgress}!MenuController@{MenuController}}
+\doxysubsubsection{\texorpdfstring{inProgress()}{inProgress()}}
+{\footnotesize\ttfamily in\+Progress (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Zeigt die \char`\"{}in\+\_\+progress\char`\"{}-\/Ansicht für den aktuellen Benutzer und setzt den Rasp\+User zurück, wenn die Rolle nicht \char`\"{}maintenance\char`\"{} ist.
+
+\begin{DoxyReturn}{Returns}
+View 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_controller_8php_source_l00060}{60}} of file \mbox{\hyperlink{_menu_controller_8php_source}{Menu\+Controller.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_menu_controller_a082405d89acd6835c3a7c7a08a7adbab}\label{class_app_1_1_http_1_1_controllers_1_1_menu_controller_a082405d89acd6835c3a7c7a08a7adbab}} 
+\index{MenuController@{MenuController}!logout@{logout}}
+\index{logout@{logout}!MenuController@{MenuController}}
+\doxysubsubsection{\texorpdfstring{logout()}{logout()}}
+{\footnotesize\ttfamily logout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Setzt den Rasp\+User zurück und leitet den Benutzer zur \char`\"{}home\char`\"{}-\/Route weiter.
+
+\begin{DoxyReturn}{Returns}
+Redirect\+Response 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_controller_8php_source_l00087}{87}} of file \mbox{\hyperlink{_menu_controller_8php_source}{Menu\+Controller.\+php}}.
+
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_menu_controller_a5ab3bd1c209b4353ac32bd7ee51985d2}\label{class_app_1_1_http_1_1_controllers_1_1_menu_controller_a5ab3bd1c209b4353ac32bd7ee51985d2}} 
+\index{MenuController@{MenuController}!show@{show}}
+\index{show@{show}!MenuController@{MenuController}}
+\doxysubsubsection{\texorpdfstring{show()}{show()}}
+{\footnotesize\ttfamily show (\begin{DoxyParamCaption}\item[{Request}]{\$request }\end{DoxyParamCaption})}
+
+Zeigt die Menüansicht mit den zugehörigen Daten für den aktuellen Benutzer an.
+
+
+\begin{DoxyParams}[1]{Parameters}
+Request & {\em \$request} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Application$\vert$\+Factory$\vert$\+View 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_controller_8php_source_l00024}{24}} of file \mbox{\hyperlink{_menu_controller_8php_source}{Menu\+Controller.\+php}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/\+Http/\+Controllers/Menu\+Controller.\+php\end{DoxyCompactItemize}

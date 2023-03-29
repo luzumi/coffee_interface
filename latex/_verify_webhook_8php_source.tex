@@ -1,0 +1,60 @@
+\hypertarget{_verify_webhook_8php_source}{}\doxysection{Verify\+Webhook.\+php}
+\label{_verify_webhook_8php_source}\index{app/Http/Middleware/VerifyWebhook.php@{app/Http/Middleware/VerifyWebhook.php}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00001}00001\ <?php}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00003}00003\ \textcolor{keyword}{namespace\ }App\(\backslash\)Http\(\backslash\)Middleware;}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00005}00005\ use\ Closure;}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00006}00006\ use\ Illuminate\(\backslash\)Contracts\(\backslash\)Session\(\backslash\)Session;}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00007}00007\ use\ Illuminate\(\backslash\)Http\(\backslash\)Request;}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00008}00008\ use\ Illuminate\(\backslash\)Session\(\backslash\)Store;}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00009}00009\ use\ Illuminate\(\backslash\)Support\(\backslash\)Str;}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00011}\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook}{00011}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook}{VerifyWebhook}}}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{protected}\ \$session;}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00025}\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_a1b367620fddf04cfa695dd66b9b54f48}{00025}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_a1b367620fddf04cfa695dd66b9b54f48}{\_\_construct}}(Store\ \$session)}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00026}00026\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00027}00027\ \ \ \ \ \ \ \ \ \$this-\/>session\ =\ \$session;}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00037}\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_acef7660b2651389395d139e8af42d670}{00037}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_acef7660b2651389395d139e8af42d670}{handle}}(\$request,\ Closure\ \$next)}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00038}00038\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00039}00039\ \ \ \ \ \ \ \ \ \$this-\/>\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_ad4b47d92edc231cc741aa653ca151417}{startSessionIfNecessary}}(\$request);}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00041}00041\ \ \ \ \ \ \ \ \ \$token\ =\ \$this-\/>session-\/>get(\textcolor{stringliteral}{'\_token'});}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (empty(\$token))\ \{}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \$token\ =\ \$this-\/>\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_a231d4fd8d99742848c95dce07ded3dc2}{generateToken}}();}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \$this-\/>session-\/>put(\textcolor{stringliteral}{'\_token'},\ \$token);}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00045}00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00047}00047\ \ \ \ \ \ \ \ \ \$request-\/>attributes-\/>set(\textcolor{stringliteral}{'verifiedCsrfToken'},\ \$token);}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \$next(\$request);}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00057}\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_ad4b47d92edc231cc741aa653ca151417}{00057}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_ad4b47d92edc231cc741aa653ca151417}{startSessionIfNecessary}}(Request\ \$request)}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00058}00058\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\$this-\/>session-\/>isStarted())\ \{}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00061}00061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00063}00063\ \ \ \ \ \ \ \ \ \$sessionCookie\ =\ \$request-\/>cookies-\/>get(config(\textcolor{stringliteral}{'session.cookie'}));}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_null(\$sessionCookie))\ \{}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \$this-\/>session-\/>setId(\$sessionCookie);}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00067}00067\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00069}00069\ \ \ \ \ \ \ \ \ \$this-\/>session-\/>start();}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00070}00070\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00077}\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_a231d4fd8d99742848c95dce07ded3dc2}{00077}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_verify_webhook_a231d4fd8d99742848c95dce07ded3dc2}{generateToken}}()}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00078}00078\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Str::random(40);}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_verify_webhook_8php_source_l00081}00081\ \}}
+
+\end{DoxyCode}

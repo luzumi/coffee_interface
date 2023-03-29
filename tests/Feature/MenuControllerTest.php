@@ -91,7 +91,7 @@ class MenuControllerTest extends TestCase
         $response = $this->actingAs($user)->get(route('logout'));
 
         $response->assertRedirect('/');
-        $this->assertEquals(0, RaspUser::getRaspUserId());
+        $this->assertEquals(0, RaspUser::getActualRaspUser());
         $this->assertEquals(route('home'), $response->getTargetUrl());
     }
 

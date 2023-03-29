@@ -95,6 +95,4 @@
         }
         setInterval(load, 1000);
     </script>
-
-
 @endsection

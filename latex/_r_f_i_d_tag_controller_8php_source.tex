@@ -1,0 +1,24 @@
+\hypertarget{_r_f_i_d_tag_controller_8php_source}{}\doxysection{RFIDTag\+Controller.\+php}
+\label{_r_f_i_d_tag_controller_8php_source}\index{app/Http/Controllers/RFIDTagController.php@{app/Http/Controllers/RFIDTagController.php}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00001}00001\ <?php}
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00003}00003\ \textcolor{keyword}{namespace\ }App\(\backslash\)Http\(\backslash\)Controllers;}
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00005}00005\ use\ \mbox{\hyperlink{class_app_1_1_models_1_1_r_f_i_d___tag}{App\(\backslash\)Models\(\backslash\)RFID\_Tag}};}
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00006}00006\ use\ \mbox{\hyperlink{class_app_1_1_services_1_1_rasp_user}{App\(\backslash\)Services\(\backslash\)RaspUser}};}
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00007}00007\ use\ Illuminate\(\backslash\)Http\(\backslash\)Request;}
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00008}00008\ use\ LaravelIdea\(\backslash\)Helper\(\backslash\)App\(\backslash\)Models\(\backslash\)\_IH\_RFID\_Tag\_C;}
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00010}\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_r_f_i_d_tag_controller}{00010}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_r_f_i_d_tag_controller}{RFIDTagController}}\ \textcolor{keyword}{extends}\ \mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_controller}{Controller}}}
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00011}00011\ \{}
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00017}\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_r_f_i_d_tag_controller_ab86ba36154b20e6bbfa3ba705f12f9d6}{00017}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_r_f_i_d_tag_controller_ab86ba36154b20e6bbfa3ba705f12f9d6}{getTag}}()}
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00018}00018\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00019}00019\ \ \ \ \ \ \ \ \ \$id\ =\ RaspUser::getRaspUserId();}
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ RFID\_Tag::find(\$id);}
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00022}00022\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_r_f_i_d_tag_controller_8php_source_l00023}00023\ \}}
+
+\end{DoxyCode}

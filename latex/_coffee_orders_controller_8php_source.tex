@@ -1,0 +1,43 @@
+\hypertarget{_coffee_orders_controller_8php_source}{}\doxysection{Coffee\+Orders\+Controller.\+php}
+\label{_coffee_orders_controller_8php_source}\index{app/Http/Controllers/CoffeeOrdersController.php@{app/Http/Controllers/CoffeeOrdersController.php}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00001}00001\ <?php}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00003}00003\ \textcolor{keyword}{namespace\ }App\(\backslash\)Http\(\backslash\)Controllers;}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00005}00005\ use\ \mbox{\hyperlink{class_app_1_1_models_1_1_coffee_order}{App\(\backslash\)Models\(\backslash\)CoffeeOrder}};}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00006}00006\ use\ \mbox{\hyperlink{class_app_1_1_models_1_1_coffee_variety}{App\(\backslash\)Models\(\backslash\)CoffeeVariety}};}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00007}00007\ use\ \mbox{\hyperlink{class_app_1_1_models_1_1_r_f_i_d___tag}{App\(\backslash\)Models\(\backslash\)RFID\_Tag}};}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00008}00008\ use\ \mbox{\hyperlink{class_app_1_1_models_1_1_user}{App\(\backslash\)Models\(\backslash\)User}};}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00009}00009\ use\ \mbox{\hyperlink{class_app_1_1_services_1_1_calculate}{App\(\backslash\)Services\(\backslash\)Calculate}};}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00010}00010\ use\ \mbox{\hyperlink{class_app_1_1_services_1_1_rasp_user}{App\(\backslash\)Services\(\backslash\)RaspUser}};}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00011}00011\ use\ \mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service}{App\(\backslash\)Services\(\backslash\)WebhookService}};}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00012}00012\ use\ Illuminate\(\backslash\)Http\(\backslash\)RedirectResponse;}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00013}00013\ use\ Illuminate\(\backslash\)Http\(\backslash\)Request;}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00014}00014\ use\ Illuminate\(\backslash\)Support\(\backslash\)Facades\(\backslash\)Log;}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00015}00015\ use\ Ratchet\(\backslash\)RFC6455\(\backslash\)Messaging\(\backslash\)Message;}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00017}\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_coffee_orders_controller}{00017}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_coffee_orders_controller}{CoffeeOrdersController}}\ \textcolor{keyword}{extends}\ \mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_controller}{Controller}}}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00018}00018\ \{}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00026}\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_coffee_orders_controller_a0aff021c98c95fc0c40fb7f10ba1d153}{00026}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_coffee_orders_controller_a0aff021c98c95fc0c40fb7f10ba1d153}{newOrder}}(Request\ \$request,\ \$order\_number)}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00027}00027\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00028}00028\ \ \ \ \ \ \ \ \ \$raspUser\ =\ RaspUser::getRaspUserId();}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00029}00029\ \ \ \ \ \ \ \ \ \$rfidTag\ =\ RFID\_Tag::where(\textcolor{stringliteral}{'user\_id'},\ \$raspUser-\/>user\_id)-\/>with(\textcolor{stringliteral}{'user'})-\/>first();}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00030}00030\ \ \ \ \ \ \ \ \ \$coffee\ =\ CoffeeVariety::findOrFail(\$order\_number);}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00031}00031\ \ \ \ \ \ \ \ \ \$webhook\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service}{WebhookService}}();}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00033}00033\ \ \ \ \ \ \ \ \ CoffeeOrder::create([}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'tag\_id'}\ =>\ \$rfidTag-\/>id,}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'user\_id'}\ =>\ \$rfidTag-\/>user-\/>id,}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'coffee\_name'}\ =>\ \$coffee-\/>coffee\_name,}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00037}00037\ \ \ \ \ \ \ \ \ ]);}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00039}00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_app_1_1_services_1_1_calculate_a5d80ac71cc378cc48a721f8873c70a54}{Calculate::coffeeOrder}}(\$coffee-\/>id,\ \$raspUser-\/>user\_id);}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00040}00040\ \ \ \ \ \ \ \ \ \$webhook-\/>sendWebhookGetCoffee(\$coffee-\/>coffee\_code);}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ redirect()-\/>route(\textcolor{stringliteral}{'in\_progress'})-\/>with(compact(\textcolor{stringliteral}{'rfidTag'}));}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_coffee_orders_controller_8php_source_l00044}00044\ \}}
+
+\end{DoxyCode}

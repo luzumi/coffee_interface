@@ -25,7 +25,7 @@ class CoffeeOrdersController extends Controller
      */
     public function newOrder(Request $request, $order_number)
     {
-        $raspUser = RaspUser::getRaspUserId();
+        $raspUser = RaspUser::getActualRaspUser();
         $rfidTag = RFID_Tag::where('user_id', $raspUser->user_id)->with('user')->first();
         $coffee = CoffeeVariety::findOrFail($order_number);
         $webhook = new WebhookService();

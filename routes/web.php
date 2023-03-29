@@ -23,9 +23,9 @@ Route::post('/turn_on', 'App\Services\WebhookService@sendWebhookGetCoffee')->nam
 Route::post('/webhook', 'App\Services\WebhookService@handleWebhook')->name('webhook');
 Route::get('/webhook_data', 'App\Services\WebhookService@getWebhookData')->name('webhook_data');
 Route::post('/welcome', 'App\Http\Controllers\MenuController@backToWelcome')->name('back_to_welcome');
-//Route::get('/limit/{key}', 'App\Http\Controllers\MenuController@limit')->name('limit');
 Route::post('/new_order/{type}', 'App\Http\Controllers\CoffeeOrdersController@newOrder')->name('new_order');
 Route::get('/in_progress', 'App\Http\Controllers\MenuController@inProgress')->name('in_progress');
 Route::get('/logout', 'App\Http\Controllers\MenuController@logout')->name('logout');
+Route::get('/user_not_found', 'App\Http\Controllers\MenuController@userNotFound')->name('user_not_found');
 
 Route::get('/set', 'App\Services\WebhookService@setId')->name('setId');

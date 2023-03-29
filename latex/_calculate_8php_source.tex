@@ -1,0 +1,37 @@
+\hypertarget{_calculate_8php_source}{}\doxysection{Calculate.\+php}
+\label{_calculate_8php_source}\index{app/Services/Calculate.php@{app/Services/Calculate.php}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00001}00001\ <?php}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00003}00003\ \textcolor{keyword}{namespace\ }App\(\backslash\)Services;}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00005}00005\ use\ App\(\backslash\)Models\(\backslash\)CoffeeVariety;}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00006}00006\ use\ App\(\backslash\)Models\(\backslash\)RFID\_Tag;}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00007}00007\ use\ App\(\backslash\)Models\(\backslash\)User;}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00009}\mbox{\hyperlink{class_app_1_1_services_1_1_calculate}{00009}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_app_1_1_services_1_1_calculate}{Calculate}}}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00018}\mbox{\hyperlink{class_app_1_1_services_1_1_calculate_a5d80ac71cc378cc48a721f8873c70a54}{00018}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_services_1_1_calculate_a5d80ac71cc378cc48a721f8873c70a54}{coffeeOrder}}(\textcolor{keywordtype}{int}\ \$coffee\_id,\ \textcolor{keywordtype}{int}\ \$userId):\ void}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00019}00019\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00020}00020\ \ \ \ \ \ \ \ \ \$coffeeVariety\ =\ CoffeeVariety::findOrFail(\$coffee\_id);}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00021}00021\ \ \ \ \ \ \ \ \ \$user\ =\ User::findOrFail(\$userId);}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self::isFreeCoffeeEligible(\$user))\ \{}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00025}00025\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Verringert\ das\ Kreditguthaben\ des\ Benutzers\ um\ die\ Kosten\ des\ Kaffees.}}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00028}00028\ \ \ \ \ \ \ \ \ \$user-\/>decrement(\textcolor{stringliteral}{'credits'},\ \$coffeeVariety-\/>credit\_cost);}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00029}00029\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ \textcolor{keyword}{function}\ isFreeCoffeeEligible(User\ \$user):\ bool}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00040}00040\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00041}00041\ \ \ \ \ \ \ \ \ \$tag\ =\ RFID\_Tag::where(\textcolor{stringliteral}{'user\_id'},\ \$user-\/>id)-\/>firstOrFail();}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ in\_array(\$tag-\/>role,\ [\textcolor{stringliteral}{'vip'},\ \textcolor{stringliteral}{'maintenance'}]);}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_calculate_8php_source_l00046}00046\ \}}
+
+\end{DoxyCode}

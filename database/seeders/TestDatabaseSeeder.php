@@ -17,7 +17,7 @@ class TestDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Seed RFID tags
+        // Seed RFIDService tags
         $rfidTags = [
             ['tag_uid' => '54-121-106-124-89', 'role' => 'vip', 'tag_active' => true],
             ['tag_uid' => '89-54-121-106-124', 'role' => 'maintenance', 'tag_active' => true],

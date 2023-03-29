@@ -1,0 +1,41 @@
+\hypertarget{_route_service_provider_8php_source}{}\doxysection{Route\+Service\+Provider.\+php}
+\label{_route_service_provider_8php_source}\index{app/Providers/RouteServiceProvider.php@{app/Providers/RouteServiceProvider.php}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00001}00001\ <?php}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00003}00003\ \textcolor{keyword}{namespace\ }App\(\backslash\)Providers;}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00005}00005\ use\ Illuminate\(\backslash\)Cache\(\backslash\)RateLimiting\(\backslash\)Limit;}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00006}00006\ use\ Illuminate\(\backslash\)Foundation\(\backslash\)Support\(\backslash\)Providers\(\backslash\)RouteServiceProvider\ as\ ServiceProvider;}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00007}00007\ use\ Illuminate\(\backslash\)Http\(\backslash\)Request;}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00008}00008\ use\ Illuminate\(\backslash\)Support\(\backslash\)Facades\(\backslash\)RateLimiter;}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00009}00009\ use\ Illuminate\(\backslash\)Support\(\backslash\)Facades\(\backslash\)Route;}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00011}\mbox{\hyperlink{class_app_1_1_providers_1_1_route_service_provider}{00011}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_app_1_1_providers_1_1_route_service_provider}{RouteServiceProvider}}\ \textcolor{keyword}{extends}\ ServiceProvider}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{const}\ HOME\ =\ \textcolor{stringliteral}{'/home'};}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00025}\mbox{\hyperlink{class_app_1_1_providers_1_1_route_service_provider_a8814ea4b5beba763c570b4818980814e}{00025}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_providers_1_1_route_service_provider_a8814ea4b5beba763c570b4818980814e}{boot}}():\ void}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00026}00026\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00027}00027\ \ \ \ \ \ \ \ \ \$this-\/>\mbox{\hyperlink{class_app_1_1_providers_1_1_route_service_provider_a51a0b4b24e8a1931e93c0a857eecb7a6}{configureRateLimiting}}();}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00029}00029\ \ \ \ \ \ \ \ \ \$this-\/>routes(\textcolor{keyword}{function}\ ()\ \{}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ Route::middleware(\textcolor{stringliteral}{'api'})}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>prefix(\textcolor{stringliteral}{'api'})}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>group(base\_path(\textcolor{stringliteral}{'routes/api.php'}));}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ Route::middleware(\textcolor{stringliteral}{'web'})}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>group(base\_path(\textcolor{stringliteral}{'routes/web.php'}));}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00036}00036\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00042}\mbox{\hyperlink{class_app_1_1_providers_1_1_route_service_provider_a51a0b4b24e8a1931e93c0a857eecb7a6}{00042}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_providers_1_1_route_service_provider_a51a0b4b24e8a1931e93c0a857eecb7a6}{configureRateLimiting}}():\ void}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00043}00043\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00044}00044\ \ \ \ \ \ \ \ \ RateLimiter::for(\textcolor{stringliteral}{'api'},\ \textcolor{keyword}{function}\ (Request\ \$request)\ \{}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Limit::perMinute(60)-\/>by(\$request-\/>user()?-\/>id\ ?:\ \$request-\/>ip());}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00046}00046\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_route_service_provider_8php_source_l00048}00048\ \}}
+
+\end{DoxyCode}

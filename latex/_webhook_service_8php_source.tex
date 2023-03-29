@@ -1,0 +1,143 @@
+\hypertarget{_webhook_service_8php_source}{}\doxysection{Webhook\+Service.\+php}
+\label{_webhook_service_8php_source}\index{app/Services/WebhookService.php@{app/Services/WebhookService.php}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00001}00001\ <?php}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00003}00003\ \textcolor{keyword}{namespace\ }App\(\backslash\)Services;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00005}00005\ use\ App\(\backslash\)Models\(\backslash\)RFID\_Tag;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00006}00006\ use\ App\(\backslash\)Models\(\backslash\)User;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00007}00007\ use\ GuzzleHttp\(\backslash\)Client;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00008}00008\ use\ GuzzleHttp\(\backslash\)Exception\(\backslash\)GuzzleException;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00009}00009\ use\ Illuminate\(\backslash\)Contracts\(\backslash\)Foundation\(\backslash\)Application;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00010}00010\ use\ Illuminate\(\backslash\)Http\(\backslash\)JsonResponse;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00011}00011\ use\ Illuminate\(\backslash\)Http\(\backslash\)RedirectResponse;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00012}00012\ use\ Illuminate\(\backslash\)Http\(\backslash\)Request;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00013}00013\ use\ Illuminate\(\backslash\)Routing\(\backslash\)Redirector;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00014}00014\ use\ Illuminate\(\backslash\)Support\(\backslash\)Facades\(\backslash\)Log;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00015}00015\ use\ Psr\(\backslash\)Http\(\backslash\)Message\(\backslash\)ResponseInterface;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00017}\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service}{00017}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service}{WebhookService}}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00018}00018\ \{}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00025}\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a2517c3b5fc8fd81b684b287054f08120}{00025}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a2517c3b5fc8fd81b684b287054f08120}{handleWebhook}}(Request\ \$request):\ JsonResponse}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00026}00026\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00027}00027\ \ \ \ \ \ \ \ \ \$data\ =\ \$request-\/>json()-\/>all();}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Festlegen\ des\ aktuellen\ Benutzers\ anhand\ der\ empfangenen\ Benutzer-\/ID}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00030}00030\ \ \ \ \ \ \ \ \ \$rfidTag\ =\ RFID\_Tag::where(\textcolor{stringliteral}{'tag\_uid'},\ \$data[\textcolor{stringliteral}{'tag\_uid'}])-\/>with(\textcolor{stringliteral}{'user'})-\/>first();}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00031}00031\ \ \ \ \ \ \ \ \ \$userId\ =\ \$rfidTag-\/>user-\/>id;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Protokollieren\ der\ eingehenden\ Webhook-\/Daten}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00034}00034\ \ \ \ \ \ \ \ \ Log::info(\textcolor{stringliteral}{'Webhook\ data\ incoming:\ '},\ \$data);}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extrahieren\ der\ optionalen\ Parameter\ aus\ den\ empfangenen\ Daten}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00037}00037\ \ \ \ \ \ \ \ \ \$disruption\ =\ \$data[\textcolor{stringliteral}{'disruption'}]\ ??\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00038}00038\ \ \ \ \ \ \ \ \ \$userNotFound\ =\ \$data[\textcolor{stringliteral}{'user\_not\_found'}]\ ??\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00039}00039\ \ \ \ \ \ \ \ \ \$service\ =\ \$data[\textcolor{stringliteral}{'service'}]\ ??\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Aktualisieren\ des\ RaspUser-\/Eintrags\ in\ der\ Datenbank}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00042}00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_app_1_1_services_1_1_rasp_user_a7b78f85bce70bcd34ecc0d90cea661b6}{RaspUser::setRaspUser}}(\$userId,\ \$disruption,\ \$userNotFound,\ \$service);}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Rückgabe\ einer\ JSON-\/Antwort\ mit\ einem\ Status\ "{}success"{}\ und\ den\ empfangenen\ Daten}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ response()-\/>json([\textcolor{stringliteral}{'status'}\ =>\ \textcolor{stringliteral}{'success'},\ \textcolor{stringliteral}{'data'}\ =>\ \$data]);}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00054}\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a828825007808598a6b0136c1ed10816e}{00054}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a828825007808598a6b0136c1ed10816e}{getWebhookData}}():\ JsonResponse}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00055}00055\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Abrufen\ der\ aktuellen\ Benutzer-\/ID}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00057}00057\ \ \ \ \ \ \ \ \ \$raspUser\ =\ \mbox{\hyperlink{class_app_1_1_services_1_1_rasp_user_a1f255639995ed31dd7091cac18e55dee}{RaspUser::getRaspUserId}}();}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Abrufen\ des\ Benutzers\ anhand\ der\ Benutzer-\/ID}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00060}00060\ \ \ \ \ \ \ \ \ \$user\ =\ User::find(\$raspUser-\/>user\_id);}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Abrufen\ der\ Rolle\ des\ RFID-\/Tags\ für\ den\ Benutzer}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00063}00063\ \ \ \ \ \ \ \ \ \$rfidTagRole\ =\ RFID\_Tag::where(\textcolor{stringliteral}{'user\_id'},\ \$user-\/>id)-\/>first()-\/>role;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Protokollieren\ der\ ausgehenden\ Webhook-\/Daten}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00066}00066\ \ \ \ \ \ \ \ \ Log::info(\textcolor{stringliteral}{'Webhook\ data\ outgoing:\ '},\ [}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'data'}\ =>\ \$raspUser-\/>user\_id,}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'disruption'}\ =>\ \$raspUser-\/>disruption,}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'user\_not\_found'}\ =>\ \$raspUser-\/>user\_not\_found,}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'service'}\ =>\ \$raspUser-\/>service,}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'role'}\ =>\ \$rfidTagRole,}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00072}00072\ \ \ \ \ \ \ \ \ ]);}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Rückgabe\ einer\ JSON-\/Antwort\ mit\ den\ Webhook-\/Daten}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ response()-\/>json([}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'data'}\ =>\ \$raspUser-\/>user\_id,}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'disruption'}\ =>\ \$raspUser-\/>disruption,}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'user\_not\_found'}\ =>\ \$raspUser-\/>user\_not\_found,}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'service'}\ =>\ \$raspUser-\/>service,}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'role'}\ =>\ \$rfidTagRole,}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00081}00081\ \ \ \ \ \ \ \ \ ]);}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00082}00082\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00091}\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a79a8df22d3d533faec42df8f9098ec60}{00091}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a79a8df22d3d533faec42df8f9098ec60}{sendWebhookGetCoffee}}(\textcolor{keywordtype}{string}\ \$coffeeCode):\ int}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00092}00092\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00093}00093\ \ \ \ \ \ \ \ \ Log::info(\textcolor{stringliteral}{'webhookHandler\ called'}\ .\ \$coffeeCode);}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00095}00095\ \ \ \ \ \ \ \ \ \$config\ =\ \$this-\/>\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a370bd5b2db59dacce94e5985b86ba526}{getWebhookConfiguration}}();}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\$config)\ \{}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ Log::error(\textcolor{stringliteral}{'Webhook\ configuration\ not\ found.'});}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 500;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00099}00099\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \$client\ =\ \$this-\/>\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_ada118063e54a5ab451ecea6c0b46d852}{createGuzzleClient}}(\$config[\textcolor{stringliteral}{'webhook\_url'}],\ \$coffeeCode);}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00103}00103\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (\(\backslash\)Exception\ \$e)\ \{}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ Log::error(\textcolor{stringliteral}{'Could\ not\ create\ Guzzle\ client:\ '}\ .\ \$e-\/>getMessage());}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 500;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00106}00106\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00108}00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \$response\ =\ \$this-\/>\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a78c9001466a66bfb4833979cc34e464e}{sendWebhookRequest}}(\$client,\ \$config[\textcolor{stringliteral}{'webhook\_url'}],\ \$coffeeCode);}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ Log::info(\textcolor{stringliteral}{'Webhook\ sent\ to\ Raspberry\ Pi:\ '}\ .\ \$client-\/>getConfig(\textcolor{stringliteral}{'action'}));}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \$response-\/>getStatusCode();}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00112}00112\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (GuzzleException\ \$e)\ \{}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ Log::error(\textcolor{stringliteral}{'Could\ not\ send\ webhook\ to\ Raspberry\ Pi:\ '}\ .\ \$e-\/>getMessage());}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 500;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00115}00115\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00116}00116\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00123}\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a370bd5b2db59dacce94e5985b86ba526}{00123}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a370bd5b2db59dacce94e5985b86ba526}{getWebhookConfiguration}}():\ ?array}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00124}00124\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00125}00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ config(\textcolor{stringliteral}{'webhook-\/client.configs.0'});}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00126}00126\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00136}\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_ada118063e54a5ab451ecea6c0b46d852}{00136}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_ada118063e54a5ab451ecea6c0b46d852}{createGuzzleClient}}(\textcolor{keywordtype}{string}\ \$webhookUrl,\ \textcolor{keywordtype}{string}\ \$coffeeCode):\ Client}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00137}00137\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00138}00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ Client([}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'base\_uri'}\ =>\ \$webhookUrl,}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'action'}\ =>\ \$coffeeCode,}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00141}00141\ \ \ \ \ \ \ \ \ ]);}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00142}00142\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00153}\mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a78c9001466a66bfb4833979cc34e464e}{00153}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{function}\ \mbox{\hyperlink{class_app_1_1_services_1_1_webhook_service_a78c9001466a66bfb4833979cc34e464e}{sendWebhookRequest}}(Client\ \$client,\ \textcolor{keywordtype}{string}\ \$webhookUrl,\ \textcolor{keywordtype}{string}\ \$coffeeCode):\ ResponseInterface}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00154}00154\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00155}00155\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \$client-\/>post(\$webhookUrl,\ [}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'auth'}\ =>\ [\textcolor{stringliteral}{'stripe\_secret\_key'},\ \textcolor{charliteral}{'1'}],}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'json'}\ =>\ [}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'url'}\ =>\ \$webhookUrl,}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'events'}\ =>\ [\textcolor{stringliteral}{'charge.succeeded'}],}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'action'}\ =>\ \$coffeeCode,}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ ],}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00162}00162\ \ \ \ \ \ \ \ \ ]);}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00163}00163\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00167}00167\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{function}\ setId():\ Redirector|Application|RedirectResponse}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00168}00168\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Setzen\ der\ aktuellen\ Benutzer-\/ID\ auf\ 0\ oder\ 6,\ abhängig\ von\ der\ aktuellen\ Benutzer-\/ID}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00170}00170\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (benötigt\ für\ den\ klickbaren\ Buttons\ auf\ der\ Startseite)}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00171}00171\ \ \ \ \ \ \ \ \ \$id\ =\ \mbox{\hyperlink{class_app_1_1_services_1_1_rasp_user_a1f255639995ed31dd7091cac18e55dee}{RaspUser::getRaspUserId}}()\ ==\ 1\ ?\ 0\ :\ 1;}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00172}00172\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_app_1_1_services_1_1_rasp_user_a7b78f85bce70bcd34ecc0d90cea661b6}{RaspUser::setRaspUser}}(\$id);}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00174}00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ redirect(\textcolor{charliteral}{'/'});}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00175}00175\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_webhook_service_8php_source_l00176}00176\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>GetMeCoffee: app/Http/Controllers/CoffeeOrdersController.php Quellcode</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">GetMeCoffee
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','Suchen');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Lade ...</div>
+<div class="SRStatus" id="Searching">Suche ...</div>
+<div class="SRStatus" id="NoMatches">Keine Treffer</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../dir_d422163b96683743ed3963d4aac17747.html">app</a></li><li class="navelem"><a class="el" href="../../dir_0c4ee04d587063ecca91a7f35642b9f3.html">Http</a></li><li class="navelem"><a class="el" href="../../dir_27ba1f74dc73f44d4e9ca42f2dd266ec.html">Controllers</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">CoffeeOrdersController.php</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span>&lt;?php</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">namespace </span>App\Http\Controllers;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>use App\Models\CoffeeOrder;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>use App\Models\CoffeeVariety;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>use App\Models\RFID_Tag;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>use App\Models\User;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>use <a class="code hl_class" href="../../d4/dd5/class_app_1_1_services_1_1_calculate.html">App\Services\Calculate</a>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>use <a class="code hl_class" href="../../d7/d06/class_app_1_1_services_1_1_rasp_user.html">App\Services\RaspUser</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>use <a class="code hl_class" href="../../d7/d7d/class_app_1_1_services_1_1_webhook_service.html">App\Services\WebhookService</a>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>use Illuminate\Http\RedirectResponse;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>use Illuminate\Http\Request;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>use Illuminate\Support\Facades\Log;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>use Ratchet\RFC6455\Messaging\Message;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="../../d6/d5a/class_app_1_1_http_1_1_controllers_1_1_coffee_orders_controller.html">   17</a></span><span class="keyword">class </span><a class="code hl_class" href="../../d6/d5a/class_app_1_1_http_1_1_controllers_1_1_coffee_orders_controller.html">CoffeeOrdersController</a> <span class="keyword">extends</span> <a class="code hl_class" href="../../d5/d91/class_app_1_1_http_1_1_controllers_1_1_controller.html">Controller</a></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="../../d6/d5a/class_app_1_1_http_1_1_controllers_1_1_coffee_orders_controller.html#a0aff021c98c95fc0c40fb7f10ba1d153">   26</a></span>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code hl_function" href="../../d6/d5a/class_app_1_1_http_1_1_controllers_1_1_coffee_orders_controller.html#a0aff021c98c95fc0c40fb7f10ba1d153">newOrder</a>(Request $request, $order_number)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        $raspUser = RaspUser::getRaspUserId();</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        $rfidTag = RFID_Tag::where(<span class="stringliteral">&#39;user_id&#39;</span>, $raspUser-&gt;user_id)-&gt;with(<span class="stringliteral">&#39;user&#39;</span>)-&gt;first();</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        $coffee = CoffeeVariety::findOrFail($order_number);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        $webhook = <span class="keyword">new</span> <a class="code hl_class" href="../../d7/d7d/class_app_1_1_services_1_1_webhook_service.html">WebhookService</a>();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        CoffeeOrder::create([</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="stringliteral">&#39;tag_id&#39;</span> =&gt; $rfidTag-&gt;id,</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="stringliteral">&#39;user_id&#39;</span> =&gt; $rfidTag-&gt;user-&gt;id,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="stringliteral">&#39;coffee_name&#39;</span> =&gt; $coffee-&gt;coffee_name,</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        ]);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <a class="code hl_function" href="../../d4/dd5/class_app_1_1_services_1_1_calculate.html#a5d80ac71cc378cc48a721f8873c70a54">Calculate::coffeeOrder</a>($coffee-&gt;id, $raspUser-&gt;user_id);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        $webhook-&gt;sendWebhookGetCoffee($coffee-&gt;coffee_code);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">return</span> redirect()-&gt;route(<span class="stringliteral">&#39;in_progress&#39;</span>)-&gt;with(compact(<span class="stringliteral">&#39;rfidTag&#39;</span>));</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
+<div class="ttc" id="aclass_app_1_1_http_1_1_controllers_1_1_coffee_orders_controller_html"><div class="ttname"><a href="../../d6/d5a/class_app_1_1_http_1_1_controllers_1_1_coffee_orders_controller.html">App\Http\Controllers\CoffeeOrdersController</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d4/da7/_coffee_orders_controller_8php_source.html#l00017">CoffeeOrdersController.php:18</a></div></div>
+<div class="ttc" id="aclass_app_1_1_http_1_1_controllers_1_1_coffee_orders_controller_html_a0aff021c98c95fc0c40fb7f10ba1d153"><div class="ttname"><a href="../../d6/d5a/class_app_1_1_http_1_1_controllers_1_1_coffee_orders_controller.html#a0aff021c98c95fc0c40fb7f10ba1d153">App\Http\Controllers\CoffeeOrdersController\newOrder</a></div><div class="ttdeci">newOrder(Request $request, $order_number)</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/da7/_coffee_orders_controller_8php_source.html#l00026">CoffeeOrdersController.php:26</a></div></div>
+<div class="ttc" id="aclass_app_1_1_http_1_1_controllers_1_1_controller_html"><div class="ttname"><a href="../../d5/d91/class_app_1_1_http_1_1_controllers_1_1_controller.html">App\Http\Controllers\Controller</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d6c/_controller_8php_source.html#l00009">Controller.php:10</a></div></div>
+<div class="ttc" id="aclass_app_1_1_services_1_1_calculate_html"><div class="ttname"><a href="../../d4/dd5/class_app_1_1_services_1_1_calculate.html">App\Services\Calculate</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d4/db0/_calculate_8php_source.html#l00009">Calculate.php:10</a></div></div>
+<div class="ttc" id="aclass_app_1_1_services_1_1_calculate_html_a5d80ac71cc378cc48a721f8873c70a54"><div class="ttname"><a href="../../d4/dd5/class_app_1_1_services_1_1_calculate.html#a5d80ac71cc378cc48a721f8873c70a54">App\Services\Calculate\coffeeOrder</a></div><div class="ttdeci">static coffeeOrder(int $coffee_id, int $userId)</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/db0/_calculate_8php_source.html#l00018">Calculate.php:18</a></div></div>
+<div class="ttc" id="aclass_app_1_1_services_1_1_rasp_user_html"><div class="ttname"><a href="../../d7/d06/class_app_1_1_services_1_1_rasp_user.html">App\Services\RaspUser</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d1/da1/_rasp_user_8php_source.html#l00009">RaspUser.php:10</a></div></div>
+<div class="ttc" id="aclass_app_1_1_services_1_1_webhook_service_html"><div class="ttname"><a href="../../d7/d7d/class_app_1_1_services_1_1_webhook_service.html">App\Services\WebhookService</a></div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d31/_webhook_service_8php_source.html#l00017">WebhookService.php:18</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Erzeugt von&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+</small></address>
+</body>
+</html>
