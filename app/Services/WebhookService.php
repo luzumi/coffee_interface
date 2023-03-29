@@ -54,15 +54,15 @@ class WebhookService
     public function getWebhookData(): ?JsonResponse
     {
         $raspUser = RaspUser::getActualRaspUser();
-        if ($raspUser['user_id'] < 1) {
+        if ($raspUser->user_id < 1) {
             return null;
         }
 
         if ($raspUser->user_not_found) {
-            return $this->responseUserNotFound($raspUser['user_id']);
+            return $this->responseUserNotFound($raspUser->user_id);
         }
 
-        $user = User::find($raspUser['user_id']);
+        $user = User::find($raspUser->user_id);
         $rfidTagRole = RFID_Tag::where('user_id', $user->id)->first()->role;
 
         return $this->createWebhookDataResponse($raspUser, $rfidTagRole);
@@ -223,7 +223,7 @@ class WebhookService
     {
         // Setzen der aktuellen Benutzer-ID auf 0 oder 6, abhängig von der aktuellen Benutzer-ID
         // (benötigt für den klickbaren Buttons auf der Startseite)
-        $id = RaspUser::getActualRaspUser()->user_id == 3 ? 0 : 3;
+        $id = RaspUser::getActualRaspUser()->user_id == 1 ? 0 : 1;
         RaspUser::setRaspUser($id);
 
         return redirect('/');
