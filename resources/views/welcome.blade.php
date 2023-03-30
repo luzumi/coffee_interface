@@ -14,7 +14,7 @@
 
             <div class="title_text">
                 <h2>
-                    <a href="{{ route('test') }}">
+                    <a href="{{ route('setId') }}">
                         Bitte halten Sie Ihren RFID-Chip an den Leser.
                     </a>
                 </h2>
@@ -36,9 +36,9 @@
 @endsection
 
 @section('scripts')
-    <link href="{{ asset('css/welcome.css') }}" rel="stylesheet"/>
     {{--    CLOCK   --}}
     <script src="{{ asset('js/clock.js') }}"></script>
     {{--    Load    --}}
     <script src="{{ asset('js/menu_load.js') }}"></script>
+
 @endsection

@@ -53,9 +53,21 @@ class WebhookService
      */
     public function getWebhookData(): ?JsonResponse
     {
+        Log::info('getWebhookData called'); // Debug-Statement hinzugefügt
+
         $raspUser = RaspUser::getActualRaspUser();
         if ($raspUser->user_id < 1) {
-            return null;
+            $defaultResponse = response()->json([
+                'data' => $raspUser->user_id,
+                'disruption' => false,
+                'user_not_found' => true,
+                'need_service' => false,
+                'role' => 'user_not_found',
+            ]);
+
+            Log::info('getWebhookData: Default response', ['response' => $defaultResponse]); // Debug-Statement hinzugefügt
+
+            return $defaultResponse;
         }
 
         if ($raspUser->user_not_found) {
@@ -224,6 +236,7 @@ class WebhookService
         // Setzen der aktuellen Benutzer-ID auf 0 oder 6, abhängig von der aktuellen Benutzer-ID
         // (benötigt für den klickbaren Buttons auf der Startseite)
         $id = RaspUser::getActualRaspUser()->user_id == 1 ? 0 : 1;
+        Log::info('Set ID to ' . $id);
         RaspUser::setRaspUser($id);
 
         return redirect('/');

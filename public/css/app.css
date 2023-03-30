@@ -710,15 +710,15 @@ html, body {
 .progress-section {
     position: relative;
     display: inline-block;
-    width: 800px;
+    width: 200px;
     height: 200px;
 }
 
 .waiting-icon {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: 0.1rem;
+    left: 0.44rem;
+    width: 110%;
     height: 100%;
 }
 
@@ -735,14 +735,6 @@ html, body {
     height: 100%;
 }
 
-#fillThis {
-    stroke: #000;
-    stroke-width: 1;
-    fill: none;
-}
-
 .green-path {
-    fill: green;
+    fill: var(--bg-color-2);
 }
-
-

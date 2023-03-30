@@ -25,6 +25,7 @@ class MenuController extends Controller
     public function show(Request $request)
     {
         $raspUser = RaspUser::getActualRaspUser();
+
         $user = User::with('coffeeOrders')->find($raspUser->user_id);
 
         $viewName = $this->getViewName($raspUser);

@@ -8,15 +8,17 @@ function load() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             console.log('readyState');
             let responseText = xhr.responseText;
-            console.log("if " + responseText);
-            if (responseText.startsWith("data")) {
+            console.log("Server response: " + responseText); // Zeile hinzugefügt
+
+        if (responseText.startsWith("data")) {
                 responseText = responseText.substring(5);
                 console.log("if " + responseText);
             }
             try {
-                let data = JSON.parse(this.responseText);
+                let data = JSON.parse(responseText);
 
                 const userId = data.data;
+                console.log('userId: ' + userId);
 
                 if (userId == null || userId < 1) {
                     console.log('kein Benutzer gefunden');
