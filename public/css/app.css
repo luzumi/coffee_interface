@@ -708,24 +708,26 @@ html, body {
     fill:none;
 }
 
-.FillThis {
-    fill: none;
-    stroke: green;
-    stroke-width: 1;
+.fill-this {
+    fill: green;
     animation: fillAnimation 4s forwards 1;
 }
 
 
 @keyframes fillAnimation {
     0% {
-        stroke-dasharray: 0 1794.35;
-        stroke-dashoffset: 0;
+        transform: translateY(0%);
     }
     100% {
-        stroke-dasharray: 1794.35 1794.35;
-        stroke-dashoffset: -1435.48; /* 80% der Länge: 1794,35 * 0,8 = 1435,48 */
+        transform: translateY(-80%);
     }
 }
+
+.green-path {
+    fill: green;
+    animation: fillAnimation 4s forwards 1;
+}
+
 
 
 
