@@ -676,66 +676,6 @@ html, body {
     }
 }
 
-.progress-section {
-    position: absolute;
-    display: inline-block;
-    width: 800px;
-    height: 400px;
-}
-
-.svg-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.waiting-icon {
-    position: absolute;
-    top: 1.44rem;
-    left: 13.9rem;
-    width: 100%;
-    height: 100%;
-    z-index: 8000;
-}
-
-.overlay-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9000;
-    fill:none;
-}
-
-.fill-this {
-    fill: green;
-    animation: fillAnimation 4s forwards 1;
-}
-
-
-@keyframes fillAnimation {
-    0% {
-        transform: translateY(0%);
-    }
-    100% {
-        transform: translateY(-80%);
-    }
-}
-
-.green-path {
-    fill: green;
-    animation: fillAnimation 4s forwards 1;
-}
-
-
-
-
-
-
-
-
-
 .progress {
     color: white;
     text-align: center;
@@ -767,43 +707,54 @@ html, body {
     z-index: 9999;
 }
 
-.waiting-icon {
-    position: absolute;
-    background-color: #343030;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 15rem;
-    height: 15rem;
-    z-index: 8999;
+.progress-section {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
 }
 
-.overlay {
-    position: fixed;
+.waiting-icon {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 9999;
-    pointer-events: none;
 }
+
+.svg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.overlay-svg {
+    width: 100%;
+    height: 100%;
+    fill: #9CAFD4;
+}
+
 
 @keyframes strokeAnimation {
     0% {
-        stroke-dashoffset: 100;
+        transform: translateY(0%);
     }
     100% {
-        stroke-dashoffset: 0;
+        transform: translateY(-80%);
     }
 }
 
 #fillThis {
-    stroke: #000; /* Die Farbe des Strichs */
-    stroke-width: 1; /* Die Breite des Strichs */
+    stroke: #000;
+    stroke-width: 1;
     fill: none;
-    stroke-dasharray: 100;
-    stroke-dashoffset: 100;
-    animation: strokeAnimation 2s linear forwards;
-    z-index: 9100;
 }
+
+.green-path {
+    fill: green;
+    animation: strokeAnimation 2s linear forwards;
+}
+
 
