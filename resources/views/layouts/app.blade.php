@@ -17,6 +17,9 @@
 <body class="body">
 
 <div class="border">
+    <img class="itb" src=" {{ asset('storage/media/ITB_Logo_blank_farbe.svg') }}" alt="Dein SVG-Bild" />
+    <img class="uni-logo" src=" {{ asset('storage/media/UHB_Logo_Web_RGB.svg') }}" alt="Dein SVG-Bild" />
+
     <div class="content">
         @yield('content')
     </div>

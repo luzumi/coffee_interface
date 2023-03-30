@@ -64,6 +64,24 @@ html, body {
     border-radius: 3rem 3rem 3rem 3rem;
 }
 
+.itb {
+    position: absolute;
+    top: 35rem;
+    left: 61.3rem;
+    z-index: 1000;
+    width: 4%;
+    height: 4%;
+}
+
+.uni-logo {
+    position: absolute;
+    top: 34.5rem;
+    left: 55.8rem;
+    z-index: 1000;
+    width: 7%;
+    height: 7%;
+}
+
 /*.content {*/
 /*    position: relative;*/
 /*    width: 85%;*/
