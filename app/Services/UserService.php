@@ -12,13 +12,16 @@ class UserService
 
     /**
      * Erstellt einen neuen Benutzer und eine neue RFID_Tag-Instanz mit der angegebenen UID und der ID des neuen Benutzers.
+     * Der neue Benutzer wird anschließend als RaspUser gesetzt.
+     * Wenn der Benutzer nicht gefunden wurde, wird eine entsprechende Response zurückgegeben.
      *
      * @param string $tagUid
+     *
      * @return Redirector|Application|RedirectResponse
      */
-    public function createNewUserAndTag(string $tagUid): Redirector|Application|RedirectResponse
+    public static function createNewUserAndTag(string $tagUid): Redirector|Application|RedirectResponse
     {
-        $user = $this->createNewUser();
+        $user = self::createNewUser();
 
         RFIDService::createNewRFIDTag($tagUid, $user->id);
 
@@ -30,21 +33,25 @@ class UserService
     /**
      * Erstellt einen neuen Benutzer mit einem eindeutigen Benutzernamen, der aus dem Namen des Benutzers und der Anzahl
      * aller Benutzer besteht, die bereits in der Datenbank gespeichert sind.
+     * Der Namestoken wird verwendet, um einen eindeutigen Benutzernamen für einen neuen Benutzer zu erstellen.
      *
      * @return User
      */
-    public function createNewUser(): User
+    public static function createNewUser(): User
     {
         return User::create([
-            'username' => 'newUser: ' . $this->getNameToken(User::count()),
+            'username' => 'newUser: ' . self::getNameToken(User::count()),
         ]);
     }
 
     /**
+     * Erstellt einen eindeutigen Namenstoken für einen neuen Benutzer. Der Namestoken besteht aus dem Namen des Benutzers
+     * und der Anzahl aller Benutzer, umgewandelt in eine Zeichenkette, die bereits in der Datenbank gespeichert sind.
+     *
      * @param $integer int Wert der die Anzahl der User in der Datenbank angibt
      * @return string NameToken, zur Identifizierung des neuen Users
      */
-    public function getNameToken(int $integer): string
+    private static function getNameToken(int $integer): string
     {
         $result = "";
         while ($integer > 0) {

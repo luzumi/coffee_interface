@@ -1,6 +1,7 @@
 :root {
     --ff-primary: 'Unbounded', cursive;
     --ff-secondary: 'Roboto', sans-serif;
+    --ff-third: 'Gruppo', cursive;
     --digital-clock: 'Sono', sans-serif;
 
     --bg-color-1: #281D16FF;
@@ -264,6 +265,35 @@ html, body {
     background: var(--text-color-1);
     color: var(--bg-color-1);
     font-family: var(--ff-primary);
+}
+
+.service-pulse {
+    animation: pulsate 1s ease-in-out infinite;
+}
+
+.service {
+    width: 50%;
+    font-family: var(--ff-third);
+}
+
+.disruption{
+    width: 50%;
+    font-family: var(--ff-third);
+    font-size: xxx-large;
+    font-weight: bold;
+    color: var(--bg-color-6);
+}
+
+.disruption-text {
+    font-family: var(--ff-third);
+    font-size: medium;
+}
+
+.disruption-border {
+    width: 50%;
+    border: 1rem solid var(--bg-color-6);
+    border-radius: 2rem;
+    padding: 2rem;
 }
 
 /*CLOCK*/

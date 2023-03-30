@@ -14,7 +14,7 @@
 
             <div class="title_text">
                 <div>
-                    <h2> Diese Karte ist im System noch nicht erfasst. </h2>
+                    <h2> <a href="#">Diese Karte ist im System noch nicht erfasst.</a> </h2>
 
                     <h3 class="user_not_found"> Bitte wenden Sie sich mit dem Code: <b> &nbsp;{{ substr($user->username, 9) }}&nbsp; </b> an den Administrator. </h3>
                 </div>
@@ -40,4 +40,5 @@
             window.location.href = "{{ route('logout') }}";
         }, 12000);
     </script>
+    <script src="{{ asset('js/clock.js') }}"></script>
 @endsection

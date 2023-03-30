@@ -18,15 +18,15 @@
         <div class="menu-statistics">
             <div class="menu-statistics-item">
                 <h3>Bestellungen</h3>
-                <p>{{ $viewData['orders']->count() }}</p>
+                <p>{{ $viewData['user']->coffeeOrders->count() }}</p>
             </div>
             <div class="menu-statistics-item">
                 <h3>Letzte Bestellung:&nbsp;</h3>
-                <p>{{ $viewData['orders']->last() ? $viewData['orders']->last()->updated_at->format('d.m.Y - H:i') : '' }}</p>
+                <p>{{ $viewData['user']->coffeeOrders->last() ? $viewData['user']->coffeeOrders->last()->updated_at->format('d.m.Y - H:i') : '' }}</p>
             </div>
             <div class="menu-statistics-item">
                 <h3>Letzter Auswahl</h3>
-                <p>{{ $viewData['orders']->last() ? $viewData['orders']->last()->coffee_name : 'noch keine Auswahl getroffen' }}</p>
+                <p>{{ $viewData['user']->coffeeOrders->last() ? $viewData['user']->coffeeOrders->last()->coffee_name : 'noch keine Auswahl getroffen' }}</p>
             </div>
 
             <div class="menu-statistics-item">
@@ -99,7 +99,7 @@
             </div>
         @endif
     </div>
-    <div id="role" hidden role={{ $viewData['role'] }}></div>
+    <div id="role" hidden role='{{ $viewData['role'] }}'></div>
 
 @endsection
 @section('scripts')

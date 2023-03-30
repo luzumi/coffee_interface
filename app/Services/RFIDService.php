@@ -12,9 +12,9 @@ class RFIDService
      * wird eine neue RFID_Tag-Instanz mit der angegebenen UID und einer neuen User-Instanz erstellt.
      *
      * @param string $tagUid
-     * @return RFID_Tag
+     * @return
      */
-    public static function getRFIDTag(string $tagUid): RFID_Tag
+    public static function getRFIDTag(string $tagUid)
     {
         $rfidTag = RFID_Tag::where('tag_uid', $tagUid)->with('user')->first();
 
@@ -24,6 +24,7 @@ class RFIDService
 
         return $rfidTag;
     }
+//
 
     /**
      * Erstellt einen eindeutigen Namenstoken für einen neuen Benutzer. Der Namestoken besteht aus dem Namen des Benutzers
@@ -34,7 +35,7 @@ class RFIDService
      * @param int $userId
      * @return RFID_Tag
      */
-    public function createNewRFIDTag(string $tagUid, int $userId): RFID_Tag
+    public static function createNewRFIDTag(string $tagUid, int $userId): RFID_Tag
     {
         return RFID_Tag::create([
             'tag_uid' => $tagUid,

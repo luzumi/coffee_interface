@@ -13,11 +13,12 @@
             </div>
 
             <div class="title_text">
-                <h2>
-                    <a href="{{ route('setId') }}">
-                        Bitte halten Sie Ihren RFID-Chip an den Leser.
-                    </a>
-                </h2>
+                <div class="disruption-border">
+                    <h2> <a href="#"><b class="disruption">STÖRUNG!!</b></a> </h2>
+                    <h2> Eine Zubereitung ist derzeit nicht möglich!</h2>
+                    <h3 class="disruption-text"> Der Eingriff eines Servicetechnikers ist notwendig. </h3>
+                    <h3 class="disruption-text"> Informieren Sie den Administrator! </h3>
+                </div>
                 <div class="clock-container">
                     <div class="clock" id="clock">
                         <div class="hour-hand"></div>
@@ -34,11 +35,12 @@
     </div>
     <div class="loader"></div>
 @endsection
-
 @section('scripts')
-    <link href="{{ asset('css/welcome.css') }}" rel="stylesheet"/>
-    {{--    CLOCK   --}}
+    <script>
+        setTimeout(function () {
+            window.location.href = "{{ route('logout') }}";
+        }, 12000);
+    </script>
+
     <script src="{{ asset('js/clock.js') }}"></script>
-    {{--    Load    --}}
-    <script src="{{ asset('js/menu_load.js') }}"></script>
 @endsection

@@ -18,24 +18,24 @@ class MenuController extends Controller
     /**
      * Zeigt die Menüansicht mit den zugehörigen Daten für den aktuellen Benutzer an.
      *
+     *
      * @param Request $request
      * @return Application|Factory|View
      */
     public function show(Request $request)
     {
         $raspUser = RaspUser::getActualRaspUser();
-        $user = User::find($raspUser->user_id);
+        $user = User::with('coffeeOrders')->find($raspUser->user_id);
 
-        if ($raspUser->user_not_found) {
-            return view('user_not_found')->with(compact('user'));
+        $viewName = $this->getViewName($raspUser);
+        if ($viewName !== 'menu') {
+            return view($viewName)->with(compact('user'));
         }
 
-        $user = User::find($raspUser->user_id);
         $rfidTag = RFID_Tag::where('user_id', $user->id)->first();
 
         $viewData = [
             'user' => $user,
-            'orders' => $user->coffeeOrders,
             'varieties' => CoffeeVariety::all(),
             'role' => $rfidTag->role,
             'rasp_user_entry' => $raspUser,
@@ -43,8 +43,6 @@ class MenuController extends Controller
 
         return view('menu')->with(compact('viewData'));
     }
-
-
 
     /**
      * Setzt den RaspUser mit der angegebenen Benutzer-ID zurück und leitet den Benutzer zur "home"-Route weiter.
@@ -84,21 +82,58 @@ class MenuController extends Controller
         return view('in_progress')->with(compact('viewData'));
     }
 
-
-
     /**
      * Setzt den RaspUser zurück und leitet den Benutzer zur "home"-Route weiter.
      *
-     * @return RedirectResponse
+     * @return Application|Factory|View
      */
     public function logout()
     {
         return $this->backToWelcome();
     }
 
+    /**
+     * Zeigt die Ansicht "user_not_found" an.
+     *
+     * @return Application|Factory|View
+     */
     public function userNotFound()
     {
         return view('user_not_found');
+    }
+
+    /**
+     * Zeigt die Ansicht "disruption" an.
+     *
+     * @return Application|Factory|View
+     */
+    public function needService()
+    {
+        return view('need_service');
+    }
+
+    /**#
+     * Gibt die Ansicht zurück, die abhängig von den Daten des RaspUsers angezeigt werden soll.
+     *
+     *
+     * @param $raspUser
+     * @return string
+     */
+    private function getViewName($raspUser)
+    {
+        if ($raspUser->user_not_found) {
+            return 'user_not_found';
+        }
+
+        if ($raspUser->need_service) {
+            return 'need_service';
+        }
+
+        if ($raspUser->disruption) {
+            return 'disruption';
+        }
+
+        return 'menu';
     }
 
 }
