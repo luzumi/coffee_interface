@@ -10,7 +10,7 @@
 
     <div class="progress-section">
         <div class="svg-container">
-{{--            <img class="waiting-icon" src="{{ asset('storage/media/waitingIcon.svg') }}" alt="Dein SVG-Bild"/>--}}
+            <img class="waiting-icon" src="{{ asset('storage/media/waitingIcon.svg') }}" alt="Dein SVG-Bild"/>
             <svg class="overlay-svg" viewBox="0 0 1530 1530" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <clipPath id="clip-path">
