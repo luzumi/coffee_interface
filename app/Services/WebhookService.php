@@ -210,7 +210,7 @@ class WebhookService
      */
     protected function getWebhookConfiguration(): ?array
     {
-        return config('webhook-client.configs.0');
+        return config('webhook-client.configs'[0]);
     }
 
     /**

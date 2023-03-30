@@ -136,4 +136,9 @@ class MenuController extends Controller
         return 'menu';
     }
 
+
+    public function test()
+    {
+        return view('test');
+    }
 }

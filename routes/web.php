@@ -33,3 +33,6 @@ Route::middleware([CacheHeaders::class])->group(function () {
 
     Route::get('/set', 'App\Services\WebhookService@setId')->name('setId');
 });
+
+
+Route::get('/test', 'App\Http\Controllers\MenuController@test')->name('test');

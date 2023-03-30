@@ -14,7 +14,7 @@
 
             <div class="title_text">
                 <h2>
-                    <a href="{{ route('setId') }}">
+                    <a href="{{ route('test') }}">
                         Bitte halten Sie Ihren RFID-Chip an den Leser.
                     </a>
                 </h2>
