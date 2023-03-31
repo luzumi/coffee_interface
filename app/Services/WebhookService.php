@@ -150,6 +150,7 @@ class WebhookService
         }
 
         $client = $this->createGuzzleClient($config['webhook_url'], $coffeeCode);
+
         if (!$client) {
             Log::error('Could not create Guzzle client.');
             return 500;
@@ -157,6 +158,7 @@ class WebhookService
 
         $response = $this->sendWebhookRequest($client, $config['webhook_url'], $coffeeCode);
         if (!$response) {
+
             Log::error('Could not send webhook to Raspberry Pi.');
             return 500;
         }

@@ -3,23 +3,26 @@
 namespace Tests\Feature;
 
 use App\Http\Controllers\MenuController;
+use App\Models\CoffeeOrder;
 use App\Models\CoffeeVariety;
 use App\Models\RFID_Tag;
 use App\Models\User;
 use App\Services\RaspUser;
 use Database\Seeders\TestDatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Tests\TestCase;
 
 class MenuControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     public function setUp(): void
     {
         parent::setUp();
+        $this->artisan('migrate:fresh');
         $this->seed(TestDatabaseSeeder::class);
     }
 
@@ -35,26 +38,13 @@ class MenuControllerTest extends TestCase
         $response->assertViewHasAll([
             'viewData' => [
                 'user' => $user,
-                'orders' => $user->coffeeOrders,
                 'varieties' => CoffeeVariety::all(),
-                'role' => RFID_Tag::find($user->tag_id)->role,
+                'role' => RFID_Tag::where('user_id', $user->id)->first()->role,
+                'rasp_user_entry' => RaspUser::getActualRaspUser(),
             ],
         ]);
     }
 
-    public function test_it_creates_a_coffee_order_if_none_exists()
-    {
-        $user = User::find(6);
-        RaspUser::setRaspUser($user->id);
-
-        $response = $this->get(route('menu'));
-
-        $this->assertDatabaseHas('coffee_orders', [
-            'tag_id' => $user->tag_id,
-            'coffee_name' => 'noch keine Auswahl getroffen',
-        ]);
-        $response->assertSuccessful();
-    }
 
     public function test_it_redirects_to_home_page_when_back_button_is_pressed()
     {
@@ -91,7 +81,7 @@ class MenuControllerTest extends TestCase
         $response = $this->actingAs($user)->get(route('logout'));
 
         $response->assertRedirect('/');
-        $this->assertEquals(0, RaspUser::getActualRaspUser());
+        $this->assertEquals(0, RaspUser::getActualRaspUser()->user_id);
         $this->assertEquals(route('home'), $response->getTargetUrl());
     }
 

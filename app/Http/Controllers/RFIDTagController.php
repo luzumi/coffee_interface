@@ -13,12 +13,12 @@ class RFIDTagController extends Controller
     /**
      * Gibt das RFID_tag des aktuellen Raspberry Pi-Benutzers zurück.
      *
-     * @return RFID_Tag|RFID_Tag|_IH_RFID_Tag_C|null
      */
     public function getTag()
     {
-        $id = RaspUser::getActualRaspUser();
+        $raspUser = RaspUser::getActualRaspUser();
+        $userId = $raspUser->user_id;
 
-        return RFID_Tag::find($id);
+        return RFID_Tag::find($userId);
     }
 }

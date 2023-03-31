@@ -24,7 +24,6 @@ class User extends Authenticatable
         'username',
         'firstname',
         'lastname',
-        'tag_id',
         'credits',
         'active',
         'remarks',
@@ -54,7 +53,7 @@ class User extends Authenticatable
      */
     public function rfidTag(): HasMany
     {
-        return $this->hasMany(RFID_Tag::class, 'id');
+        return $this->hasMany(RFID_Tag::class, 'user_id');
     }
 
     /**

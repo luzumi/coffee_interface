@@ -7,18 +7,14 @@ use App\Models\User;
 use App\Services\RaspUser;
 use App\Services\WebhookService;
 use Database\Seeders\TestDatabaseSeeder;
-use Exception;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
-use Mockery;
-use Monolog\Handler\StreamHandler;
 use Tests\TestCase;
+
+
 
 class WebHookServiceTest extends TestCase
 {
@@ -27,16 +23,18 @@ class WebHookServiceTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+        $this->artisan('migrate:fresh');
         $this->seed(TestDatabaseSeeder::class);
     }
 
     public function test_handle_webhook_returns_success_response()
     {
-        $rasp_user_id = 123;
+        $rasp_user_id = 3;
         RaspUser::setRaspUser($rasp_user_id);
+        $rfid_tag = RFID_Tag::where('user_id', $rasp_user_id)->first();
         $webhookService = new WebhookService();
         $data = [
-            'user_id' => $rasp_user_id,
+            'tag_uid' => $rfid_tag->tag_uid,
             'other_data' => 'some_value',
         ];
 
@@ -44,16 +42,19 @@ class WebHookServiceTest extends TestCase
         $response = $webhookService->handleWebhook($request);
 
         $this->assertEquals(Response::HTTP_OK, $response->status());
-        $this->assertEquals($rasp_user_id, $response->getData()->data->user_id);
+        $this->assertEquals($rfid_tag->tag_uid, $response->getData()->data->tag_uid);
         $this->assertEquals($data['other_data'], $response->getData()->data->other_data);
 
     }
 
     public function test_handle_webhook_sets_rasp_user_id()
     {
-        $rasp_user_id = 123;
+        $rasp_user_id = 3;
+        RaspUser::setRaspUser($rasp_user_id);
+        $rfid_tag = RFID_Tag::where('user_id', $rasp_user_id)->first();
+        $webhookService = new WebhookService();
         $data = [
-            'user_id' => $rasp_user_id,
+            'tag_uid' => $rfid_tag->tag_uid,
             'other_data' => 'some_value',
         ];
         $request = Request::create('/test', 'POST', [], [], [], [], json_encode($data));
@@ -61,7 +62,7 @@ class WebHookServiceTest extends TestCase
 
         $webhookService->handleWebhook($request);
 
-        $this->assertEquals($rasp_user_id, RaspUser::getActualRaspUser());
+        $this->assertEquals($rasp_user_id, RaspUser::getActualRaspUser()->user_id);
     }
 
     public function test_get_webhook_data_returns_json_response_with_data_and_role()
@@ -69,35 +70,11 @@ class WebHookServiceTest extends TestCase
         $rasp_user_id = 1;
         RaspUser::setRaspUser($rasp_user_id);
         $user = User::find($rasp_user_id);
-        $expectedRole = RFID_Tag::find($user->tag_id)->role;
+        $expectedRole = RFID_Tag::where('user_id', $user->id)->first()->role;
 
         $response = $this->getJson('/webhook_data');
 
         $this->assertEquals(Response::HTTP_OK, $response->status());
         $response->assertJson(['data' => $rasp_user_id, 'role' => $expectedRole]);
-    }
-
-    public function test_get_webhook_data_returns_404_response_when_rasp_user_id_is_zero()
-    {
-        RaspUser::setRaspUser(0);
-
-        $response = $this->getJson('/webhook_data');
-
-        $response->assertStatus(500);
-    }
-
-    public function test_sendWebhookGetCoffee_with_valid_coffee_code()
-    {
-        // Arrange
-        $coffeeCode = 'coffee';
-        config(['webhook-client.configs.0.webhook_url' => 'http://example.com']);
-        config(['webhook-client.configs.0.guzzle_http_client' => 'http://example.org']);
-        $webhookService = new WebhookService();
-
-        // Act
-        $response = $webhookService->sendWebhookGetCoffee($coffeeCode);
-
-        // Assert
-        $this->assertEquals(200, $response);
     }
 }

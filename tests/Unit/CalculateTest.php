@@ -18,6 +18,7 @@ class CalculateTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+        $this->artisan('migrate:fresh');
         $this->seed(TestDatabaseSeeder::class);
     }
 
@@ -26,10 +27,10 @@ class CalculateTest extends TestCase
         $tag = RFID_Tag::with('user')->where('role', 'user')->first();
 
         $credits = $tag->user->credits;
-        $coffee_name = 'Espresso';
-        $price = CoffeeVariety::where('coffee_name', $coffee_name)->first()->credit_cost;
+        $coffee_id = 3;
+        $price = CoffeeVariety::find($coffee_id)->credit_cost;
 
-        Calculate::coffeeOrder($coffee_name, $tag->user->id);
+        Calculate::coffeeOrder($coffee_id, $tag->user->id);
 
         $tag->refresh();
         $this->assertEquals($credits - $price, $tag->user->credits);
@@ -40,9 +41,9 @@ class CalculateTest extends TestCase
         $tag = RFID_Tag::with('user')->where('role', 'vip')->first();
 
         $credits = $tag->user->credits;
-        $coffee_name = 'Espresso';
+        $coffee_id = 3;
 
-        Calculate::coffeeOrder($coffee_name, $tag->user->id);
+        Calculate::coffeeOrder($coffee_id, $tag->user->id);
 
         $tag->refresh();
         $this->assertEquals($credits - 0, $tag->user->credits);
@@ -53,9 +54,9 @@ class CalculateTest extends TestCase
         $tag = RFID_Tag::with('user')->where('role', 'maintenance')->first();
 
         $credits = $tag->user->credits;
-        $coffee_name = 'Espresso';
+        $coffee_id = 3;
 
-        Calculate::coffeeOrder($coffee_name, $tag->user->id);
+        Calculate::coffeeOrder($coffee_id, $tag->user->id);
 
         $tag->refresh();
         $this->assertEquals($credits - 0, $tag->user->credits);

@@ -17,26 +17,27 @@ class RaspUserTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+        $this->artisan('migrate:fresh');
         $this->seed(TestDatabaseSeeder::class);
     }
 
     public function test_it_sets_and_gets_rasp_user_id()
     {
         // Arrange
-        $user_id = 123;
+        $user_id = 2;
 
         // Act
         RaspUser::setRaspUser($user_id);
         $result = RaspUser::getActualRaspUser();
 
         // Assert
-        $this->assertEquals($user_id, $result);
+        $this->assertEquals($user_id, $result->user_id);
     }
 
     public function test_it_resets_rasp_user_id()
     {
         // Arrange
-        $user_id = 123;
+        $user_id = 2;
         RaspUser::setRaspUser($user_id);
 
         // Act
@@ -44,7 +45,7 @@ class RaspUserTest extends TestCase
         $result = RaspUser::getActualRaspUser();
 
         // Assert
-        $this->assertEquals(0, $result);
+        $this->assertEquals(0, $result->user_id);
     }
 
     public function test_it_returns_zero_for_rasp_user_id_if_not_set()
@@ -53,7 +54,7 @@ class RaspUserTest extends TestCase
         $result = RaspUser::getActualRaspUser();
 
         // Assert
-        $this->assertEquals(0, $result);
+        $this->assertEquals(0, $result->user_id);
     }
 
     public function test_it_sets_rasp_user_id_to_zero_on_reset()

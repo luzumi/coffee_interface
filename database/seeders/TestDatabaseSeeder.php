@@ -19,23 +19,19 @@ class TestDatabaseSeeder extends Seeder
     {
         // Seed RFIDService tags
         $rfidTags = [
-            ['tag_uid' => '54-121-106-124-89', 'role' => 'vip', 'tag_active' => true],
-            ['tag_uid' => '89-54-121-106-124', 'role' => 'maintenance', 'tag_active' => true],
-            ['tag_uid' => '124-89-54-121-106', 'role' => 'user', 'tag_active' => true],
-            ['tag_uid' => '106-124-89-54-121', 'role' => 'user', 'tag_active' => true],
-            ['tag_uid' => '121-106-124-89-54', 'role' => 'user', 'tag_active' => true],
-            ['tag_uid' => '54-121-106-124-89', 'role' => 'user', 'tag_active' => true]
+            ['tag_uid' => '182-232-225-89-230', 'role' => 'vip', 'tag_active' => true],
+            ['tag_uid' => '214-33-156-27-112', 'role' => 'maintenance', 'tag_active' => true],
+            ['tag_uid' => '19-89-65-33-42', 'role' => 'user', 'tag_active' => true],
+            ['tag_uid' => '30-92-208-131-17', 'role' => 'user', 'tag_active' => true],
+            ['tag_uid' => '16-215-115-162-22', 'role' => 'user', 'tag_active' => true],
+            ['tag_uid' => '136-4-117-47-214', 'role' => 'user', 'tag_active' => true]
         ];
-        foreach ($rfidTags as $rfidTag) {
-            RFID_Tag::create($rfidTag);
-        }
 
         // Seed users
         $users = [
             ['username' => 'vip_user',
                 'firstname' => 'VIP',
                 'lastname' => 'PRO',
-                'tag_id' => '1',
                 'credits' => '0',
                 'active' => true,
                 'remarks' => '',
@@ -43,7 +39,6 @@ class TestDatabaseSeeder extends Seeder
             ['username' => 'MAINTENANCE_user',
                 'firstname' => 'MAINTENANCE',
                 'lastname' => 'MAINTENANCE_PRO',
-                'tag_id' => '2',
                 'credits' => '0',
                 'active' => true,
                 'remarks' => '',
@@ -51,7 +46,6 @@ class TestDatabaseSeeder extends Seeder
             ['username' => 'user-1000',
                 'firstname' => 'user',
                 'lastname' => '1000',
-                'tag_id' => '3',
                 'credits' => '1000',
                 'active' => true,
                 'remarks' => '',
@@ -59,7 +53,6 @@ class TestDatabaseSeeder extends Seeder
             ['username' => 'user-55',
                 'firstname' => 'user',
                 'lastname' => '55',
-                'tag_id' => '4',
                 'credits' => '55',
                 'active' => true,
                 'remarks' => '',
@@ -67,7 +60,6 @@ class TestDatabaseSeeder extends Seeder
             ['username' => 'user-0',
                 'firstname' => 'user',
                 'lastname' => '0',
-                'tag_id' => '5',
                 'credits' => '0',
                 'active' => true,
                 'remarks' => '',
@@ -75,14 +67,18 @@ class TestDatabaseSeeder extends Seeder
             ['username' => 'user-no-order',
                 'firstname' => 'user',
                 'lastname' => '0',
-                'tag_id' => '6',
                 'credits' => '0',
                 'active' => true,
                 'remarks' => '',
             ]
         ];
-        foreach ($users as $user) {
-            User::create($user);
+
+        // Create users and associate RFIDService tags with users
+        foreach ($users as $index => $user) {
+            $createdUser = User::create($user);
+            $rfidTag = $rfidTags[$index];
+            $rfidTag['user_id'] = $createdUser->id;
+            RFID_Tag::create($rfidTag);
         }
 
         // Seed coffee varieties
@@ -90,32 +86,38 @@ class TestDatabaseSeeder extends Seeder
             ['coffee_name' => 'Coffee',
                 'credit_cost' => '50',
                 'coffee_image' => 'strong.png',
-                'coffee_description' => 'A strong black coffee.'
+                'coffee_description' => 'A strong black coffee.',
+                'coffee_code' => 'FA:09'
             ],
             ['coffee_name' => 'Coffee Double',
                 'credit_cost' => '90',
                 'coffee_image' => 'strong.png',
-                'coffee_description' => 'A strong black coffee.'
+                'coffee_description' => 'A strong black coffee.',
+                'coffee_code' => 'FA:0A'
             ],
             ['coffee_name' => 'Espresso',
                 'credit_cost' => '60',
                 'coffee_image' => 'light.png',
-                'coffee_description' => 'A short black coffee.'
+                'coffee_description' => 'A short black coffee.',
+                'coffee_code' => 'FA:07'
             ],
             ['coffee_name' => 'Espresso Double',
                 'credit_cost' => '100',
                 'coffee_image' => 'normal.png',
-                'coffee_description' => 'A normal black coffee.'
+                'coffee_description' => 'A normal black coffee.',
+                'coffee_code' => 'FA:08'
             ],
             ['coffee_name' => 'Water',
                 'credit_cost' => '0',
                 'coffee_image' => 'water.png',
-                'coffee_description' => 'Gratis Water.'
+                'coffee_description' => 'Gratis Water.',
+                'coffee_code' => 'FA:06'
             ],
             ['coffee_name' => 'noch keine Auswahl getroffen',
                 'credit_cost' => '0',
                 'coffee_image' => 'water.png',
-                'coffee_description' => 'erster Eintrag eines Users'
+                'coffee_description' => 'erster Eintrag eines Users',
+                'coffee_code' => '6'
             ],
         ];
         foreach ($coffeeVarieties as $coffeeVariety) {
@@ -143,7 +145,13 @@ class TestDatabaseSeeder extends Seeder
             CoffeeOrder::create($coffeeOrder);
         }
 
-        DB::insert('insert into rasp_users (id) values (?)', [0]);
-        RaspUser::setRaspUser(0);
+        DB::table('rasp_users')->insert([
+            'user_id' => 0,
+            'need_service' => false,
+            'user_not_found' => false,
+            'disruption' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

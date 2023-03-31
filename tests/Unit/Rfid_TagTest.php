@@ -18,6 +18,7 @@ class Rfid_TagTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->artisan('migrate:fresh');
         $this->seed('TestDatabaseSeeder');
     }
 
@@ -40,7 +41,17 @@ class Rfid_TagTest extends TestCase
 
     public function test_rfid_tag_can_be_created()
     {
+        $user = User::create([
+            'username' => 'new_user',
+            'firstname' => 'Test',
+            'lastname' => 'Unit',
+            'credits' => 0,
+            'active' => true,
+            'remarks' => '',
+        ]);
+
         $data = [
+            'user_id' => $user->id,
             'tag_uid' => '1234567890',
             'role' => 'customer',
             'tag_active' => true,
@@ -48,8 +59,14 @@ class Rfid_TagTest extends TestCase
 
         $rfidTag = RFID_Tag::create($data);
 
+        $this->assertDatabaseHas('users', [
+            'username' => 'new_user',
+            'firstname' => 'Test',
+            'lastname' => 'Unit',
+        ]);
         $this->assertDatabaseHas('rfid_tags', $data);
     }
+
 
     public function test_rfid_tag_cannot_be_created_without_required_fields()
     {

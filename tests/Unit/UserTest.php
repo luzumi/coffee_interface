@@ -18,21 +18,26 @@ class UserTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->artisan('migrate:fresh');
         $this->seed('TestDatabaseSeeder');
     }
 
     public function test_user_has_rfid_tag()
     {
-        $user = User::find(1);
-        $rfidTag = RFID_Tag::find($user->tag_id);
+        $user = User::first();
+        $rfidTags = $user->rfidTag;
 
-        $this->assertInstanceOf(RFID_Tag::class, $user->rfidTag);
-        $this->assertEquals($rfidTag->id, $user->rfidTag->id);
+        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $rfidTags);
+
+        foreach ($rfidTags as $rfidTag) {
+            $this->assertInstanceOf(RFID_Tag::class, $rfidTag);
+            $this->assertEquals($user->id, $rfidTag->user_id);
+        }
     }
 
     public function test_user_has_coffee_orders()
     {
-        $user = User::find(1);
+        $user = User::first();
 
         $this->assertInstanceOf(Collection::class, $user->coffeeOrders);
         $this->assertInstanceOf(CoffeeOrder::class, $user->coffeeOrders->first());
@@ -44,7 +49,6 @@ class UserTest extends TestCase
             'username' => 'new_user',
             'firstname' => 'John',
             'lastname' => 'Doe',
-            'tag_id' => 2,
             'credits' => 0,
             'active' => true,
             'remarks' => '',
@@ -53,7 +57,19 @@ class UserTest extends TestCase
         $user = User::create($data);
 
         $this->assertDatabaseHas('users', $data);
+
+        $tagData = [
+            'user_id' => $user->id,
+            'tag_uid' => '1234567890',
+            'role' => 'user',
+            'tag_active' => true,
+        ];
+
+        $rfidTag = RFID_Tag::create($tagData);
+
+        $this->assertDatabaseHas('rfid_tags', $tagData);
     }
+
 
     public function test_user_cannot_be_created_without_required_fields()
     {
@@ -67,7 +83,7 @@ class UserTest extends TestCase
 
     public function test_user_can_be_updated()
     {
-        $user = User::find(1);
+        $user = User::first();
         $newData = [
             'username' => 'new_username',
         ];
@@ -79,7 +95,7 @@ class UserTest extends TestCase
 
     public function test_user_can_be_deleted()
     {
-        $user = User::find(1);
+        $user = User::first();
 
         // Lösche zuerst alle CoffeeOrders, die mit dem User verknüpft sind
         foreach ($user->coffeeOrders as $coffeeOrder) {
