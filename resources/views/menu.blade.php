@@ -46,34 +46,46 @@
             </div>
 
             @foreach($viewData['varieties'] as $key => $variety)
-                @if($variety->coffee_name == 'noch keine Auswahl getroffen') @continue @endif
+                @if($variety->coffee_name == 'noch keine Auswahl getroffen')
+                    @continue
+                @endif
 
                 <div class="menu-varieties-item menu-varieties-item-{{$key}}">
-
-                @if( $viewData['role'] != 'maintenance' &&
-                            $viewData['role'] != 'vip' &&
-                            $viewData['user']->credits < $variety->credit_cost )
-                        <form  class="order-form">
+                    {{-- Check Guthaben für normale User --}}
+                    @if( $viewData['role'] != 'maintenance' &&
+                                $viewData['role'] != 'vip' &&
+                                $viewData['user']->credits < $variety->credit_cost )
+                        <form class="order-form">
                             @csrf
-                            <button type="button" class="btn menu-varieties-item-button menu-varieties-item-button-{{ $key }}"></button>
+                            <button type="button"
+                                    class="btn menu-varieties-item-button menu-varieties-item-button-{{ $key }}"></button>
                         </form>
 
                         <div class="menu-varieties-item menu-varieties-item-{{$key}} ">
                             <h5>Bitte Guthaben aufladen.</h5>
                         </div>
 
-                @else
-                    <form method="POST" action="{{ route('new_order', ['type' => $variety->id]) }}"
-                          class="order-form">
-                        @csrf
-                        <button type="submit"
-                                class="btn menu-varieties-item-button menu-varieties-item-button-{{$key}}"></button>
-                    </form>
-                @endif
+                    @else
+                        <form method="POST" action="{{ route('new_order', ['type' => $variety->id]) }}" class="order-form">
+                            @csrf
+                            <div class="menu-varieties-item menu-varieties-item-{{$key}}">
+                                <div class="button-container">
+                                    <button type="submit" class="btn menu-varieties-item-button menu-varieties-item-button-{{$key}}"></button>
+                                    <button type="submit" class="text-button">{{ $variety->coffee_name }}</button>
+                                </div>
+                            </div>
+                        </form>
+                    @endif
 
-                    <div class="menu-varieties-item-name menu-varieties-item-name-{{$key}}">
-                        <h3>{{ $variety->coffee_name }}</h3>
-                    </div>
+{{--                    <form method="POST" action="{{ route('new_order', ['type' => $variety->id]) }}"--}}
+{{--                          class="order-form" id="order-form-{{$key}}">--}}
+{{--                        @csrf--}}
+{{--                        <div class="menu-varieties-item-name menu-varieties-item-name-{{$key}}">--}}
+{{--                            <h3 onclick="submitForm(event, {{$key}});" style="cursor:pointer;">--}}
+{{--                                {{ $variety->coffee_name }}--}}
+{{--                            </h3>--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
 
                     <div class="menu-varieties-item-price menu-varieties-item-price-{{$key}}">
                         @if($viewData['role'] == 'maintenance' || $viewData['role'] == 'vip')
@@ -111,7 +123,6 @@
             }
         }, 60000);
     </script>
-
 @endsection
 
 
