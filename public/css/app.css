@@ -66,8 +66,8 @@ html, body {
 
 .itb {
     position: absolute;
-    top: 35rem;
-    left: 61.3rem;
+    top: 33.5rem;
+    left: 51.8rem;
     z-index: 1000;
     width: 4%;
     height: 4%;
@@ -75,23 +75,12 @@ html, body {
 
 .uni-logo {
     position: absolute;
-    top: 34.5rem;
-    left: 55.8rem;
+    top: 33rem;
+    left: 54.8rem;
     z-index: 1000;
     width: 7%;
     height: 7%;
 }
-
-/*.content {*/
-/*    position: relative;*/
-/*    width: 85%;*/
-/*    height: 82%;*/
-/*    background: linear-gradient(to bottom right, var(--bg-color-1), var(--bg-color-2));*/
-/*    padding: 2rem;*/
-/*    margin: auto;*/
-/*    border-radius: 3rem 3rem 3rem 3rem;*/
-/*}*/
-
 
 .content {
     position: relative;
@@ -554,6 +543,23 @@ html, body {
     justify-self: center;
 }
 
+.button-container {
+    display: flex;
+    align-items: center;
+}
+
+.text-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: 5px;
+    font: inherit;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+    z-index: 2;
+}
 
 /* Button-Styling */
 .btn {
@@ -696,11 +702,20 @@ html, body {
     font-family: var(--ff-primary)
 }
 
+.overlay {
+    position: fixed;
+    /*top: 1rem;*/
+    /*left: 1rem;*/
+    width: 85%;
+    height: 65%;
+    background-color: transparent;
+    z-index: 9999;
+}
+
 .in-progress {
     position: absolute;
-    top: 30%;
-    left: 40%;
-    background-color: #343030;
+    top: 3rem;
+    left: 10rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -710,15 +725,15 @@ html, body {
 .progress-section {
     position: relative;
     display: inline-block;
-    width: 200px;
-    height: 200px;
+    width: 400px;
+    height: 400px;
 }
 
 .waiting-icon {
     position: absolute;
     top: 0.1rem;
-    left: 0.44rem;
-    width: 110%;
+    left: 1.44rem;
+    width: 100%;
     height: 100%;
 }
 
@@ -731,12 +746,17 @@ html, body {
 }
 
 .overlay-svg {
+    position: absolute;
+    left: -1.5rem;
+    top: 1.15rem;
     width: 100%;
     height: 100%;
+
+
 }
 
 .green-path {
-    fill: var(--bg-color-2);
+    fill: var(--bg-color-1);
 }
 
 .overlay {
