@@ -67,7 +67,8 @@
                           class="order-form">
                         @csrf
                         <button type="submit"
-                                class="btn menu-varieties-item-button menu-varieties-item-button-{{$key}}"></button>
+                                class="btn menu-varieties-item-button menu-varieties-item-button-{{$key}}">
+                        </button>
                     </form>
                 @endif
 

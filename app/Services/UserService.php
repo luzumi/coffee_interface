@@ -51,7 +51,7 @@ class UserService
      * @param $integer int Wert der die Anzahl der User in der Datenbank angibt
      * @return string NameToken, zur Identifizierung des neuen Users
      */
-    private static function getNameToken(int $integer): string
+    public static function getNameToken(int $integer): string
     {
         $result = "";
         while ($integer > 0) {

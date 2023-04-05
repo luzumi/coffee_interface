@@ -113,6 +113,16 @@ class MenuController extends Controller
         return view('need_service');
     }
 
+    /**
+     * Zeigt die Ansicht "disruption" an.
+     *
+     * @return Application|Factory|View
+     */
+    public function disruption()
+    {
+        return view('disruption');
+    }
+
     /**#
      * Gibt die Ansicht zurück, die abhängig von den Daten des RaspUsers angezeigt werden soll.
      *

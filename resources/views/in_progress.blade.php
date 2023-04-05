@@ -27,13 +27,13 @@
     <script>
         setTimeout(() => {
             window.location.href = '/';
-        }, 8000);
+        },15000);
     </script>
 
     <script>
         window.onload = function() {
             const clipRect = document.getElementById('clip-rect');
-            const duration = 2000; // Dauer der Animation in Millisekunden
+            const duration = 5000; // Dauer der Animation in Millisekunden
 
             function updateHeight() {
                 const elapsedTime = Date.now() - startTime;

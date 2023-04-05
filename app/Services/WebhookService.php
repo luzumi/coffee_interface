@@ -237,7 +237,7 @@ class WebhookService
     {
         // Setzen der aktuellen Benutzer-ID auf 0 oder 6, abhängig von der aktuellen Benutzer-ID
         // (benötigt für den klickbaren Buttons auf der Startseite)
-        $id = RaspUser::getActualRaspUser()->user_id == 1 ? 0 : 1;
+        $id = RaspUser::getActualRaspUser()->user_id == 3 ? 0 : 3;
         Log::info('Set ID to ' . $id);
         RaspUser::setRaspUser($id);
 
