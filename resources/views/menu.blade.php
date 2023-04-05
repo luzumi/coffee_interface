@@ -77,16 +77,6 @@
                         </form>
                     @endif
 
-{{--                    <form method="POST" action="{{ route('new_order', ['type' => $variety->id]) }}"--}}
-{{--                          class="order-form" id="order-form-{{$key}}">--}}
-{{--                        @csrf--}}
-{{--                        <div class="menu-varieties-item-name menu-varieties-item-name-{{$key}}">--}}
-{{--                            <h3 onclick="submitForm(event, {{$key}});" style="cursor:pointer;">--}}
-{{--                                {{ $variety->coffee_name }}--}}
-{{--                            </h3>--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
-
                     <div class="menu-varieties-item-price menu-varieties-item-price-{{$key}}">
                         @if($viewData['role'] == 'maintenance' || $viewData['role'] == 'vip')
                             <p>0 Credits</p>
