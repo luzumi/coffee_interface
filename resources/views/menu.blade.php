@@ -21,16 +21,16 @@
                 <p>{{ $viewData['user']->coffeeOrders->count() }}</p>
             </div>
             <div class="menu-statistics-item">
-                <h3>Letzte Bestellung:&nbsp;</h3>
+                <h3>Letzte Bestellung&nbsp;</h3>
                 <p>{{ $viewData['user']->coffeeOrders->last() ? $viewData['user']->coffeeOrders->last()->updated_at->format('d.m.Y - H:i') : '' }}</p>
             </div>
             <div class="menu-statistics-item">
-                <h3>Letzter Auswahl</h3>
+                <h3>Letzte Auswahl</h3>
                 <p>{{ $viewData['user']->coffeeOrders->last() ? $viewData['user']->coffeeOrders->last()->coffee_name : 'noch keine Auswahl getroffen' }}</p>
             </div>
 
             <div class="menu-statistics-item">
-                <h3>Role</h3>
+                <h3>Benutzergruppe</h3>
                 <p> {{ $viewData['role'] }}</p>
             </div>
             <div class="menu-statistics-item">
@@ -41,8 +41,8 @@
 
         <div class="menu-varieties">
             <div class="menu-varieties-header">
-                <p class="menu-varieties-header-2">Getränk</p>
-                <p class="menu-varieties-header-3">Kosten</p>
+{{--                <p class="menu-varieties-header-2">Getränk</p>--}}
+                <p class="menu-varieties-header-3">Credits</p>
             </div>
 
             @foreach($viewData['varieties'] as $key => $variety)
@@ -68,11 +68,9 @@
                     @else
                         <form method="POST" action="{{ route('new_order', ['type' => $variety->id]) }}" class="order-form">
                             @csrf
-                            <div class="menu-varieties-item menu-varieties-item-{{$key}}">
-                                <div class="button-container">
-                                    <button type="submit" class="btn menu-varieties-item-button menu-varieties-item-button-{{$key}}"></button>
-                                    <button type="submit" class="text-button">{{ $variety->coffee_name }}</button>
-                                </div>
+                            <div class="button-container">
+                                <button type="submit" class="btn menu-varieties-item-button menu-varieties-item-button-{{$key}}"></button>
+                                <button type="submit" class="text-button">{{ $variety->coffee_name }}</button>
                             </div>
                         </form>
                     @endif
@@ -81,11 +79,12 @@
                         @if($viewData['role'] == 'maintenance' || $viewData['role'] == 'vip')
                             <p>0 Credits</p>
                         @else
-                            <p>{{ $variety->credit_cost }} Credits</p>
+                            <p>{{ $variety->credit_cost }}</p>
                         @endif
                     </div>
                 </div>
             @endforeach
+
         </div>
 
         <div class="menu-logout">

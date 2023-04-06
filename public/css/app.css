@@ -16,6 +16,8 @@
     --text-color-2: #300e06;
     --text-color-3: #cb8840;
     --text-color-3-opactity-75: rgba(203, 136, 64, 0.75);
+    --bg-color-3-opactity-25: rgba(203, 136, 64, 0.25);
+    --bg-color-4-opactity-25: rgb(222, 175, 141, 0.25);
 
     --hours: 10;
     --minutes: 10;
@@ -405,9 +407,9 @@ html, body {
 .grid_menu {
     display: grid;
     grid-template:
-        "logo logo title" 5rem
-        "user user menu" 20rem
-        "main main leaf" 5rem;
+        "logo logo title title" 5rem
+        "user menu menu menu" 20rem
+        "main main leaf leaf" 5rem;
     gap: 0 4rem;
 }
 
@@ -449,6 +451,8 @@ html, body {
 /*Varieties*/
 .menu-varieties {
     grid-area: menu;
+    background: linear-gradient(to top, var(--bg-color-4-opactity-25), var(--bg-color-3-opactity-25));
+    border-radius: 25px;
     display: grid;
     grid-template:
         "head1 head2 head3" 1fr
@@ -460,46 +464,39 @@ html, body {
 }
 
 .menu-varieties-header {
-    grid-area: head3;
+    grid-column: head3;
     display: flex;
-    flex-direction: row;
-    position: relative;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 2rem;
     padding: 0.1rem;
     border-radius: 0.25rem;
-    left: -3rem;
     top: 2rem;
-    color: var(--bg-color-2);
+    color: var(--bg-color-4);
     font-family: var(--ff-secondary);
-    width: 8rem;
+    width: 100%;
     height: 1.0rem;
     justify-self: right;
 }
 
-.menu-varieties-header-2, .menu-varieties-header-3 {
-    grid-area: head2;
-    background: linear-gradient(to top, var(--bg-color-3-opactity-75), var(--text-color-3-opactity-75));
-}
+/*.menu-varieties-header-2, .menu-varieties-header-3 {*/
+/*    grid-area: head2;*/
+/*    background: linear-gradient(to top, var(--bg-color-3-opactity-75), var(--text-color-3-opactity-75));*/
+/*}*/
 
-.menu-varieties-header-3 {
-    grid-area: head3;
-}
+/*.menu-varieties-header-3 {*/
+/*    grid-area: head3;*/
+/*}*/
 
 .menu-varieties-item {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0.7rem;
-    margin: 0.5rem 0.2rem;
+    padding: 0.3rem;
     border-radius: 0.25rem;
     background: linear-gradient(to right, var(--bg-color-1), var(--bg-color-2));
     color: var(--text-color-1);
     font-family: var(--ff-secondary);
     height: 1.5rem;
-    width: 12rem;
+    width: 93%;
 }
 
 .menu-varieties-item h5 {
@@ -535,7 +532,7 @@ html, body {
 .menu-varieties-item-name {
     grid-column: 1 / 2;
     grid-row: 2 / 3;
-    justify-self: center;
+    justify-self: flex-start;
 }
 
 .menu-varieties-item-price {
@@ -551,6 +548,8 @@ html, body {
 
 .text-button {
     background: none;
+    justify-content: left;
+    text-align: left;
     border: none;
     padding: 0 2rem ;
     margin-left: 5px;
