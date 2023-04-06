@@ -207,7 +207,7 @@ class WebhookService
         try {
             return $client->post($webhookUrl, [
                 'headers' => ['Content-Type' => 'application/json'],
-                'json' => ['coffee_code' => $coffeeCode],
+                'json' => ['action' => $coffeeCode],
             ]);
         } catch (GuzzleException $e) {
             Log::error('Could not send webhook to Raspberry Pi: ' . $e->getMessage());
