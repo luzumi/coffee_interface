@@ -32,6 +32,6 @@ Route::get('/user_not_found', 'App\Http\Controllers\MenuController@userNotFound'
 Route::get('/need_service', 'App\Http\Controllers\MenuController@needService')->name('need_service');
 Route::get('/disruption', 'App\Http\Controllers\MenuController@disruption')->name('disruption');
 
-Route::get('/set', 'App\Services\WebhookService@setId')->name('setId');
+//Route::get('/set', 'App\Services\WebhookService@setId')->name('setId');
 
-Route::get('/test', 'App\Http\Controllers\MenuController@test')->name('test');
+//Route::get('/test', 'App\Http\Controllers\MenuController@test')->name('test');

@@ -8,8 +8,8 @@
     --bg-color-2: #59341AFF;
     --bg-color-3: #9f6034;
     --bg-color-4: rgb(222, 175, 141);
-    --bg-color-5: rgba(94,79,70,75);
-    --bg-color-6: rgba(169,84,32,75);
+    --bg-color-5: rgba(94, 79, 70, 75);
+    --bg-color-6: rgba(169, 84, 32, 75);
     --bg-color-3-opactity-75: rgba(168, 112, 71, 0.75);
 
     --text-color-1: #F4AF66FF;
@@ -286,7 +286,7 @@ html, body {
     font-family: var(--ff-third);
 }
 
-.disruption{
+.disruption {
     width: 50%;
     font-family: var(--ff-third);
     font-size: xxx-large;
@@ -552,7 +552,7 @@ html, body {
     justify-content: left;
     text-align: left;
     border: none;
-    padding: 0 2rem ;
+    padding: 0 2rem;
     margin-left: 5px;
     font: inherit;
     cursor: pointer;

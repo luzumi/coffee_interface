@@ -19,7 +19,7 @@
                     {{-- Bitte halten Sie Ihren RFID-Chip an den Leser. --}}
                     {{-- </a> --}}
 
-                        Bitte halten Sie Ihren RFID-Chip an den Leser.
+                    Bitte halten Sie Ihren RFID-Chip an den Leser.
 
                 </h2>
                 <div class="clock-container">

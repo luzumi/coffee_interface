@@ -11,14 +11,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Gruppo&family=Unbounded:wght@200;400;600;800&display=swap"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Sono&display=swap" rel="stylesheet">
-{{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
+    {{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
     @yield('scripts')
 </head>
 <body class="body">
 
 <div class="border">
-    <img class="itb" src=" {{ asset('storage/media/ITB_Logo_blank_farbe.svg') }}" alt="Logo ITB" />
-    <img class="uni-logo" src=" {{ asset('storage/media/UHB_Logo_Web_RGB.svg') }}" alt="Logo Universität Bremen" />
+    <img class="itb" src=" {{ asset('storage/media/ITB_Logo_blank_farbe.svg') }}" alt="Logo ITB"/>
+    <img class="uni-logo" src=" {{ asset('storage/media/UHB_Logo_Web_RGB.svg') }}" alt="Logo Universität Bremen"/>
 
     <div class="content">
         @yield('content')

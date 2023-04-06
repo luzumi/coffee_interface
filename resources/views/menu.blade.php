@@ -41,7 +41,7 @@
 
         <div class="menu-varieties">
             <div class="menu-varieties-header">
-{{--                <p class="menu-varieties-header-2">Getränk</p>--}}
+                {{--                <p class="menu-varieties-header-2">Getränk</p>--}}
                 <p class="menu-varieties-header-3">Credits</p>
             </div>
 
@@ -66,10 +66,12 @@
                         </div>
 
                     @else
-                        <form method="POST" action="{{ route('new_order', ['type' => $variety->id]) }}" class="order-form">
+                        <form method="POST" action="{{ route('new_order', ['type' => $variety->id]) }}"
+                              class="order-form">
                             @csrf
                             <div class="button-container">
-                                <button type="submit" class="btn menu-varieties-item-button menu-varieties-item-button-{{$key}}"></button>
+                                <button type="submit"
+                                        class="btn menu-varieties-item-button menu-varieties-item-button-{{$key}}"></button>
                                 <button type="submit" class="text-button">{{ $variety->coffee_name }}</button>
                             </div>
                         </form>
