@@ -766,16 +766,6 @@ html, body {
 
 
 }
-
-.button-bg {
-    background-image: url('path/to/your/background-image.jpg');
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 100%;
-    filter: brightness(50%);
-}
-
 .help-menu-button:hover .button-bg {
     filter: brightness(70%);
 }
@@ -838,3 +828,6 @@ html, body {
     background-size: 100% 100%;
 }
 
+.help-text {
+    color: var(--text-color-3);
+}
