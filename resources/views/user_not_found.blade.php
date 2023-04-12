@@ -16,7 +16,10 @@
                 <div>
                     <h2> <a href="#">Diese Karte ist im System noch nicht erfasst.</a> </h2>
 
-                    <h3 class="user_not_found"> Bitte wenden Sie sich mit dem Code: <b> &nbsp;{{ substr($user->username, 9) }}&nbsp; </b> an den Administrator. </h3>
+                    <h3 class="user_not_found"> Bitte wenden Sie sich mit dem </h3>
+                    <h3 class="user_not_found"> Code: <b> &nbsp;{{ substr($user->username, 9) }}&nbsp; </b> </h3>
+                    <h3 class="user_not_found"> an den </h3>
+                    <h3 class="user_not_found"> Administrator. </h3>
                 </div>
                 <div class="clock-container">
                     <div class="clock" id="clock">

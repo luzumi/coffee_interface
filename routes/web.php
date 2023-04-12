@@ -18,6 +18,18 @@ Log::info('Route file called'); // Debug-Statement hinzugefügt
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+Route::get('/help', function () {
+    return view('help');
+})->name('help');
+
+Route::get('/help/rfid', function () {
+    return view('rfid');
+})->name('help_rfid');
+
+Route::get('/help/menu', function () {
+    return view('menu_help');
+})->name('help_menu');
+
 Route::get('/menu', 'App\Http\Controllers\MenuController@show')->name('menu');
 
 Route::post('/turn_on', 'App\Services\WebhookService@sendWebhookGetCoffee')->name('get_coffee');

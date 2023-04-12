@@ -19,10 +19,15 @@
 <div class="border">
     <img class="itb" src=" {{ asset('storage/media/ITB_Logo_blank_farbe.svg') }}" alt="Logo ITB"/>
     <img class="uni-logo" src=" {{ asset('storage/media/UHB_Logo_Web_RGB.svg') }}" alt="Logo Universität Bremen"/>
-
     <div class="content">
         @yield('content')
     </div>
+    <a href="{{ route('help') }}" class="btn btn-help ">
+        ?
+    </a>
+
+
+
 </div>
 
 </body>
