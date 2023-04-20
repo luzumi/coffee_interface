@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class MenuController extends Controller
 {
@@ -100,7 +101,7 @@ class MenuController extends Controller
      */
     public function userNotFound()
     {
-        if (RaspUser::getActualRaspUser()->user_id === 8) {
+        if (Str::startsWith(RaspUser::getActualRaspUser()->user_id, '8')) {
             return view('card-not-accepted');
         }
 
