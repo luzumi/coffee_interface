@@ -48,7 +48,7 @@ class MenuController extends Controller
     /**
      * Setzt den RaspUser mit der angegebenen Benutzer-ID zurück und leitet den Benutzer zur "home"-Route weiter.
      *
-     * @return Application|Factory|View
+     * @return Application
      */
     public function backToWelcome()
     {
@@ -86,7 +86,7 @@ class MenuController extends Controller
     /**
      * Setzt den RaspUser zurück und leitet den Benutzer zur "home"-Route weiter.
      *
-     * @return Application|Factory|View
+     * @return Application
      */
     public function logout()
     {
@@ -100,9 +100,17 @@ class MenuController extends Controller
      */
     public function userNotFound()
     {
+        if (RaspUser::getActualRaspUser()->user_id === 8) {
+            return view('card-not-accepted');
+        }
+
         return view('user_not_found');
     }
 
+    public function cardNotAccepted()
+    {
+        return view('card-not-accepted');
+    }
     /**
      * Zeigt die Ansicht "disruption" an.
      *

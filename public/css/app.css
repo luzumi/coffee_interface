@@ -619,7 +619,7 @@ html, body {
 .menu-logout-button {
     display: inline-flex;
     padding: 1.7rem 1.0rem;
-    align-item: center;
+    /*align-item: center;*/
 }
 
 .maintenance-mode {
@@ -829,5 +829,7 @@ html, body {
 }
 
 .help-text {
+    position: relative;
+    font-family: var(--ff-secondary);
     color: var(--text-color-3);
 }

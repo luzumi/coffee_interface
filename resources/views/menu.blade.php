@@ -11,7 +11,7 @@
             <h1>Get me Coffee</h1>
         </div>
         <div class="title_welcome">
-            <h2>Willkommen, <br>{{ $viewData['user']->username }}!</h2>
+            <h2>Willkommen, <br>{{ $viewData['user']->firstname??$viewData['user']->username }}!</h2>
         </div>
         <div class="bg_img1"></div>
 

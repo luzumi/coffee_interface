@@ -110,21 +110,17 @@ class WebhookService
      */
     private function createWebhookDataResponse($raspUser, string $rfidTagRole): JsonResponse
     {
-        Log::info('Webhook data outgoing: ', [
+        $responseText = [
             'data' => $raspUser->user_id,
             'disruption' => $raspUser->disruption,
             'user_not_found' => $raspUser->user_not_found,
             'need_service' => $raspUser->need_service,
             'role' => $rfidTagRole,
-        ]);
+        ];
 
-        return response()->json([
-            'data' => $raspUser->user_id,
-            'disruption' => $raspUser->disruption,
-            'user_not_found' => $raspUser->user_not_found,
-            'need_service' => $raspUser->need_service,
-            'role' => $rfidTagRole,
-        ]);
+        Log::info('Webhook data outgoing: ', $responseText);
+
+        return response()->json($responseText);
     }
 
 
