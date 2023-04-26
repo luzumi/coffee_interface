@@ -33,16 +33,16 @@
                 <h3>Benutzergruppe</h3>
                 <p> {{ $viewData['role'] }}</p>
             </div>
-            <div class="menu-statistics-item">
-                <h3>Guthaben</h3>
-                <p> {{ $viewData['user']->credits }} Credits</p>
-            </div>
+{{--            <div class="menu-statistics-item">--}}
+{{--                <h3>Guthaben</h3>--}}
+{{--                <p> {{ $viewData['user']->credits }} Credits</p>--}}
+{{--            </div>--}}
         </div>
 
         <div class="menu-varieties">
             <div class="menu-varieties-header">
                 {{--                <p class="menu-varieties-header-2">Getränk</p>--}}
-                <p class="menu-varieties-header-3">Guthaben:  {{ $viewData['user']->credits }} Credits</p>
+                <p class="menu-varieties-header-3"> Guthaben:  {{ $viewData['user']->credits }} Credits  </p>
             </div>
 
             @foreach($viewData['varieties'] as $key => $variety)
