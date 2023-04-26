@@ -17,7 +17,12 @@
             <div class="button-bg-menu-help"><p>MENU</p></div>
         </a>
     </div>
+    <div class="menu-logout">
+        <form method="GET" action="{{ route('home') }}">
 
+            <button type="submit" class="btn menu-logout-button">Zurück</button>
+        </form>
+    </div>
 @endsection
 
 

@@ -41,7 +41,7 @@
     <script>
         setTimeout(function () {
             window.location.href = "{{ route('logout') }}";
-        }, 12000);
+        }, 8000);
     </script>
     <script src="{{ asset('js/clock.js') }}"></script>
 @endsection

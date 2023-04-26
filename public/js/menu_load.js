@@ -35,4 +35,4 @@ function load() {
     xhr.send();
 }
 
-setInterval(load, 1000);
+setInterval(load, 333);

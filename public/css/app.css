@@ -670,8 +670,8 @@ html, body {
 
 .coffee-cup-animation {
     animation-name: fill-coffee;
-    animation-duration: 5s;
-    animation-delay: 2s; /* Verzögerung von 2 Sekunden */
+    animation-duration: 40s;
+    animation-delay: 19s; /* Verzögerung von n Sekunden */
     animation-fill-mode: backwards;
 }
 

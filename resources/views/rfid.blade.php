@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="overlay"></div>
+
 
     <div class="title_app">
         <h1>Get me Coffee - </h1>
@@ -22,4 +22,10 @@
             </ol>
         </li>
     </ol>
+    <div class="menu-logout">
+        <form method="GET" action="{{ route('help') }}">
+
+            <button type="submit" class="btn menu-logout-button">Zurück</button>
+        </form>
+    </div>
 @endsection

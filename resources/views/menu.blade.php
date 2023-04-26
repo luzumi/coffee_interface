@@ -42,7 +42,7 @@
         <div class="menu-varieties">
             <div class="menu-varieties-header">
                 {{--                <p class="menu-varieties-header-2">Getränk</p>--}}
-                <p class="menu-varieties-header-3">Credits</p>
+                <p class="menu-varieties-header-3">Guthaben:  {{ $viewData['user']->credits }} Credits</p>
             </div>
 
             @foreach($viewData['varieties'] as $key => $variety)
@@ -112,7 +112,7 @@
             if (role !== 'maintenance') {
                 window.location.href = "{{ route('logout') }}";
             }
-        }, 60000);
+        }, 36000);
     </script>
 @endsection
 
