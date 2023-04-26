@@ -15,9 +15,9 @@
             <div class="title_text">
                 <h2>
                     {{-- Link für Entwicklung, ersetzt das Auflegen einer RFID-Karte --}}
-{{--                     <a href="{{ route('setId') }}">--}}
-{{--                     Bitte halten Sie Ihren RFID-Chip an den Leser.--}}
-{{--                     </a>--}}
+                     <a href="{{ route('setId') }}">
+                     Bitte halten Sie Ihren RFID-Chip an den Leser.
+                     </a>
 
                     Bitte halten Sie Ihren RFID-Chip an den Leser.
 

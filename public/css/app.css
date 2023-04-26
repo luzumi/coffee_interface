@@ -660,12 +660,12 @@ html, body {
     background-image: url('../storage/media/coffeecup.png');
     background-repeat: no-repeat;
     background-position: top left;
-    background-size: 220px;
+    background-size: 200px;
     height: 100%;
     width: 100%;
-    background-position-x: 12rem;
-    background-position-y: 12rem;
-    opacity: 1;
+    background-position-x: 9rem;
+    background-position-y: 13.4rem;
+    opacity: 0.9;
     z-index: 1;
 }
 

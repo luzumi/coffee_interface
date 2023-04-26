@@ -10,11 +10,11 @@
 
     <div class="flex-help">
         <a href="{{ route('help_rfid') }}" class="help-button">
-            <div class="button-bg-rfid-help"><p>RFID</p></div>
+            <div class="button-bg-rfid-help"><p class="title_text">RFID</p></div>
         </a>
 
         <a href="{{ route('help_menu') }}" class="help-button">
-            <div class="button-bg-menu-help"><p>MENU</p></div>
+            <div class="button-bg-menu-help"><p class="title_text">MENU</p></div>
         </a>
     </div>
     <div class="menu-logout">

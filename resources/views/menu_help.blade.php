@@ -9,16 +9,20 @@
         <h1 class="title_welcome"> &nbsp;Help - Menu</h1>
     </div>
     <ol class="help-text">
+        <hr>
         <li><strong>Getränk auswählen:</strong> Wählen Sie das gewünschte Getränk aus der Getränkeliste aus.</li>
-        <li><strong>Menü-Übersicht:</strong>
+        <ul> Angezeigt werden die Auswahlmöglichkeit und der jeweilige Preis </ul>
+        <ul> Reicht Ihr aktuelles Guthaben für diese Auswahlmöglichkeit nicht aus, können Sie es bei Alexander Seedorf aufladen </ul>
+        <hr>
+        <li><strong>Menü-Statistiken:</strong>
             <ul>
-                <li><em>Home:</em> Zeigt die Startseite mit Getränkeauswahl.</li>
-                <li><em>Getränke:</em> Zeigt eine Liste der verfügbaren Getränke zur Auswahl.</li>
-                <li><em>Guthaben:</em> Zeigt Ihr aktuelles Guthaben an.</li>
-                <li><em>Profil:</em> Zeigt Ihr Profil mit persönlichen Informationen.</li>
-                <li><em>Logout:</em> Loggt Sie aus dem System aus.</li>
+                <li><em>Bestellungen:</em> Zeigt die Anzahl Ihrer getätigten Bestellungen</li>
+                <li><em>letzte Bestellung:</em> Ihr letzter Besuch</li>
+                <li><em>Letzte Auswahl:</em> Ihre letzte getätigte Auswahl</li>
+                <li><em>Benutzergruppe:</em> Ihr Account ist Mitglied der Gruppe</li>
             </ul>
         </li>
+        <hr>
     </ol>
     <div class="menu-logout">
         <form method="GET" action="{{ route('help') }}">
