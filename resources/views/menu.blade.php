@@ -79,7 +79,7 @@
 
                     <div class="menu-varieties-item-price menu-varieties-item-price-{{$key}}">
                         @if($viewData['role'] == 'maintenance' || $viewData['role'] == 'vip')
-                            <p>0 Credits</p>
+                            <p>free</p>
                         @else
                             <p>{{ $variety->credit_cost }}</p>
                         @endif

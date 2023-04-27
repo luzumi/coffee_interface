@@ -47,4 +47,6 @@ Route::get('/disruption', 'App\Http\Controllers\MenuController@disruption')->nam
 
 Route::get('/set', 'App\Services\WebhookService@setId')->name('setId');
 
+Route::get('admin', 'App\Http\Controllers\AdminController@index')->name('admin');
+
 //Route::get('/test', 'App\Http\Controllers\MenuController@test')->name('test');

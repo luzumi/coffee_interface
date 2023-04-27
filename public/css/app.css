@@ -839,3 +839,98 @@ html, body {
     font-family: var(--ff-secondary);
     color: var(--text-color-3);
 }
+
+
+/*admin-page*/
+.admin-btn{
+    position: absolute;
+    left: 53rem;
+    top: 2rem;
+    opacity: 0.8;
+}
+
+.admin-board {
+    position: absolute;
+    display: grid;
+    grid-template:
+        "header-left header-right" 1fr
+        "dash board " 3fr;
+    font-size: 1rem;
+    color: var(--text-color-1);
+    font-family: var(--ff-secondary);
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+}
+
+.admin-title_app {
+    grid-area: header-left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color-1);
+    font-family: var(--ff-primary);
+    left: 1rem
+}
+
+.admin-title_welcome {
+    grid-area: header-right;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding-right: 2rem;
+    color: var(--text-color-1);
+    font-family: var(--ff-primary);
+
+}
+
+.admin-dash{
+    position: absolute;
+    grid-area: dash;
+    grid-gap: 1rem;
+    padding-left: .3rem;
+    width: 15rem;
+    height: 80%;
+    left: 1rem
+}
+
+.admin-dash-head {
+    position: absolute;
+    top: -3rem;
+    grid-area: dash;
+    color: var(--text-color-1);
+    font-family: var(--ff-third);
+    font-size: 1.6rem;
+    z-index: 2;
+}
+
+.admin-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 2rem;
+    color: var(--text-color-1);
+    font-family: var(--ff-third);
+    font-size: 0.8rem;
+}
+
+.admin-dash-btn {
+    font-family: var(--ff-third);
+    color: var(--text-color-1);
+    text-decoration: none;
+}
+
+.admin-dash-area{
+    position: relative;
+    left: -8rem;
+    top: -2rem;
+    grid-area: board;
+    grid-gap: 1rem;
+    padding-left: .3rem;
+    width: 120%;
+    height: 90%;
+
+    background-color: #1B2840;
+}
