@@ -6,7 +6,7 @@ function setClock() {
 
     const hourDeg = (hours / 12) * 360 + (minutes / 60) * 30;
     const minuteDeg = (minutes / 60) * 360 + (seconds / 60) * 6;
-    const secondDeg = (seconds / 60) * 360 - 90;
+    const secondDeg = ((seconds + 15) / 60) * 360 - 90;
 
     const hourHand = document.querySelector(".hour-hand");
     const minuteHand = document.querySelector(".minute-hand");
