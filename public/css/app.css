@@ -871,18 +871,19 @@ html, body {
     align-items: center;
     color: var(--text-color-1);
     font-family: var(--ff-primary);
-    left: 1rem
+    left: 1rem;
+    width: 20rem;
 }
 
 .admin-title_welcome {
     grid-area: header-right;
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
     align-items: center;
     padding-right: 2rem;
     color: var(--text-color-1);
     font-family: var(--ff-primary);
-
+    width: 31rem;
 }
 
 .admin-dash{
@@ -892,7 +893,8 @@ html, body {
     padding-left: .3rem;
     width: 15rem;
     height: 80%;
-    left: 1rem
+    left: 1rem;
+    font-family: var(--ff-secondary);
 }
 
 .admin-dash-head {
@@ -900,7 +902,6 @@ html, body {
     top: -3rem;
     grid-area: dash;
     color: var(--text-color-1);
-    font-family: var(--ff-third);
     font-size: 1.6rem;
     z-index: 2;
 }
@@ -912,7 +913,6 @@ html, body {
     width: 100%;
     height: 2rem;
     color: var(--text-color-1);
-    font-family: var(--ff-third);
     font-size: 0.8rem;
 }
 
@@ -925,35 +925,43 @@ html, body {
 .admin-dash-area{
     position: relative;
     /*left: -8rem;*/
-    top: -2rem;
+
     grid-area: board;
     grid-gap: 1rem;
     padding-left: .3rem;
-    width: 90%;
+    width: 99%;
     height: 90%;
-
-    background-color: #1B2840;
+    left: -3.5rem;
+    background-color: var(--bg-color-1);
 }
 
+.admin-label {
+    color: var(--text-color-1);
+    font-family: var(--ff-secondary);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
 .admin-dash-user-table {
     height: 20rem;
-    width: 30rem;
+    width: 35rem;
     overflow: scroll;
-}
-
-.admin-table-th, .admin-table-td {
-    text-align: left;
-    padding: 0.5rem;
-    border: 1px solid #000;
 }
 
 .admin-form-group {
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.admin-form-group input {
+    flex-basis: 66%;
+    margin-left: 10px;
 }
 
 .admin-form-group label {
+    flex-basis: 30%;
+    text-align: left;
     margin-bottom: 5px;
 }
 
@@ -964,11 +972,30 @@ html, body {
 }
 
 .admin-inline-form-group label {
-    margin-right: 10px;
+    width: 11rem;
+    left: 2rem;
 }
 
 .admin-inline-form-group input {
+    width: 10rem;
     flex-grow: 1;
 }
 
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--text-color-1);
+}
+
+.admin-table th, .admin-table td {
+    text-align: left;
+    padding: 0.5rem;
+    border: 1px solid var(--text-color-1);
+    border-top: none;
+    border-bottom: none;
+}
+
+.admin-table th {
+    border-bottom: 1px solid var(--text-color-1);
+}
 

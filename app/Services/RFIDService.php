@@ -3,6 +3,12 @@
 namespace App\Services;
 
 use App\Models\RFID_Tag;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use LaravelIdea\Helper\App\Models\_IH_RFID_Tag_QB;
 
 class RFIDService
 {
@@ -12,9 +18,9 @@ class RFIDService
      * wird eine neue RFID_Tag-Instanz mit der angegebenen UID und einer neuen User-Instanz erstellt.
      *
      * @param string $tagUid
-     * @return
+     * @return Model|Builder|RFID_Tag|Redirector|Application|_IH_RFID_Tag_QB|RedirectResponse|null
      */
-    public static function getRFIDTag(string $tagUid)
+    public static function getRFIDTag(string $tagUid): Model|Builder|RFID_Tag|Redirector|Application|_IH_RFID_Tag_QB|RedirectResponse|null
     {
         $rfidTag = RFID_Tag::where('tag_uid', $tagUid)->with('user')->first();
 

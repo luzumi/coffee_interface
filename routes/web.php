@@ -48,5 +48,8 @@ Route::get('/disruption', 'App\Http\Controllers\MenuController@disruption')->nam
 Route::get('/set', 'App\Services\WebhookService@setId')->name('setId');
 
 Route::get('admin', 'App\Http\Controllers\AdminController@index')->name('admin');
+Route::get('admin/users', 'App\Http\Controllers\AdminController@manageUsers')->name('admin.manage-users');
+Route::get('admin/users/{id}/edit', 'App\Http\Controllers\AdminController@edit')->name('admin.edit-user');
+Route::put('admin/users/{id}', 'App\Services\UserService@update')->name('admin.users.id-update');
 
 //Route::get('/test', 'App\Http\Controllers\MenuController@test')->name('test');

@@ -33,7 +33,7 @@ class CalculateTest extends TestCase
         Calculate::coffeeOrder($coffee_id, $tag->user->id);
 
         $tag->refresh();
-        $this->assertEquals( 'test_it_calculates_the_price_of_a_coffee_order',$credits - $price, $tag->user->credits);
+        $this->assertEquals( $credits - $price, $tag->user->credits, 'test_it_calculates_the_price_of_a_coffee_order');
     }
 
     public function test_it_calculates_the_price_of_a_vip_coffee_order()
@@ -46,7 +46,7 @@ class CalculateTest extends TestCase
         Calculate::coffeeOrder($coffee_id, $tag->user->id);
 
         $tag->refresh();
-        $this->assertEquals('test_it_calculates_the_price_of_a_vip_coffee_order', $credits - 0, $tag->user->credits);
+        $this->assertEquals($credits - 0, $tag->user->credits, 'test_it_calculates_the_price_of_a_vip_coffee_order' );
     }
 
     public function test_it_calculates_the_price_of_a_maintenance_coffee_order()

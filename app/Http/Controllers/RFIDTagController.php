@@ -12,7 +12,7 @@ class RFIDTagController extends Controller
 
     /**
      * Gibt das RFID_tag des aktuellen Raspberry Pi-Benutzers zurück.
-     *
+     * return RFID_Tag
      */
     public function getTag()
     {

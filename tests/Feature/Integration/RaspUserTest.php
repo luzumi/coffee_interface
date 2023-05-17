@@ -23,14 +23,11 @@ class RaspUserTest extends TestCase
 
     public function test_it_sets_and_gets_rasp_user_id()
     {
-        // Arrange
         $user_id = 2;
 
-        // Act
         RaspUser::setRaspUser($user_id);
         $result = RaspUser::getActualRaspUser();
 
-        // Assert
         $this->assertEquals($user_id, $result->user_id);
     }
 

@@ -19,22 +19,20 @@ class MenuController extends Controller
     /**
      * Zeigt die Menüansicht mit den zugehörigen Daten für den aktuellen Benutzer an.
      *
-     *
-     * @param Request $request
      * @return Application|Factory|View
      */
-    public function show(Request $request)
+    public function show(): View|Factory|Application
     {
         $raspUser = RaspUser::getActualRaspUser();
-
         $user = User::with('coffeeOrders')->find($raspUser->user_id);
-
         $viewName = $this->getViewName($raspUser);
+
         if ($viewName !== 'menu') {
             return view($viewName)->with(compact('user'));
         }
-
-        $rfidTag = RFID_Tag::where('user_id', $user->id)->first();
+//TODO: TAG-UID needed, USER-ID falsch für role Bestimmung
+        $rfidTag = RFID_Tag::where('user_id', $user->id)
+            ->first();
 
         $viewData = [
             'user' => $user,
@@ -141,18 +139,9 @@ class MenuController extends Controller
      */
     private function getViewName($raspUser)
     {
-        if ($raspUser->user_not_found) {
-            return 'user_not_found';
-        }
-
-        if ($raspUser->need_service) {
-            return 'need_service';
-        }
-
-        if ($raspUser->disruption) {
-            return 'disruption';
-        }
-
+        if ($raspUser->user_not_found) {            return 'user_not_found';        }
+        if ($raspUser->need_service) {            return 'need_service';        }
+        if ($raspUser->disruption) {            return 'disruption';        }
         return 'menu';
     }
 

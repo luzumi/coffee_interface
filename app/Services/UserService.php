@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 
@@ -61,4 +62,20 @@ class UserService
         }
         return $result;
     }
+
+    public function update(Request $request, $id): Redirector|Application|RedirectResponse
+    {
+        $user = User::find($id);
+
+        $user->username = $request->username;
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->credits += $request->credits;
+        // Update any other fields you have
+
+        $user->save();
+
+        return redirect('admin/users');
+    }
+
 }

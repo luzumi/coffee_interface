@@ -18,11 +18,11 @@
                 <div class="admin-dash">
                     <hr>
                     <div class="admin-link">
-                        <h2><a href="{{ route('admin') }}" class="admin-dash-btn">Manage Users</a></h2>
+                        <h2><a href="{{ route('admin.manage-users') }}" class="admin-dash-btn">Manage Users</a></h2>
                     </div>
                     <hr>
                     <div class="admin-link">
-                        <h2><a href="{{ route('admin') }}" class="admin-dash-btn">Manage Posts</a></h2>
+                        <h2><a href="{{ route('admin') }}" class="admin-dash-btn">Manage RFID-Tags</a></h2>
                     </div>
                     <hr>
                     <div class="admin-link">
@@ -31,9 +31,8 @@
                     <hr>
                 </div>
             </div>
-
             <div class="admin-dash-area">
-
+                @yield('dashboard')
             </div>
         </div>
     </div>

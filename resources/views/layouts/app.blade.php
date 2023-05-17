@@ -26,13 +26,13 @@
     <a href="{{ route('help') }}" class="btn btn-help ">
         ?
     </a>
-    @if(isset($viewData) && $viewData['user']->id == 7)
-        <div class="menu-logout">
-            <form method="GET" action="{{ route('admin') }}">
-                <button type="submit" class="admin-btn btn menu-logout-button">Admin</button>
-            </form>
-        </div>
-    @endif
+{{--    @if(isset($viewData) && $viewData['user']->id == 7)--}}
+{{--        <div class="menu-logout">--}}
+{{--            <form method="GET" action="{{ route('admin') }}">--}}
+{{--                <button type="submit" class="admin-btn btn menu-logout-button">Admin</button>--}}
+{{--            </form>--}}
+{{--        </div>--}}
+{{--    @endif--}}
 
 
 </div>

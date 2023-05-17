@@ -71,7 +71,8 @@
                             @csrf
                             <div class="button-container">
                                 <button type="submit"
-                                        class="btn menu-varieties-item-button menu-varieties-item-button-{{$key}}"></button>
+                                        class="btn menu-varieties-item-button menu-varieties-item-button-{{$key}}">
+                                </button>
                                 <button type="submit" class="text-button">{{ $variety->coffee_name }}</button>
                             </div>
                         </form>
