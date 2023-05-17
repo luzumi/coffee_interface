@@ -924,13 +924,51 @@ html, body {
 
 .admin-dash-area{
     position: relative;
-    left: -8rem;
+    /*left: -8rem;*/
     top: -2rem;
     grid-area: board;
     grid-gap: 1rem;
     padding-left: .3rem;
-    width: 120%;
+    width: 90%;
     height: 90%;
 
     background-color: #1B2840;
 }
+
+.admin-dash-user-table {
+    height: 20rem;
+    width: 30rem;
+    overflow: scroll;
+}
+
+.admin-table-th, .admin-table-td {
+    text-align: left;
+    padding: 0.5rem;
+    border: 1px solid #000;
+}
+
+.admin-form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.admin-form-group label {
+    margin-bottom: 5px;
+}
+
+.admin-inline-form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-inline-form-group label {
+    margin-right: 10px;
+}
+
+.admin-inline-form-group input {
+    flex-grow: 1;
+}
+
+
