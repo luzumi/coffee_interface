@@ -22,7 +22,7 @@ class AdminController extends Controller
             ->with(compact('viewData'));
     }
 
-    public function edit($id)
+    public function editUser($id)
     {
         $user['actual'] = User::with('rfidTag')->find($id);
         $user['all'] = User::all();
