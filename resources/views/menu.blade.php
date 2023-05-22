@@ -71,7 +71,8 @@
                             @csrf
                             <div class="button-container">
                                 <button type="submit"
-                                        class="btn menu-varieties-item-button menu-varieties-item-button-{{$key}}"></button>
+                                        class="btn menu-varieties-item-button menu-varieties-item-button-{{$key}}">
+                                </button>
                                 <button type="submit" class="text-button">{{ $variety->coffee_name }}</button>
                             </div>
                         </form>
@@ -79,7 +80,7 @@
 
                     <div class="menu-varieties-item-price menu-varieties-item-price-{{$key}}">
                         @if($viewData['role'] == 'maintenance' || $viewData['role'] == 'vip')
-                            <p>0 Credits</p>
+                            <p>free</p>
                         @else
                             <p>{{ $variety->credit_cost }}</p>
                         @endif
