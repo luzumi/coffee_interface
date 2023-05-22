@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RFID_Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin');
+        return view('admin.admin');
     }
 
     public function manageUsers()
@@ -30,4 +31,21 @@ class AdminController extends Controller
         return view('admin.edit-user', compact('user'));
     }
 
+    public function manageRFIDs()
+    {
+        $viewData = [
+            'rfid' => RFID_Tag::with('user')->get()->reverse()
+        ];
+
+        return view('admin.manage-rfids')
+            ->with(compact('viewData'));
+    }
+
+    public function editRFID($id)
+    {
+        $rfid['actual'] = RFID_Tag::with('user')->find($id);
+        $rfid['allUsers'] = User::all()->reverse();
+        $rfid['roles'] = ['VIP', 'User', 'Maintenance'];
+        return view('admin.edit-rfid', compact('rfid'));
+    }
 }

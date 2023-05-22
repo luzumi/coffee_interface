@@ -1000,3 +1000,20 @@ html, body {
     border-bottom: 1px solid var(--text-color-1);
 }
 
+.admin-custom-select-wrapper {
+    position: relative;
+}
+
+.admin-custom-select {
+    appearance: none;
+    /*background: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>') no-repeat right;*/
+    background-size: 1em;
+    background-position-x: 95%;
+    background-color: var(--bg-color-6); /* Or whatever color you want */
+    padding-right: 2em; /* To make room for the arrow */
+    width: 2em; /* Set the width to the size you want the arrow box to be */
+    overflow: hidden; /* To hide the rest of the select */
+    white-space: nowrap; /* To stop the select from wrapping lines, thus showing more text */
+    text-indent: 10em; /* To move the visible selected option text out of view */
+}
+

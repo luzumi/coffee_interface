@@ -52,4 +52,7 @@ Route::get('admin/users', 'App\Http\Controllers\AdminController@manageUsers')->n
 Route::get('admin/users/{id}/edit', 'App\Http\Controllers\AdminController@editUser')->name('admin.edit-user');
 Route::put('admin/users/{id}', 'App\Services\UserService@update')->name('admin.users.id-update');
 
+Route::get('admin/rfids', 'App\Http\Controllers\AdminController@manageRFIDs')->name('admin.manage-rfids');
+Route::get('admin/rfids/{id}/edit', 'App\Http\Controllers\AdminController@editRFID')->name('admin.edit-rfid');
+Route::put('admin/rfids/{id}', 'App\Services\RFIDService@update')->name('admin.rfids.id-update');
 //Route::get('/test', 'App\Http\Controllers\MenuController@test')->name('test');

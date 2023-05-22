@@ -1,4 +1,4 @@
-@extends('admin')
+@extends('admin.admin')
 
 @section('dashboard')
     <form method="POST" action="/admin/users/{{ $user['actual']->id }}">
@@ -19,7 +19,7 @@
             <label for="lastname">Name: </label>
             <input type="text" id="lastname" name="lastname" value="{{ $user['actual']->lastname }}">
         </div>
-<br>
+        <br>
         <div class="admin-form-group">
             <label for="credits">aktuelle Credits: {{ $user['actual']->credits }}</label>
             <div class="admin-inline-form-group">
@@ -33,27 +33,27 @@
         <label class="admin-label">RFID-Karten</label>
         <table class="admin-table">
             <tr>
-                <th >ID</th>
-                <th >User-ID</th>
-                <th >Tag-UID</th>
-                <th >Benutzerrolle</th>
-                <th >aktiv</th>
+                <th>ID</th>
+                <th>User-ID</th>
+                <th>Tag-UID</th>
+                <th>Benutzerrolle</th>
+                <th>aktiv</th>
                 <!-- Fügen Sie hier zusätzliche Spalten für andere Benutzerinformationen hinzu -->
             </tr>
 
             @foreach($user['actual']['rfidTag'] as $rfidTag)
                 <tr>
-                    <td >{{ $rfidTag->id }}</td>
-                    <td >{{ $rfidTag->user_id }}</td>
-                    <td >{{ $rfidTag->tag_uid }}</td>
-                    <td >{{ $rfidTag->role }}</td>
-                    <td >{{ $rfidTag->tag_active }}</td>
+                    <td>{{ $rfidTag->id }}</td>
+                    <td>{{ $rfidTag->user_id }}</td>
+                    <td>{{ $rfidTag->tag_uid }}</td>
+                    <td>{{ $rfidTag->role }}</td>
+                    <td>{{ $rfidTag->tag_active }}</td>
                     <!-- Fügen Sie hier zusätzliche Zellen für andere Benutzerinformationen hinzu -->
                 </tr>
             @endforeach
         </table>
 
-<br>
+        <br>
         <!-- Fügen Sie hier weitere Felder hinzu, wenn Sie weitere Benutzerinformationen bearbeiten möchten -->
 
         <button class="btn" type="submit">Update</button>

@@ -22,7 +22,7 @@
                     </div>
                     <hr>
                     <div class="admin-link">
-                        <h2><a href="{{ route('admin') }}" class="admin-dash-btn">Manage RFID-Tags</a></h2>
+                        <h2><a href="{{ route('admin.manage-rfids') }}" class="admin-dash-btn">Manage RFID-Tags</a></h2>
                     </div>
                     <hr>
                     <div class="admin-link">

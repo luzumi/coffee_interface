@@ -3,10 +3,12 @@
 namespace App\Services;
 
 use App\Models\RFID_Tag;
+use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use LaravelIdea\Helper\App\Models\_IH_RFID_Tag_QB;
 
@@ -48,5 +50,49 @@ class RFIDService
             'user_id' => $userId,
             'role' => 'rfid_not_found',
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return Redirector|Application|RedirectResponse
+     */
+    public function update(Request $request, $id): Redirector|Application|RedirectResponse
+    {
+        $rfid = RFID_Tag::find($id);
+        $username = $request->input('username');
+        $oldUsername = $request->input('oldUserName');
+        $newUsername = $request->input('new_username');
+        $firstname = $request->input('firstname');
+        $lastname = $request->input('lastname');
+        $credits = $request->input('credits');
+        $username = $request->input('username');
+        $user = User::where('username', $username)->first();
+
+        if ($newUsername == null && $firstname == null && $lastname == null && $credits == null) {
+            $rfid->user_id = $user->id;
+            $rfid->save();
+
+            if ($user->rfidTag->count() === 0) {
+                try {
+                    $user->deleteOrFail();
+                } catch (  \Throwable $e) {
+                    \Log::info($e->getMessage());
+                }
+            }
+        } else {
+            $user->username = $newUsername;
+            $user->firstname = $firstname;
+            $user->lastname = $lastname;
+            $user->credits = $credits;
+            $user->save();
+
+            $rfid->user_id = $user->id;
+            $rfid->role = $request->input('role');
+            $rfid->tag_active = $request->input('tag_active') == 1 ? 1 : 0;
+            $rfid->save();
+        }
+
+        return redirect('admin/rfids');
     }
 }
