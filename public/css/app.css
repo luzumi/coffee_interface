@@ -589,7 +589,7 @@ html, body {
     padding: 1.6rem 1.6rem;
     background-repeat: no-repeat;
     background-position: center center;
-    z-index: 2;
+    z-index: 5;
 }
 
 .menu-varieties-item-button-0 {
@@ -625,6 +625,7 @@ html, body {
 .menu-logout-button {
     display: inline-flex;
     padding: 1.7rem 1.0rem;
+    z-index: 5;
     /*align-item: center;*/
 }
 
@@ -651,7 +652,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 5;
 }
 
 /*Background-Images*/
@@ -719,7 +720,7 @@ html, body {
     height: 70%;
     background-color: blue;
     opacity: 0;
-    z-index: 9999;
+    z-index: 4;
 }
 
 .in-progress {
@@ -729,7 +730,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9900;
+    z-index: 6;
 }
 
 .progress-section {
