@@ -589,6 +589,7 @@ html, body {
     padding: 1.6rem 1.6rem;
     background-repeat: no-repeat;
     background-position: center center;
+    z-index: 2;
 }
 
 .menu-varieties-item-button-0 {
