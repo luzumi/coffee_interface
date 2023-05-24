@@ -88,8 +88,13 @@
         <br>
 
         <button class="btn" type="submit">Update</button>
+        <button type="button" onclick="confirmDelete('{{ route('admin.rfids.id-delete', $rfid['actual']->id) }}',
+                'Bist du sicher, dass du diese RFID-Karte löschen möchtest?')" class="btn">
+            Löschen
+        </button>
     </form>
 @endsection
+
 @section('scripts')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -108,5 +113,10 @@
                 }
             });
         });
+        function confirmDelete(url, message) {
+            if (confirm(message)) {
+                window.location = url;
+            }
+        }
     </script>
 @endsection

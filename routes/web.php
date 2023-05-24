@@ -51,10 +51,13 @@ Route::get('admin', 'App\Http\Controllers\AdminController@index')->name('admin')
 Route::get('admin/users', 'App\Http\Controllers\AdminController@manageUsers')->name('admin.manage-users');
 Route::get('admin/users/{id}/edit', 'App\Http\Controllers\AdminController@editUser')->name('admin.edit-user');
 Route::put('admin/users/{id}', 'App\Services\UserService@update')->name('admin.users.id-update');
+Route::get('admin/users/{id}/delete', 'App\Services\UserService@delete')->name('admin.users.id-delete');
+
 
 Route::get('admin/rfids', 'App\Http\Controllers\AdminController@manageRFIDs')->name('admin.manage-rfids');
 Route::get('admin/rfids/{id}/edit', 'App\Http\Controllers\AdminController@editRFID')->name('admin.edit-rfid');
 Route::put('admin/rfids/{id}', 'App\Services\RFIDService@update')->name('admin.rfids.id-update');
+Route::get('admin/rfids/{id}/delete', 'App\Services\RFIDService@delete')->name('admin.rfids.id-delete');
 
 Route::get('admin/cats', 'App\Http\Controllers\AdminController@manageCats')->name('admin.manage-cats');
 Route::get('admin/cats/{id}/edit', 'App\Http\Controllers\AdminController@editCats')->name('admin.edit-cats');

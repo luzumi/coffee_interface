@@ -57,6 +57,20 @@
         <!-- Fügen Sie hier weitere Felder hinzu, wenn Sie weitere Benutzerinformationen bearbeiten möchten -->
 
         <button class="btn" type="submit">Update</button>
+        <button type="button" onclick="confirmDelete('{{ route('admin.users.id-delete', $user['actual']->id) }}',
+                'Bist du sicher, dass du diesen User löschen möchtest?')" class="btn">
+            Löschen
+        </button>
     </form>
 
+@endsection
+
+@section('scripts')
+    <script>
+        function confirmDelete(url, message) {
+            if (confirm(message)) {
+                window.location = url;
+            }
+        }
+    </script>
 @endsection

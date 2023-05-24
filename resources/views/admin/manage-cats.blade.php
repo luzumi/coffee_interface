@@ -20,8 +20,8 @@
                     <td>{{ Str::limit($cat->coffee_name, 10) }}</td>
                     <td>{{ $cat->credit_cost }}</td>
                     <td>{{ $cat->coffee_code }}</td>
-                    <td>{{ Str::limit($cat->description, 10) }}</td>
-                    <td>{{ Str::limit($cat->image, 10) }}</td>
+                    <td>{{ Str::limit($cat->coffee_description, 10) }}</td>
+                    <td>{{ Str::limit($cat->coffee_image, 6) }}</td>
                     <td><a href="cats/{{ $cat->id }}/edit">Edit</a></td>
                     <!-- Fügen Sie hier zusätzliche Zellen für andere Benutzerinformationen hinzu -->
                 </tr>

@@ -78,4 +78,10 @@ class UserService
         return redirect('admin/users');
     }
 
+    public function delete($id): Redirector|Application|RedirectResponse
+    {
+        User::findOrFail($id)->delete();
+
+        return redirect('admin/rfids');
+    }
 }

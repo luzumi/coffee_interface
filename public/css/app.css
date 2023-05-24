@@ -944,7 +944,7 @@ html, body {
     font-size: 1.2rem;
 }
 .admin-dash-user-table {
-    height: 20rem;
+    height: 16rem;
     width: 35rem;
     overflow: scroll;
 }
@@ -1019,12 +1019,10 @@ html, body {
 }
 
 .admin-help-image {
-    width: 100%;
-    height: 980%;
     background-image: url("../storage/media/Display.png");
-    background-size: 490px;
-    background-position-x: 1rem;
-    background-position-y: 130rem;
-    background-position: center;
-    background-repeat: no-repeat;
+    /* Hier setzen Sie die Höhe und Breite des Bildes */
+    width: 100%;
+    height: 100%;
+    background-size: cover;
 }
+

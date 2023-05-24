@@ -17,14 +17,10 @@
 
         <div class="admin-form-group">
             <label for="code">Code: </label>
+            <button type="button" onclick="window.location='{{ route('admin.help-display') }}'" class="btn">
+                Codes
+            </button>
             <input type="text" id="code" name="code" value="{{ $viewData['cats']->coffee_code }}">
-{{--            TODO: Code-Hilfe-Image--}}
-{{--            <form method="GET" action="{{ route('admin.help-display') }}">--}}
-
-                <button type="submit" >
-                    <div class="admin-help-image"></div>
-                </button>
-{{--            </form>--}}
         </div>
 
         <div class="admin-form-group">

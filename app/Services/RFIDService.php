@@ -95,4 +95,11 @@ class RFIDService
 
         return redirect('admin/rfids');
     }
+
+    public function delete($id): Redirector|Application|RedirectResponse
+    {
+        RFID_Tag::findOrFail($id)->delete();
+
+        return redirect('admin/rfids');
+    }
 }
