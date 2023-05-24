@@ -19,7 +19,6 @@
     </div>
     <div class="menu-logout">
         <form method="GET" action="{{ route('home') }}">
-
             <button type="submit" class="btn menu-logout-button">Zurück</button>
         </form>
     </div>

@@ -26,7 +26,6 @@
     </ol>
     <div class="menu-logout">
         <form method="GET" action="{{ route('help') }}">
-
             <button type="submit" class="btn menu-logout-button">Zurück</button>
         </form>
     </div>

@@ -23,9 +23,16 @@
     <div class="content">
         @yield('content')
     </div>
-    <a href="{{ route('help') }}" class="btn btn-help ">
-        ?
-    </a>
+    @if(Route::current()->getName() != 'help')
+        <form method="GET" action="{{ route('help') }}">
+
+                <a href="{{ route('help') }}" class="btn btn-help ">
+                    ?
+                </a>
+
+        </form>
+    @endif
+
 {{--    @if(isset($viewData) && $viewData['user']->id == 7)--}}
 {{--        <div class="menu-logout">--}}
 {{--            <form method="GET" action="{{ route('admin') }}">--}}

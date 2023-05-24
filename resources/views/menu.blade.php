@@ -13,7 +13,7 @@
         <div class="title_welcome">
             <h2>Willkommen, <br>{{ $viewData['user']->firstname??$viewData['user']->username }}!</h2>
         </div>
-        <div class="bg_img1"></div>
+{{--        <div class="bg_img1"></div>--}}
 
         <div class="menu-statistics">
             <div class="menu-statistics-item">
