@@ -55,4 +55,9 @@ Route::put('admin/users/{id}', 'App\Services\UserService@update')->name('admin.u
 Route::get('admin/rfids', 'App\Http\Controllers\AdminController@manageRFIDs')->name('admin.manage-rfids');
 Route::get('admin/rfids/{id}/edit', 'App\Http\Controllers\AdminController@editRFID')->name('admin.edit-rfid');
 Route::put('admin/rfids/{id}', 'App\Services\RFIDService@update')->name('admin.rfids.id-update');
+
+Route::get('admin/cats', 'App\Http\Controllers\AdminController@manageCats')->name('admin.manage-cats');
+Route::get('admin/cats/{id}/edit', 'App\Http\Controllers\AdminController@editCats')->name('admin.edit-cats');
+Route::put('admin/cats/{id}', 'App\Services\VarietiesService@update')->name('admin.cats.id-update');
+Route::get('admin/cats/display', 'App\Http\Controllers\AdminController@helpDisplay')->name('admin.help-display');
 //Route::get('/test', 'App\Http\Controllers\MenuController@test')->name('test');

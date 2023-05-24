@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CoffeeVariety;
 use App\Models\RFID_Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -48,4 +49,27 @@ class AdminController extends Controller
         $rfid['roles'] = ['VIP', 'User', 'Maintenance'];
         return view('admin.edit-rfid', compact('rfid'));
     }
+
+    public function manageCats()
+    {
+        $viewData = [
+            'cats' => CoffeeVariety::all(),
+        ];
+
+        return view('admin.manage-cats')
+            ->with(compact('viewData'));
+    }
+
+    public function editCats($id)
+    {
+        $viewData['cats'] = CoffeeVariety::findOrFail($id);
+
+        return view('admin.edit-cats', compact('viewData'));
+    }
+
+    public function helpDisplay()
+    {
+        return view('admin-help');
+    }
+
 }

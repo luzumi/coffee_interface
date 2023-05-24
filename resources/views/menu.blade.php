@@ -92,7 +92,6 @@
 
         <div class="menu-logout">
             <form method="GET" action="{{ route('logout') }}">
-
                 <button type="submit" class="btn menu-logout-button">Logout</button>
             </form>
         </div>

@@ -86,7 +86,6 @@
                 {{ $rfid['actual']->tag_active ? 'checked' : '' }}>
         </div>
         <br>
-        <!-- Fügen Sie hier weitere Felder hinzu, wenn Sie weitere Benutzerinformationen bearbeiten möchten -->
 
         <button class="btn" type="submit">Update</button>
     </form>
