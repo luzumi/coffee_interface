@@ -199,9 +199,7 @@ html, body {
 
 .title_welcome {
     grid-area: user;
-    /*display: flex;*/
     justify-content: left;
-    /*align-items: center;*/
     text-align: left;
     font-size: 1rem;
     color: var(--text-color-1);
@@ -212,9 +210,7 @@ html, body {
 
 .title_welcome-welcome {
     grid-area: title;
-    /*display: flex;*/
     justify-content: right;
-    /*align-items: center;*/
     text-align: right;
     font-size: 1rem;
     color: var(--text-color-1);
