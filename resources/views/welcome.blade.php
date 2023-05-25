@@ -8,7 +8,7 @@
                 <h1>Get me Coffee</h1>
             </div>
 
-            <div class="title_welcome" id="csrf">
+            <div class="title_welcome-welcome" id="csrf">
                 <h2>Herzlich willkommen</h2>
             </div>
 
