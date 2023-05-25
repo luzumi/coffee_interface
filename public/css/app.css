@@ -586,6 +586,16 @@ html, body {
     z-index: 2;
 }
 
+#hiddenArea {
+    position: absolute;
+    top: -3rem;
+    left: -6rem;
+    width:100px;
+    height:100px;
+    opacity:0;
+    z-index: 9500;
+}
+
 /* Button-Styling */
 .btn {
     width: 5rem;
