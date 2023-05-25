@@ -106,14 +106,14 @@
 
 @endsection
 @section('scripts')
-{{--    <script>--}}
-{{--        setTimeout(function () {--}}
-{{--            role = document.getElementById('role').getAttribute('role');--}}
-{{--            if (role !== 'maintenance') {--}}
-{{--                window.location.href = "{{ route('logout') }}";--}}
-{{--            }--}}
-{{--        }, 36000);--}}
-{{--    </script>--}}
+    <script>
+        setTimeout(function () {
+            role = document.getElementById('role').getAttribute('role');
+            if (role !== 'maintenance') {
+                window.location.href = "{{ route('logout') }}";
+            }
+        }, 36000);
+    </script>
 @endsection
 
 
