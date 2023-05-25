@@ -298,23 +298,34 @@ html, body {
 }
 
 .disruption {
+    position: relative;
+    top: 3rem;
+    left: 1.2rem;
     width: 50%;
-    font-family: var(--ff-third);
+    font-family: var(--ff-primary);
     font-size: xxx-large;
     font-weight: bold;
     color: var(--bg-color-6);
 }
 
-.disruption-text {
+.disruption_text {
+    position: relative;
+    top: -3rem;
     font-family: var(--ff-third);
-    font-size: medium;
+    color: var(--text-color-3);
+    /*font-size: large;*/
 }
 
 .disruption-border {
-    width: 50%;
+    position: relative;
+    grid-area: title;
+    width: 100%;
+    height: 12rem;
     border: 1rem solid var(--bg-color-6);
     border-radius: 2rem;
-    padding: 2rem;
+    justify-content: center;
+    align-items: center;
+    left: -3rem;
 }
 
 /*CLOCK*/
@@ -588,11 +599,10 @@ html, body {
 
 #hiddenArea {
     position: absolute;
-    top: -3rem;
-    left: -6rem;
+    top: -0rem;
+    left: 0.0000001rem;
     width:100px;
     height:100px;
-    opacity:0;
     z-index: 9500;
 }
 

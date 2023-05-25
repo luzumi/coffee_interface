@@ -17,6 +17,7 @@
 <body class="body">
 
 <div class="border">
+    <div id="hiddenArea"></div>
 
     <img class="itb" src=" {{ asset('storage/media/ITB_Logo_blank_farbe.svg') }}" alt="Logo ITB"/>
     <img class="uni-logo" src=" {{ asset('storage/media/UHB_Logo_Web_RGB.svg') }}" alt="Logo Universität Bremen"/>
@@ -43,7 +44,29 @@
 
 
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let clickCounter = 0;
+        document.getElementById('hiddenArea').addEventListener('click', function () {
+            clickCounter++;
+            if (clickCounter === 3) {
+                openPinDialog();
+            }
+        });
 
+        function openPinDialog() {
+            clickCounter = 0;
+            var pin = prompt("Bitte geben Sie Ihre PIN ein");
+            checkPin(pin);
+        }
+
+        function checkPin(pin) {
+            if (pin === "1234") {
+                window.location.href = "{{ route('admin') }}";
+            } else window.location.href = "/";
+        }
+    });
+</script>
 </body>
 
 </html>

@@ -10,7 +10,6 @@
         <div class="title_app">
             <h1>Get me Coffee</h1>
         </div>
-        <div id="hiddenArea"></div>
 
         <div class="title_welcome">
             <h2>Willkommen {{ $viewData['user']->firstname??$viewData['user']->username }}!</h2>
@@ -115,30 +114,6 @@
                 window.location.href = "{{ route('logout') }}";
             }
         }, 36000);
-
-        document.addEventListener("DOMContentLoaded", function () {
-            let clickCounter = 0;
-            document.getElementById('hiddenArea').addEventListener('click', function () {
-                clickCounter++;
-                if (clickCounter === 3) {
-                    openPinDialog();
-                }
-            });
-
-            function openPinDialog() {
-                clickCounter = 0;
-                var pin = prompt("Bitte geben Sie Ihre PIN ein");
-                checkPin(pin);
-            }
-
-            function checkPin(pin) {
-                if (pin === "1234") {
-                    window.location.href = "{{ route('admin') }}";
-                } else window.location.href = "/";
-            }
-        });
-
-
     </script>
 @endsection
 
