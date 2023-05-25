@@ -947,6 +947,14 @@ html, body {
     z-index: 2;
 }
 
+.admin-dash-title {
+
+    grid-area: dash;
+    color: var(--text-color-1);
+    font-size: 1.6rem;
+    z-index: 2;
+}
+
 .admin-link {
     position: relative;
     display: flex;
@@ -966,13 +974,21 @@ html, body {
 .admin-dash-area{
     position: relative;
     /*left: -8rem;*/
-
     grid-area: board;
     grid-gap: 1rem;
     padding-left: .3rem;
     width: 99%;
     height: 90%;
     left: -3.5rem;
+    background-color: var(--bg-color-1);
+}
+
+.admin-overview{
+    position: absolute;
+    left: 20rem;
+    top: 6rem;
+    width: 25rem;
+    height: 10rem;
     background-color: var(--bg-color-1);
 }
 

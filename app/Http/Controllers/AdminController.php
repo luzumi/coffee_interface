@@ -11,8 +11,21 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.admin');
+        $viewData['bestOf'] = User::withCount('coffeeOrders')
+            ->orderBy('username', 'desc')
+            ->take(3)
+            ->get();
+
+        $viewData['newTags'] = User::with(['rfidtag'])
+            ->where('username', 'like', 'new%')
+            ->get();
+
+
+
+        return view('admin.admin', compact('viewData'));
     }
+
+
 
     public function manageUsers()
     {

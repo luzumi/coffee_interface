@@ -18,6 +18,10 @@
                 <div class="admin-dash">
                     <hr>
                     <div class="admin-link">
+                        <h2><a href="{{ route('admin') }}" class="admin-dash-btn">Übersicht</a></h2>
+                    </div>
+                    <hr>
+                    <div class="admin-link">
                         <h2><a href="{{ route('admin.manage-users') }}" class="admin-dash-btn">Manage Users</a></h2>
                     </div>
                     <hr>
@@ -31,9 +35,31 @@
                     <hr>
                 </div>
             </div>
-            <div class="admin-dash-area">
-                @yield('dashboard')
-            </div>
+
+            @if(!Request::is('admin'))
+                <div class="admin-dash-area">
+                    @yield('dashboard')
+                </div>
+            @else
+                <div class="admin-dash-area">
+                    <div class="admin-dash-title"> BestOf</div>
+                    <hr>
+                    @foreach($viewData['bestOf'] as $user)
+                        {{$user->username}}: {{ $user->coffee_orders_count }}<br>
+                    @endforeach
+                    <hr>
+                    <hr>
+                    <div class="admin-dash-title"> Neue Kartenanfragen </div>
+                    <hr>
+                    @foreach($viewData['newTags'] as $user)
+                        {{$user->remarks}}: {{ $user->created_at }}<br>
+                    @endforeach
+
+                </div>
+            @endif
+
+
+
         </div>
     </div>
     <div class="menu-logout">
