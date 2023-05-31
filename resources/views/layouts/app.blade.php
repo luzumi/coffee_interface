@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Sono&display=swap" rel="stylesheet">
     {{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
     @yield('scripts')
+    @livewireStyles
 </head>
 <body class="body">
 
@@ -42,7 +43,7 @@
 {{--        </div>--}}
 {{--    @endif--}}
 
-
+    @livewireScripts
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
