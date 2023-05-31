@@ -7,12 +7,12 @@
 
         <div class="admin-form-group">
             <label for="title">Titel: </label>
-            <input type="text" id="title" name="title" value="{{ $viewData['cats']->coffee_name }}">
+            <input class="admin-input-field" type="text" id="title" name="title" value="{{ $viewData['cats']->coffee_name }}">
         </div>
 
         <div class="admin-form-group">
             <label for="cost">Preis: </label>
-            <input type="text" id="cost" name="cost" value="{{ $viewData['cats']->credit_cost }}">
+            <input class="admin-input-field" type="text" id="cost" name="cost" value="{{ $viewData['cats']->credit_cost }}">
         </div>
 
         <div class="admin-form-group">
@@ -20,17 +20,17 @@
             <button type="button" onclick="window.location='{{ route('admin.help-display') }}'" class="btn">
                 Codes
             </button>
-            <input type="text" id="code" name="code" value="{{ $viewData['cats']->coffee_code }}">
+            <input class="admin-input-field" type="text" id="code" name="code" value="{{ $viewData['cats']->coffee_code }}">
         </div>
 
         <div class="admin-form-group">
             <label for="description">Beschreibung: </label>
-            <input type="text" id="description" name="description" value="{{ $viewData['cats']->coffee_description }}">
+            <input class="admin-input-field" type="text" id="description" name="description" value="{{ $viewData['cats']->coffee_description }}">
         </div>
 
         <div class="admin-form-group">
             <label for="image">Image: </label>
-            <input type="text" id="image" name="image" value="{{ $viewData['cats']->coffee_image }}" readonly>
+            <input class="admin-input-field" type="text" id="image" name="image" value="{{ $viewData['cats']->coffee_image }}" readonly>
         </div>
         <br>
 

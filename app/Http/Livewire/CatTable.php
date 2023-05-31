@@ -15,6 +15,8 @@ class CatTable extends Component
 
     public $sortField;
     public $sortAsc = true;
+    public $search = '';
+
 
     public function sortBy($field)
     {

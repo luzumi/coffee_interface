@@ -7,24 +7,24 @@
 
         <div class="admin-form-group">
             <label for="username">Username: </label>
-            <input type="text" id="username" name="username" value="{{ $user['actual']->username }}">
+            <input class="admin-input-field" type="text" id="username" name="username" value="{{ $user['actual']->username }}">
         </div>
 
         <div class="admin-form-group">
             <label for="Vorname">Vorname: </label>
-            <input type="text" id="Vorname" name="firstname" value="{{ $user['actual']->firstname }}">
+            <input class="admin-input-field" type="text" id="Vorname" name="firstname" value="{{ $user['actual']->firstname }}">
         </div>
 
         <div class="admin-form-group">
             <label for="lastname">Name: </label>
-            <input type="text" id="lastname" name="lastname" value="{{ $user['actual']->lastname }}">
+            <input class="admin-input-field" type="text" id="lastname" name="lastname" value="{{ $user['actual']->lastname }}">
         </div>
         <br>
         <div class="admin-form-group">
             <label for="credits">aktuelle Credits: {{ $user['actual']->credits }}</label>
             <div class="admin-inline-form-group">
                 <label for="credits">Kredits einzahlen:</label>
-                <input type="number" id="credits" name="credits" value="0">
+                <input class="admin-input-field" type="number" id="credits" name="credits" value="0">
             </div>
         </div>
 

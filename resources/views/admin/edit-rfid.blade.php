@@ -34,10 +34,10 @@
 
         <div class="admin-form-group" id="existing-user-fields">
             <label for="existing-username">RFID-Karte -> User zuweisen: </label>
-            <input type="text" id="existing-username" name="username" value="{{ $rfid['actual']->user->username }}" readonly>
+            <input class="admin-input-field" type="text" id="existing-username" name="username" value="{{ $rfid['actual']->user->username }}" readonly>
             <div class="admin-custom-select-wrapper">
                 <label for="user-select"></label><select id="user-select" class="admin-custom-select">
-                    <option value="new">Add New User</option>
+                    <option class="admin-input-field" value="new">Add New User</option>
                     @foreach($rfid['allUsers'] as $user)
                         <option value="{{ $user->username }}"
                             {{ $rfid['actual']->user->username == $user->username ? 'selected' : '' }}>
@@ -71,9 +71,10 @@
 
         <label for="name">Name: </label>
         <label for="name"> "{{ $rfid['actual']->user->firstname }} {{ $rfid['actual']->user->lastname }}"</label>
-        <label for="role"></label><select id="role" name="role">
+        <label for="role"></label>
+        <select class="admin-input-field" id="role" name="role">
             @foreach($rfid['roles'] as $role)
-                <option value="{{ $role }}"
+                <option class="admin-input-field" value="{{ $role }}"
                     {{ $rfid['actual']->role == $role ? 'selected' : '' }}>
                     {{ $role }}
                 </option>

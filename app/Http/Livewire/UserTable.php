@@ -13,6 +13,8 @@ class UserTable extends Component
 
     public $sortField;
     public $sortAsc = true;
+    public $search = '';
+
 
     public function sortBy($field)
     {
@@ -33,8 +35,16 @@ class UserTable extends Component
             $users = $users->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
         }
 
+        if ($this->search !== '') {
+            $users = $users->where('username', 'like', '%' . $this->search . '%')
+                ->orWhere('firstname', 'like', '%' . $this->search . '%')
+                ->orWhere('lastname', 'like', '%' . $this->search . '%');
+            // Fügen Sie hier zusätzliche Felder hinzu, nach denen gesucht werden soll
+        }
+
         $users = $users->paginate(10);
 
         return view('livewire.user-table', ['users' => $users]);
     }
+
 }

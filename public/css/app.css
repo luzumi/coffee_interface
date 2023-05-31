@@ -1081,3 +1081,10 @@ html, body {
     background-size: cover;
 }
 
+.admin-input-field {
+    border: 1px solid var(--text-color-1);
+    border-radius: 5px;
+    padding-left: 5px;
+    background-color: var(--bg-color-4);
+    color: var(--text-color-2);
+}

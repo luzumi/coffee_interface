@@ -1,4 +1,7 @@
 <div>
+    <label>
+        <input type="text" wire:model="search" class="admin-input-field" placeholder="Search RFIDs...">
+    </label>
     <table class="admin-table">
         <tr>
             <th wire:click="sortBy('id')">ID</th>

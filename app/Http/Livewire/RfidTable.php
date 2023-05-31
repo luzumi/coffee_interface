@@ -15,6 +15,7 @@ class RfidTable extends Component
 
     public $sortField;
     public $sortAsc = true;
+    public $search = '';
 
     public function sortBy($field)
     {
@@ -32,14 +33,16 @@ class RfidTable extends Component
         $rfids = RFID_Tag::query();
 
         if ($this->sortField !== null) {
-            if($this->sortField === 'username') {
-                // If sorting by username, we need to join on the users table
-                $rfids = $rfids->leftJoin('users', 'rfid_tags.user_id', '=', 'users.id')
-                    ->select('rfid_tags.*', 'users.username as username')
-                    ->orderBy('username', $this->sortAsc ? 'asc' : 'desc');
-            } else {
-                $rfids = $rfids->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
-            }
+            $rfids = $rfids->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
+        }
+
+        if ($this->search !== '') {
+            $rfids = $rfids->where('tag_uid', 'like', '%' . $this->search . '%')
+                ->orWhere('role', 'like', '%' . $this->search . '%')
+                ->orWhere('tag_active', 'like', '%' . $this->search . '%')
+                ->orWhereHas('user', function ($query) {
+                    $query->where('username', 'like', '%' . $this->search . '%');
+                });
         }
 
         $rfids = $rfids->paginate(100);
