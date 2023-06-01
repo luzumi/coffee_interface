@@ -30,7 +30,7 @@ class RfidTable extends Component
 
     public function render(): Factory|View|Application
     {
-        $rfids = RFID_Tag::query();
+        $rfids = RFID_Tag::query()->with('user');
 
         if ($this->sortField !== null) {
             $rfids = $rfids->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');

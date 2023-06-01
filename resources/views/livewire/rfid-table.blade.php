@@ -17,7 +17,7 @@
                 <td>{{ Str::limit($rfid->tag_uid, 10) }}</td>
                 <td>{{ Str::limit($rfid->role, 10) }}</td>
                 <td>{{ Str::limit($rfid->tag_active, 10) }}</td>
-                <td>{{ Str::limit($rfid->username, 10) }}</td>
+                <td>{{ Str::limit($rfid->user->username, 10) }}</td>
                 <td><a href="rfids/{{ $rfid->id }}/edit">Edit</a></td>
             </tr>
         @endforeach
