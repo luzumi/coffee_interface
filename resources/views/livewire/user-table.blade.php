@@ -12,7 +12,7 @@
             <th></th>
         </tr>
         @foreach ($users as $user)
-            <tr>
+            <tr class="{{ $user->active ? '' : 'admin-deactivated' }}">
                 <td>{{ $user->id }}</td>
                 <td>{{ Str::limit($user->username, 10) }}</td>
                 <td>{{ Str::limit($user->firstname, 10) }}</td>
