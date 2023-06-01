@@ -30,7 +30,7 @@ class MenuController extends Controller
 //TODO: TAG-UID needed, USER-ID falsch für role Bestimmung
         $rfidTag = RFID_Tag::where('tag_uid', $raspUser->rfid_tag)
             ->first();
-
+dd($rfidTag, $raspUser, $user);
         $viewData = [
             'user' => $user,
             'varieties' => CoffeeVariety::all(),
