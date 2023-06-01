@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CoffeeOrder;
 use App\Models\CoffeeVariety;
 use App\Models\RFID_Tag;
 use App\Models\User;
@@ -10,8 +9,6 @@ use App\Services\RaspUser;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class MenuController extends Controller
@@ -24,14 +21,14 @@ class MenuController extends Controller
     public function show(): View|Factory|Application
     {
         $raspUser = RaspUser::getActualRaspUser();
-        $user = User::with('coffeeOrders')->find($raspUser->user_id);
-        $viewName = $this->getViewName($raspUser);
+        $user = User::with('coffeeOrders', 'rfidTag')->find($raspUser->user_id);
+        $viewName = $this->getViewName($raspUser, $user);
 
         if ($viewName !== 'menu') {
             return view($viewName)->with(compact('user'));
         }
 //TODO: TAG-UID needed, USER-ID falsch für role Bestimmung
-        $rfidTag = RFID_Tag::where('user_id', $user->id)
+        $rfidTag = RFID_Tag::where('tag_uid', $raspUser->rfid_tag)
             ->first();
 
         $viewData = [
@@ -106,10 +103,21 @@ class MenuController extends Controller
         return view('user_not_found');
     }
 
+    /**
+     * Zeigt die Ansicht "user_not_found" an.
+     *
+     * @return Application|Factory|View
+     */
+    public function notActive()
+    {
+        return view('not_active');
+    }
+
     public function cardNotAccepted()
     {
         return view('card-not-accepted');
     }
+
     /**
      * Zeigt die Ansicht "disruption" an.
      *
@@ -137,11 +145,21 @@ class MenuController extends Controller
      * @param $raspUser
      * @return string
      */
-    private function getViewName($raspUser)
+    private function getViewName($raspUser, $user)
     {
-        if ($raspUser->user_not_found) {            return 'user_not_found';        }
-        if ($raspUser->need_service) {            return 'need_service';        }
-        if ($raspUser->disruption) {            return 'disruption';        }
+        if ($user->active === 0 || RFID_Tag::where('tag_uid', $raspUser->rfid_tag)->first()->tag_active === 0)
+        {
+            return 'not_active';
+        }
+        if ($raspUser->user_not_found) {
+            return 'user_not_found';
+        }
+        if ($raspUser->need_service) {
+            return 'need_service';
+        }
+        if ($raspUser->disruption) {
+            return 'disruption';
+        }
         return 'menu';
     }
 

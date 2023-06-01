@@ -41,6 +41,7 @@ Route::post('/new_order/{type}', 'App\Http\Controllers\CoffeeOrdersController@ne
 Route::get('/in_progress', 'App\Http\Controllers\MenuController@inProgress')->name('in_progress');
 Route::get('/logout', 'App\Http\Controllers\MenuController@logout')->name('logout');
 Route::get('/user_not_found', 'App\Http\Controllers\MenuController@userNotFound')->name('user_not_found');
+Route::get('/not_active', 'App\Http\Controllers\MenuController@notActive')->name('not_active');
 Route::get('/card_not_accepted', 'App\Http\Controllers\MenuController@cardNotAccepted')->name('card-not-accepted');
 Route::get('/need_service', 'App\Http\Controllers\MenuController@needService')->name('need_service');
 Route::get('/disruption', 'App\Http\Controllers\MenuController@disruption')->name('disruption');

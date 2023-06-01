@@ -41,11 +41,13 @@ class WebhookService
 
         $disruption = $data['disruption'] ?? false;
         $service = $data['need_service'] ?? false;
+        $rfid_tag = $data['tag_uid'] ?? null;
 
         RaspUser::setRaspUser($userId,
             $disruption,
             false,
-            $service);
+            $service,
+            $rfid_tag);
 
         return response()->json(['status' => 'success', 'data' => $data]);
     }
