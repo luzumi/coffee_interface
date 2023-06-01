@@ -42,7 +42,7 @@ class UserTable extends Component
             // Fügen Sie hier zusätzliche Felder hinzu, nach denen gesucht werden soll
         }
 
-        $users = $users->paginate(10);
+        $users = $users->paginate(100);
 
         return view('livewire.user-table', ['users' => $users]);
     }

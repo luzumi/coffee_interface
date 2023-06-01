@@ -66,11 +66,12 @@ class UserService
     public function update(Request $request, $id): Redirector|Application|RedirectResponse
     {
         $user = User::find($id);
-
+        
         $user->username = $request->username;
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->credits += $request->credits;
+        $user->active = $request->active;
         // Update any other fields you have
 
         $user->save();

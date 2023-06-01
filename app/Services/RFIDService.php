@@ -81,15 +81,14 @@ class RFIDService
                 }
             }
         } else {
-            $user->username = $newUsername;
+            $user->username = $newUsername??$username;
             $user->firstname = $firstname;
             $user->lastname = $lastname;
             $user->credits = $credits;
             $user->save();
-
             $rfid->user_id = $user->id;
             $rfid->role = $request->input('role');
-            $rfid->tag_active = $request->input('tag_active') == 1 ? 1 : 0;
+            $rfid->tag_active = $request->has('tag_active');
             $rfid->save();
         }
 

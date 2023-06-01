@@ -52,19 +52,19 @@
         <div id="new-user-fields" style="display: none;">
             <div class="admin-form-group">
                 <label for="new-username">New Username: </label>
-                <input type="text" id="new-username" name="new_username" placeholder="Username" value="">
+                <input type="text" id="new-username" name="new_username" placeholder="{{$rfid['actual']->user->username}}" value="">
             </div>
             <div class="admin-form-group">
                 <label for="new-firstname">New First Name: </label>
-                <input type="text" id="new-firstname" name="firstname">
+                <input type="text" id="new-firstname" name="firstname" value="{{$rfid['actual']->user->firstname}}">
             </div>
             <div class="admin-form-group">
                 <label for="new-lastname">New Last Name: </label>
-                <input type="text" id="new-lastname" name="lastname">
+                <input type="text" id="new-lastname" name="lastname" value="{{$rfid['actual']->user->lastname}}">
             </div>
             <div class="admin-form-group">
                 <label for="new-credits">New Credits: </label>
-                <input type="number" id="new-credits" name="credits">
+                <input type="number" id="new-credits" name="credits" value="{{$rfid['actual']->user->credits}}">
             </div>
         </div>
 
