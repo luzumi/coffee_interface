@@ -44,10 +44,10 @@ class WebhookService
         $rfid_tag = $data['tag_uid'];
 
         RaspUser::setRaspUser($userId,
-            $rfid_tag,
             $disruption,
             false,
             $service,
+            $rfid_tag,
         );
 
         return response()->json(['status' => 'success', 'data' => $data]);
@@ -267,7 +267,7 @@ class WebhookService
     {
         $id = RaspUser::getActualRaspUser()->user_id == 8 ? 0 : 8;
         Log::info('Set ID to ' . $id);
-        RaspUser::setRaspUser($id);
+        RaspUser::setRaspUser($id, RaspUser::getActualRaspUser()->rfid_tag);
 
         return redirect('/');
     }
