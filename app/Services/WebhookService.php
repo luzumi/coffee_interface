@@ -46,7 +46,7 @@ class WebhookService
             $disruption,
             $service,
             false,
-            $rfidTag->tag_uid,
+            $data['tag_uid'],
         );
 
         return response()->json(['status' => 'success', 'data' => $data]);
