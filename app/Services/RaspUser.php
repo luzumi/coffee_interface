@@ -15,9 +15,7 @@ class RaspUser
      */
     public static function getActualRaspUser()
     {
-        $rfid = DB::table('rasp_users')->where('id', 1)->first();
-        dd($rfid);
-        return $rfid;
+        return DB::table('rasp_users')->where('id', 1)->first();
     }
 
     /**
