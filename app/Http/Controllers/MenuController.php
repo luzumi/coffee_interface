@@ -23,7 +23,7 @@ class MenuController extends Controller
         $raspUser = RaspUser::getActualRaspUser();
         $user = User::with('coffeeOrders', 'rfidTag')->find($raspUser->user_id);
         $viewName = $this->getViewName($raspUser, $user);
-
+dd($raspUser, $user, $viewName);
         if ($viewName !== 'menu') {
             return view($viewName)->with(compact('user'));
         }
