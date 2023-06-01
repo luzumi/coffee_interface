@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\CoffeeVariety;
 use App\Models\RFID_Tag;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class Calculate
 {
@@ -40,7 +41,7 @@ class Calculate
     {
         $tag = RFID_Tag::where('user_id', $user->id)->firstOrFail();
 
-        return in_array($tag->role, ['vip', 'maintenance']);
+        return in_array(Str::lower($tag->role), ['vip', 'maintenance']);
     }
 
 }
