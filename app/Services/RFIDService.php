@@ -48,7 +48,7 @@ class RFIDService
         return RFID_Tag::create([
             'tag_uid' => $tagUid,
             'user_id' => $userId,
-            'role' => 'rfid_not_found',
+            'role' => 'user',
         ]);
     }
 
