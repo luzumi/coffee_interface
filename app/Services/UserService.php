@@ -26,7 +26,7 @@ class UserService
 
         RFIDService::createNewRFIDTag($tagUid, $user->id);
 
-        RaspUser::setRaspUser($user->id, false, true);
+        RaspUser::setRaspUser($user->id, false, false);
 
         return redirect('/user_not_found')->with(compact('user'));
     }

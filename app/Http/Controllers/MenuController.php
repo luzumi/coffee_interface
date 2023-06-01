@@ -150,13 +150,17 @@ class MenuController extends Controller
     private function getViewName($raspUser, $user)
     {
 //        dd($raspUser, $user);
-        if ($raspUser->user_not_found) {
+        if ($raspUser->user_not_found)
+        {
             return 'user_not_found';
         }
-        if ($raspUser->need_service) {
+        if ($raspUser->need_service)
+        {
             return 'need_service';
         }
-        if ($raspUser->disruption) {
+        if ($raspUser->disruption)
+        {
+            dd($raspUser->disruption);
             return 'disruption';
         }
         if ($user->active === 0 || RFID_Tag::where('tag_uid', $raspUser->rfid_tag)->first()->tag_active === 0)
