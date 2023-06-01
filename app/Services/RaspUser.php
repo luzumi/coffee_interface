@@ -54,10 +54,10 @@ class RaspUser
         DB::table('rasp_users')->where('id', 1)
             ->update([
                 'user_id' => $user_id,
+                'rfid_tag' => $rfid_tag,
                 'disruption' => $disruption,
                 'user_not_found' => $user_not_found,
                 'need_service' => $service,
-                'rfid_tag' => $rfid_tag
             ]);
     }
 }

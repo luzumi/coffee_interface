@@ -104,7 +104,7 @@ class MenuController extends Controller
     }
 
     /**
-     * Zeigt die Ansicht "user_not_found" an.
+     * Zeigt die Ansicht "not_active" an.
      *
      * @return Application|Factory|View
      */
