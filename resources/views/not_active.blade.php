@@ -15,7 +15,7 @@
             <div class="title_text">
                 <div>
                     <h2> <a href="#">Diese Karte ist deaktiviert.</a> </h2>
-                    <h2> <a href="#">ID: {{ $raspUser }}</a> </h2>
+                    <h2> <a href="#">ID: {{ $user->username }}</a> </h2>
 
                     <h3 class="user_not_found"> Bitte wenden Sie sich </h3>
                     <h3 class="user_not_found"> an den </h3>

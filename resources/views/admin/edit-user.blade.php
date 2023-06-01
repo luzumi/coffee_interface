@@ -27,7 +27,11 @@
                 <input class="admin-input-field" type="number" id="credits" name="credits" value="0">
             </div>
         </div>
-
+        <div class="admin-form-group">
+            <label for="active">Aktive: </label>
+            <input type="checkbox" id="active" name="active" value="1"
+                {{ $user['actual']->active ? 'checked' : '' }}>
+        </div>
         <br>
 
         <label class="admin-label">RFID-Karten</label>

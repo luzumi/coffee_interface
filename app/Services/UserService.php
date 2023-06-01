@@ -71,7 +71,7 @@ class UserService
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->credits += $request->credits;
-        $user->active = $request->active;
+        $user->active = $request->has('active');
         // Update any other fields you have
 
         $user->save();
