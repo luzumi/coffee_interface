@@ -43,10 +43,10 @@ class WebhookService
         $service = $data['need_service'] ?? false;
 
         RaspUser::setRaspUser($userId,
+            $data['tag_uid'],
             $disruption,
             $service,
             false,
-            $data['tag_uid'],
         );
 
         return response()->json(['status' => 'success', 'data' => $data]);
