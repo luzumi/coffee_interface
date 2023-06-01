@@ -110,8 +110,8 @@ class MenuController extends Controller
      */
     public function notActive()
     {
-        $tag_uid = RaspUser::getActualRaspUser()->rfid_tag;
-        return view('not_active')->with(compact('tag_uid'));
+        $viewData['tag_uid'] = RaspUser::getActualRaspUser()->rfid_tag;
+        return view('not_active')->with(compact('viewData'));
     }
 
     public function cardNotAccepted()
