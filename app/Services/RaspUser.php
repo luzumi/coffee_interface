@@ -30,6 +30,7 @@ class RaspUser
             'disruption' => false,
             'user_not_found' => false,
             'need_service' => false,
+            'rfid_tag' => null
         ]);
     }
 
