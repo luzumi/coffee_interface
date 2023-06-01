@@ -75,6 +75,7 @@ class WebhookService
                 'user_not_found' => true,
                 'need_service' => false,
                 'role' => 'user_not_found',
+                'tag_uid' => $raspUser->rfid_tag,
             ]);
 
             Log::info('getWebhookData: Default response', [
