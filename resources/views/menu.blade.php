@@ -109,7 +109,7 @@
 @section('scripts')
     <script>
         setTimeout(function () {
-            role = document.getElementById('role').getAttribute('role');
+            let role = document.getElementById('role').getAttribute('role');
             if (role !== 'maintenance') {
                 window.location.href = "{{ route('logout') }}";
             }
