@@ -44,6 +44,7 @@ class RaspUser
      * @return void
      */
     public static function setRaspUser(int  $user_id,
+                                       string $rfid_tag,
                                        bool $disruption = false,
                                        bool $user_not_found = false,
                                        bool $service = false): void
@@ -55,7 +56,8 @@ class RaspUser
                 'user_id' => $user_id,
                 'disruption' => $disruption,
                 'user_not_found' => $user_not_found,
-                'need_service' => $service
+                'need_service' => $service,
+                'rfid_tag' => $rfid_tag
             ]);
     }
 }
