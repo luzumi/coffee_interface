@@ -148,10 +148,10 @@ class MenuController extends Controller
     private function getViewName($raspUser, $user)
     {
 //        dd($raspUser, $user);
-//        if ($user->active === 0 || RFID_Tag::where('tag_uid', $raspUser->rfid_tag)->first()->tag_active === 0)
-//        {
-//            return 'not_active';
-//        }
+        if ($user->active === 0 || RFID_Tag::where('tag_uid', $raspUser->rfid_tag)->first()->tag_active === 0)
+        {
+            return 'not_active';
+        }
         if ($raspUser->user_not_found) {
             return 'user_not_found';
         }
