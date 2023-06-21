@@ -33,7 +33,7 @@ class WebhookService
                                                     | Application
     {
         $data = $request->json()->all();
-
+dd($data);
         $tagUid = $data['tag_uid'];
         $rfidTag = RFIDService::getRFIDTag($tagUid);
         $userId = $rfidTag->user->id;
