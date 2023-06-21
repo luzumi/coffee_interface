@@ -87,7 +87,7 @@ class WebhookService
         }
 
         if ($raspUser->user_not_found) {
-            return $this->responseUserNotFound($raspUser->user_id);
+            return $this->responseUserNotFound($raspUser->user_id, $raspUser->rfid_tag);
         }
 
         $user = User::find($raspUser->user_id);
@@ -108,10 +108,11 @@ class WebhookService
      * @param int $userId
      * @return JsonResponse
      */
-    private function responseUserNotFound(int $userId): JsonResponse
+    private function responseUserNotFound(int $userId, string $tag_uid): JsonResponse
     {
         return response()->json([
             'data' => $userId,
+            'tag_uid' => $tag_uid,
             'disruption' => false,
             'user_not_found' => true,
             'need_service' => false,

@@ -25,7 +25,7 @@ class UserService
         $user = self::createNewUser();
 
         RFIDService::createNewRFIDTag($tagUid, $user->id);
-        RaspUser::setRaspUser($user->id, false, false);
+        RaspUser::setRaspUser($user->id, $tagUid,false, false, false);
 
         return redirect('/user_not_found')->with(compact('user'));
     }
@@ -39,8 +39,10 @@ class UserService
      */
     public static function createNewUser(): User
     {
+        $nameToken = self::getNameToken(User::count());
         return User::create([
-            'username' => 'newUser: ' . self::getNameToken(User::count()),
+            'username' => 'newUser: ' . $nameToken,
+            'remarks' => $nameToken,
         ]);
     }
 
