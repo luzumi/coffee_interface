@@ -49,6 +49,7 @@ class RFIDService
             'tag_uid' => $tagUid,
             'user_id' => $userId,
             'role' => 'user',
+            'tag_active' => false,
         ]);
     }
 

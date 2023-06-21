@@ -34,19 +34,21 @@ class WebhookService
     {
         $data = $request->json()->all();
 
-        $rfidTag = RFIDService::getRFIDTag($data['tag_uid']);
+        $tagUid = $data['tag_uid'];
+        $rfidTag = RFIDService::getRFIDTag($tagUid);
         $userId = $rfidTag->user->id;
 
         Log::info('Webhook data incoming: ', $data);
 
         $disruption = $data['disruption'] ?? false;
+        $userNotFound = $userId < 1;
         $service = $data['need_service'] ?? false;
 
         RaspUser::setRaspUser($userId,
-            $data['tag_uid'],
+            $tagUid,
             $disruption,
+            $userNotFound,
             $service,
-            false,
         );
 
         return response()->json(['status' => 'success', 'data' => $data]);

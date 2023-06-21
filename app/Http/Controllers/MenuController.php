@@ -160,7 +160,6 @@ class MenuController extends Controller
         }
         if ($raspUser->disruption)
         {
-            dd($raspUser->disruption);
             return 'disruption';
         }
         if ($user->active === 0 || RFID_Tag::where('tag_uid', $raspUser->rfid_tag)->first()->tag_active === 0)
