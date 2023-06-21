@@ -149,7 +149,7 @@ class MenuController extends Controller
      */
     private function getViewName($raspUser, $user)
     {
-        dd($raspUser, $user);
+        //dd($raspUser, $user);
         if ($raspUser->user_not_found)
         {
             return 'user_not_found';
